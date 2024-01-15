@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <math.h>
+#define lld long long
+
+
+int cnt[1000001]={0};
+
+int main(){
+	int tc;
+	scanf("%d", &tc);
+	while(tc--){
+		int a[100], n;
+		scanf("%d", &n);
+		for(int i=0; i<n; i++){
+			scanf("%d", &a[i]);
+		}
+		
+		int ok=0;                        // Để nếu ko có phần tử lặp thì in -1
+		for(int i=0; i<n; i++){
+			if(cnt[a[i]]==1){
+				printf("%d\n", a[i]);
+				ok=1;
+				break;
+			}
+			cnt[a[i]]=1;                  // Nếu bắt gặp giá trị này thì ghi lại, nếu tí mà gặp phần tử cũng có giá trị như vậy thì tức là lặp ----> in
+		if(ok==0){
+			printf("-1");
+		}
+	}
+}
+		
+		
+		
