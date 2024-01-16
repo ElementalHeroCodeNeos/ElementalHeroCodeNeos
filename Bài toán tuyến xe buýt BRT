@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <math.h>
+#define lld long long
+
+
+void sort(int a[100], int n){
+	for(int i=0; i<n; i++){
+		for(int j=i; j<n; j++){
+			if(a[j]<a[i]){
+				int temp=a[i];
+				a[i]=a[j];
+				a[j]=temp;
+			}
+		}
+	}
+}
+
+int main(){
+	int tc;
+	scanf("%d", &tc);
+	while(tc--){
+		int a[100], n;
+		scanf("%d", &n);
+		for(int i=0; i<n; i++){
+			scanf("%d", &a[i]);
+		}
+		
+		sort(a,n);
+		
+		int res=2e9 + 1, count=0;
+		for(int i=1; i<n; i++){
+			int d = a[i]-a[i-1];
+			if(d<res){
+				res=d;
+				count=1;
+			}
+			else if(d==res){
+				count++;
+			}
+		}
+		printf("%d %d\n", res, count);
+	}
+}
