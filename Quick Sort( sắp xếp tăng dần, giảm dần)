@@ -21,3 +21,11 @@ int main(){
 		printf("%d ", a[i]);
 	}
 }
+
+
+// Nếu muốn sắp xếp trị tuyệt đối tăng dần:
+		int cmp(const void *a, const void *b){
+			return ( abs(*(int*)a) - abs(*(int*)b) );}	//
+
+
+
