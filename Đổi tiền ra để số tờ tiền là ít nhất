@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <math.h>
+
+int cnt[500000]={0};
+
+int main(){
+	int a[9]={500000, 200000, 100000, 50000, 20000, 10000, 5000, 2000, 1000};
+	int n;
+	scanf("%d", &n);
+	int temp=n;
+	for(int i=0; i<9; i++){
+		cnt[a[i]] += n/a[i];
+		n %= a[i];
+	}
+	
+	printf("Doi %d ra cac to tien VN ta duoc: \n", temp);
+	
+	for(int i=0; i<10; i++){
+		printf("So to tien %d la: %d\n", a[i], cnt[a[i]]);
+	}
+}
+		
+		
+		
