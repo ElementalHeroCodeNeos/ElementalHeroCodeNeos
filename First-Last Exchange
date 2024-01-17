@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <math.h>
+#define ll long long
+
+
+int sophantu(ll n){
+	int cnt;
+	while(n!=0){
+		cnt++;
+		n/=10;
+	}
+	return cnt;
+}
+
+
+int main(){
+	ll n;
+	scanf("%lld",&n);
+	
+	int a[9];
+	int i=0, m=sophantu(n);
+	while(n!=0){
+		a[m-i-1]=n%10;
+		i++;
+		n/=10;
+	}
+	
+	int temp=a[0];
+	a[0]=a[m-1];
+	a[m-1]=temp;
+	
+	for(int i=0;i<m;i++){
+		n += a[i]*pow(10,(m-i-1));
+	}
+	printf("%lld",n);
+}
+	
+	
