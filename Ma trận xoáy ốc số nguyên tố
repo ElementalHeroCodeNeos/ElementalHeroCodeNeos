@@ -27,7 +27,7 @@ int main(){
 	int n;
 	scanf("%d",&n);
 	
-	int a[100][100];
+	int a[10][10];
 	
 	int P[100];
 	init(P);
