@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[1000];
+		for(int i=0; i<n; i++) cin >> a[i];
+		int ans = -1e9;
+		int min_value = a[0];
+		for(int i=1; i<n; i++){
+			if(a[i] > min_value){
+				ans = max(ans, a[i] - min_value);
+			}
+			min_value = min(a[i], min_value);
+		}
+		if(ans==-1e9) cout << "-1\n";
+		else cout << ans << endl;
+	}
+	return 0;
+}
