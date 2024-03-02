@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int GCD(int a, int b){
+	if(b==0) return a;
+	return GCD(b, a%b);
+}
+
+ll LCM(int a, int b){
+	return 1ll*a*b/GCD(a, b);
+}
+
+ll solve(int x, int y, int z, int n){
+	ll tmp = LCM(x, LCM(y, z));
+	ll m = pow(10, n-1);
+	ll res = (m + tmp - 1)/tmp*tmp;
+	if(res<(ll)pow(10, n)) 
+		return res;
+	return -1;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int x, y, z, n; cin >> x >> y >> z >> n;
+		cout << solve(x, y, z, n) << endl;
+	}
+	return 0;
+}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
