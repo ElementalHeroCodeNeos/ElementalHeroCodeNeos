@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		int so = 0;
+		for(int i=0; i<s.size(); i++){
+			so = so*10 + s[i] - '0';
+			so %=11;
+		}
+		if(so==0) cout << "1\n";
+		else cout << "0\n";
+	}
+	return 0;
+}
+		
+		
+		
