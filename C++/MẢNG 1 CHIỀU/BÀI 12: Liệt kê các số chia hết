@@ -24,13 +24,13 @@ int main(){
 		}
 		int cnt = 0;
 		for(auto it : mp){
-			if(it.second == n) cnt++;			
+			if(it.first > 1 && it.second == n) cnt++;			
 		}
-		cout << cnt - 1 << endl;
+		cout << cnt << endl;
 		mp.clear();
 	}
 	return 0;
 }
 			
 			
-		
+			
