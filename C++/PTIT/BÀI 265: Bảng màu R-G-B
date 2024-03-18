@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+ll fact(int n){
+	if(n == 0) return 1;
+	return n * fact(n-1);
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, r, b, g;
+		cin >> n >> r >> b >> g;
+		ll ans = 0;
+		for(int i=r; i<=n; i++){
+			for(int j=b; j<=n; j++){
+				int k = n - i - j;
+				if(k >= g){
+					ans += fact(n)/(fact(i) * fact(j) * fact(k));
+				}
+			}
+		}
+		cout << ans << endl;
+	}
+	return 0;
+}
+	
+	
+	
+	
