@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void solve(string a, string b){
+	map<char, int> dem1;
+	map<char, int> dem2;
+	for(char x : b) dem2[x]++;
+	int res = 101, cnt = 0, left = 0, idx; 
+	for(int i=0; i<a.size(); i++){
+		dem1[a[i]]++;
+		if(dem1[a[i]] <= dem2[a[i]]) cnt++;
+		if(cnt == b.size()){
+			while(dem1[a[left]] > dem2[a[left]] || dem2[a[left]] == 0){
+				if(dem1[a[left]] > dem2[a[left]]){
+					dem1[a[left]]--;
+				}
+				left++;
+			}
+			if(res > i - left + 1){
+				res = i - left + 1;
+				idx = left;
+			}		
+		}
+	}
+	if(res == 101) cout << "-1\n";
+	else cout << a.substr(idx, res) << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string a, b; cin >> a >> b;
+		solve(a, b);
+	}
+	return 0;
+}
