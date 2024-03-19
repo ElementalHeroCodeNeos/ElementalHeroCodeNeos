@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool check(char c){
+	return c == ' ' || c == '.' || c == '!' || c == ',' || c == '?' || c == '-';
+}
+
+
+int main(){
+	int tc; cin >> tc;
+	map<string, int> mp;
+	cin.ignore();
+	while(tc--){
+		string s;
+		getline(cin, s);
+		string tmp = "";
+		for(int i=0; i<s.size(); i++){
+			if(s[i] == ' ') continue;
+			while(i < s.size() && !check(s[i])){
+				tmp += (char)s[i];
+				i++;
+			}
+			mp[tmp]++;
+			tmp = "";
+		}
+	}
+	for(auto it : mp){
+		cout << it.first << " " << it.second << endl;
+	}
+	return 0;
+}
+		
+		
