@@ -2,25 +2,25 @@
 
 using namespace std;
 
-void solve(){
-	string s; cin >> s;
-	int x; cin >> x;
+bool check(string s, int x){
 	int cnt = 0;
 	for(int i=s.size()-1; i>=0; i--){
 		if(s[i] == '0') cnt++;
-		else break;
-		if(cnt == x){
-			cout << "YES\n";
-			return;
-		}
+		else return 0;
+		if(cnt == x) return 1;
 	}
-	cout << "NO\n";
+	return 0;
 }
 
 int main(){
 	int tc; cin >> tc;
 	while(tc--){
-		solve();
+		string s; cin >> s;
+		int x; cin >> x;
+		if(check(s, x)) cout << "YES\n";
+		else cout << "NO\n";
 	}
 	return 0;
 }
+		
+		
