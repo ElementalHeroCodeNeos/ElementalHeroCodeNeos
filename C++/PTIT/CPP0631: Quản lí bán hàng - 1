@@ -1,0 +1,117 @@
+#include <bits/stdc++.h> 
+
+using namespace std; 
+
+int Cnt = 0, cnt = 0, CNT = 0;
+
+class KH{	// Tao mang clone cua KhachHang
+	public:
+		string Ma, Ten, Add;
+};
+
+class MH{	// Tao mang clone cua MatHang
+	public:
+		string ma, ten, dvi;
+		int mua, ban;	
+};
+
+KH kh[25];
+MH mh[45];
+
+class KhachHang{
+	public:
+		string Ma, Ten, Sex, Ns, Add;
+		friend istream& operator >> (istream& in, KhachHang& a){
+			Cnt++;
+			if(Cnt < 10) a.Ma = "KH00" + to_string(Cnt);
+			else a.Ma = "KH0" + to_string(Cnt);
+			if(Cnt == 1) in.ignore();
+			getline(in, a.Ten);
+			in >> a.Sex >> a.Ns;
+			in.ignore();
+			getline(in, a.Add);	
+			kh[Cnt - 1].Ma = a.Ma;
+			kh[Cnt - 1].Ten = a.Ten;
+			kh[Cnt - 1].Add = a.Add;
+			return in;		
+		}
+};
+
+class MatHang{
+	public:
+		string ma, ten, dvi;
+		int mua, ban;
+		friend istream& operator >> (istream& in, MatHang& a){
+			cnt++;
+			if(cnt < 10) a.ma = "MH00" + to_string(cnt);
+			else a.ma = "MH0" + to_string(cnt);
+			if(cnt == 1){
+				in.ignore();
+			}
+			getline(in, a.ten);
+			in >> a.dvi >> a.mua >> a.ban;
+			in.ignore();
+			mh[cnt - 1].ma = a.ma;
+			mh[cnt - 1].ten = a.ten;
+			mh[cnt - 1].dvi = a.dvi;
+			mh[cnt - 1].mua = a.mua;
+			mh[cnt - 1].ban = a.ban;
+			return in; 
+		}
+};
+
+class HoaDon : public KhachHang, public MatHang{
+	private:
+		string MA, Ma, ma;
+		int so;
+	public:
+		friend istream& operator >> (istream& in, HoaDon& a){
+			CNT++;
+			if(CNT < 10) a.MA = "HD00" + to_string(CNT);
+			else if(CNT < 100) a.MA = "HD0" + to_string(CNT);
+			else a.MA = "HD" + to_string(CNT);
+			in >> a.Ma >> a.ma >> a.so;
+			for(int i=0; i<Cnt; i++){	// Phai duyêt vòng for dê kiêm tra khach hàng va ma san phâm là gì ?
+				if(kh[i].Ma == a.Ma){	
+					a.Ten = kh[i].Ten;
+					a.Add = kh[i].Add;
+					break;
+				}
+			}
+			for(int i=0; i<cnt; i++){
+				if(mh[i].ma == a.ma){
+					a.ten = mh[i].ten;
+					a.dvi = mh[i].dvi;
+					a.mua = mh[i].mua;
+					a.ban = mh[i].ban;
+					break;
+				}
+			}
+			return in;
+		}
+		friend ostream& operator << (ostream& out, HoaDon a){
+			out << a.MA << " " << a.Ten << " " << a.Add << " ";
+			out << a.ten << " " << a.dvi << " " << a.mua << " " << a.ban << " " << a.so << " ";
+			out << a.ban * a.so << endl;
+			return out;
+		}
+};
+
+int main(){
+    KhachHang dskh[25];
+    MatHang dsmh[45];
+    HoaDon dshd[105];
+    int N,M,K,i;
+    cin >> N;
+    for(i=0;i<N;i++) cin >> dskh[i];
+    cin >> M;
+    for(i=0;i<M;i++) cin >> dsmh[i];
+    cin >> K;
+    for(i=0;i<K;i++) cin >> dshd[i];
+    
+    for(i=0;i<K;i++) cout << dshd[i];
+    return 0;
+}
+
+
+		
