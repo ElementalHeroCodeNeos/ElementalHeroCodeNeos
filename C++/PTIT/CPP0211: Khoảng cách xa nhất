@@ -1,0 +1,27 @@
+#include <bits/stdc++.h> 
+
+using namespace std; 
+
+// Bai toan có Ðiêu kiên cân là a[i] < a[j], Ðiêu kiên du la  j - i max
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int i=0; i<n; i++) cin >> a[i];
+		int res = 0;	// Kêt qua bài toán (j - i max)
+		for(int i=0; i<n; i++){
+			for(int j=n-1; j>=i; j--){	// Duyêt tu cuôi vì j - i se giam dân nên ko cân duyêt nua
+				if(a[i] < a[j]){	// Ðiêu kiên cân
+					res = max(res, j - i);
+				}
+				if(j-i <= res){	// khoi cân xét nua
+					break;
+				}
+			}
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
