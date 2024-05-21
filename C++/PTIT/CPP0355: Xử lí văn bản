@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void inThuong(string &s){	// Hàm viêt thuong các chu cái cua xâu s
+	for(int i=0; i<s.size(); i++){
+		s[i] = tolower(s[i]);
+	}
+}
+
+int main(){
+	string s;
+	int ok = 1;		// ok = 1 là khi vua moi kêt thuc 1 câu
+	while(cin >> s){
+		int n = s.size();
+		inThuong(s);
+		if(ok){
+			s[0] = toupper(s[0]);	// Viêt hoa chu cái dâu trong câu
+			ok = 0;		
+		}
+		if(s[n-1] == '.' || s[n-1] == '!' || s[n-1] == '?'){	// Nêu gap dâu . / ! / ?
+			s.erase(n - 1);		// Xoá dâu câu
+			ok = 1;
+			cout << s << endl;	// Viêt tu Ðó và xuông dòng
+			ok = 1;		// Chuân bi bat dâu câu moi
+		}
+		else cout << s << " ";	
+	}
+	return 0;
+}
