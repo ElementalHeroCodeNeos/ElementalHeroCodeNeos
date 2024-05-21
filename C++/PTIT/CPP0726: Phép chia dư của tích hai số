@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+// Y tuong là tính xâu a * b ( tích 2 so nguyên lon) rôi tính (a*b) % c
+
+ll MOD(string s, ll c){		
+	ll r = 0;
+	for(int i=0; i<s.size(); i++){
+		r = r*10 + s[i] - '0';
+		r %= c;
+	}
+	return r;
+}
+
+string Tich(string a, string b){	// Tích 2 sô nguyên lon
+	if(a.size() < b.size()) swap(a, b);
+	reverse(a.begin(), a.end());	
+	reverse(b.begin(), b.end());
+	int n = a.size(), m = b.size();
+	vector<char> c(n + m, '0');	
+	for(int i=0; i<m; i++){	
+		int nho = 0;
+		for(int j=0; j<n; j++){
+			int tmp = (b[i] - '0') * (a[j] - '0') + (c[i + j] - '0') + nho;	
+			c[i + j] = tmp % 10 + '0';
+			nho = tmp / 10;
+		}
+		if(nho) c[i + n] = nho + '0';
+	}
+	reverse(c.begin(), c.end());	
+	int p = c.size();	
+	int l = 1;
+	string ans = "";
+	if(c[0] == '0'){	
+		while(c[l] == '0'){
+			l++;
+		}
+		for(int i=l; i<p; i++) ans += c[i];
+	}
+	else{
+		for(int i=0; i<p; i++) ans += c[i];
+	}
+	return ans;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string a, b; long c; cin >> a >> b >> c;
+		string s = Tich(a, b);
+		cout << MOD(s, c) << endl;
+	}
+	return 0;
+}
+	
