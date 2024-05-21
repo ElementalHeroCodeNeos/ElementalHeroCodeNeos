@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void Tich(string a, string b){
+	if(a.size() < b.size()) swap(a, b);
+	reverse(a.begin(), a.end());	// Dao nguoc a va b
+	reverse(b.begin(), b.end());
+	int n = a.size(), m = b.size();
+	vector<char> c(n + m, '0');		// Tao mang c co n + m ki tu '0' (Mang c la ket qua)
+	for(int i=0; i<m; i++){	// Duyet cac chu so cua b tu dau den cuoi
+		int nho = 0;
+		for(int j=0; j<n; j++){
+			int tmp = (b[i] - '0') * (a[j] - '0') + (c[i + j] - '0') + nho;	// c[i + j] la ki tu o vi tri do a[j] * b[j], và Ðc công dôn
+			c[i + j] = tmp % 10 + '0';
+			nho = tmp / 10;
+		}
+		if(nho) c[i + n] = nho + '0';
+	}
+	reverse(c.begin(), c.end());	// Ðao nguoc mang c
+	int p = c.size();	// Ðoan tu Ðây Ðên cuôi là Ðê xoa các chu sô 0 o dau
+	int l = 1;
+	if(c[0] == '0'){	
+		while(c[l] == '0'){
+			l++;
+		}
+		for(int i=l; i<p; i++) cout << c[i];
+	}
+	else{
+		for(int i=0; i<p; i++) cout << c[i];
+	}
+	cout << endl;
+}
+	
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string a, b; cin >> a >> b;
+		Tich(a, b);
+	}
+	return 0;
+}
