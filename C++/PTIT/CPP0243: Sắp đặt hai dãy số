@@ -6,27 +6,28 @@ int main(){
 	int tc; cin >> tc;
 	while(tc--){
 		int n, m; cin >> n >> m;
-		int a[n], b[m];
-		map<int, int> mp;
+		int a[n], b[m];	// Lân luot là dãy A1[] và A2[] mà Ðê bài noi
+		map<int, int> mp;	// Dùng dê dêm tân suât xuât hiên cua cac phan tu trong a[]
 		vector<int> v;
 		for(int i=0; i<n; i++){
 			cin >> a[i];
-			mp[a[i]]++;
+			mp[a[i]]++;	// Nè 
 		}
-		sort(a, a + n);
+		sort(a, a + n);	// Sap xep tang dân mang a[] vì doan cuôi tang dân
 		for(int i=0; i<m; i++) cin >> b[i];
 		for(int i=0; i<m; i++){
-			int cnt = mp[b[i]];
-			for(int j=0; j<cnt; j++){
-				v.push_back(b[i]);
-				mp[b[i]]--;
+			int cnt = mp[b[i]];		// Là tân suat cua phân tu b[i] 
+			for(int j=0; j<cnt; j++){	// Duyêt vòng lap in ra tât ca các phân tu b[i]
+				v.push_back(b[i]);	// Nhet vào vecto (Kêt qua cua bài toán)
+				mp[b[i]]--;	// 
 			}
 		}
 		for(int i=0; i<n; i++){
-			if(mp[a[i]] != 0) v.push_back(a[i]);
+			if(mp[a[i]] != 0) v.push_back(a[i]);	// Ðoan cuôi là các phân tu xuât hiên trong a[] nhung ko xuât hiên trong b[]
 		}
 		for(int x : v) cout << x << " ";
 		cout << endl;
 	}
 	return 0;
 }
+			
