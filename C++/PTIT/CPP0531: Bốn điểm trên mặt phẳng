@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Ý tuong: Neu tich hôn tap [AB, AC]*AD = 0 thi A, B, C, D thuoc 1 mp
+
+struct ToaDo{
+	int x, y, z;
+	friend ToaDo operator - (const ToaDo A, const ToaDo B){	// Hàm tính vecto AB khi biêt Toa Ðô A, B
+		ToaDo AB;
+		AB.x = A.x - B.x;
+		AB.y = A.y - B.y;
+		AB.z = A.z - B.z;
+		return AB;
+	}
+	friend ToaDo operator * (const ToaDo A, const ToaDo B){	// Hàm tính tích có huong cua 2 vécto
+		ToaDo P;
+		P.x = A.y * B.z - B.y * A.z;
+		P.y = B.x * A.z - A.x * B.z;
+		P.z = A.x * B.y - A.y * B.x;
+		return P;
+	}
+	friend istream& operator >> (istream& in, ToaDo& A){
+		in >> A.x >> A.y >> A.z;
+		return in;
+	}
+};
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		ToaDo A, B, C, D;
+		cin >> A >> B >> C >> D;
+		ToaDo AB, AC, AD;
+		AB = B - A;
+		AC = C - A;
+		AD = D - A;
+		ToaDo P = AB * AC;
+		if(P.x * AD.x + P.y * AD.y + P.z * AD.z == 0){	// Tích vô huong
+			cout << "YES\n";
+		}
+		else cout << "NO\n";
+	}
+	return 0;
+}
+		
