@@ -1,0 +1,31 @@
+#include <bits/stdc++.h> 
+
+using namespace std; 
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int i=0; i<n; i++) cin >> a[i];
+		sort(a, a + n);		// Sap xêp các phân tu cua a[]
+		int d = a[n-1] - a[0];	// Khoang cách CÐ là a[n-1] - a[0] do a[] dã dc sap xêp
+		int cnt = 0;
+		for(int i=1; i<=d; i++){	// d max nên i chay tu 1->d
+			int check = 1;
+			for(int j=1; j<n; j++){
+				if((a[j] - a[0]) % i != 0){		// Nêu các phân tu trong array Ðông du vs nhau khi chia cho k thi: a[1], a[2], a[3] luôn du vs a[0]
+					check = 0; 
+					break;
+				}
+			}
+			if(check) cnt++;
+		}
+		cout << cnt << endl;
+	}
+	return 0;
+}
+		
+		
+		
+		
