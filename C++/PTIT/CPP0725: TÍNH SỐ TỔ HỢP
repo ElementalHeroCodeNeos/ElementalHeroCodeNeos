@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+const int MOD = 1e9 + 7;
+
+ll powMod(ll a, ll b, ll m){	// Hàm tính luy thua cua a mu b khi chia du cho m
+	ll res = 1;
+	a %= m;
+	while(b){
+		if(b%2 == 1){
+			res *= a;
+			res %= m;
+		}
+		a *= a;
+		a %= m;
+		b /= 2;
+	}
+	return res;
+}
+
+ll inverse(ll a, ll m){		// Hàm tìm nghich dao Module cua a khi chia du cho m
+	// Chi dùng khi m là sô nguyên tô ! O ÐÂY, MOD = 1e9 + 7 là sô nguyên tô
+	return powMod(a, m - 2, m);		
+}
+
+ll f[1001];
+void giaithua(){	// Tao mang f[ ] là mang luu giai thua cua cac so tu 0 den 1000
+	f[0] = 1;
+	for(int i=1; i<=1000; i++){
+		f[i] = f[i-1] * i;
+		f[i] %= MOD;
+	}
+}
+
+int main(){
+	giaithua();
+	int tc; cin >> tc;
+	while(tc--){
+		int n, r; cin >> n >> r;
+		cout << (f[n] * inverse((f[r] * f[n - r]) % MOD, MOD)) % MOD << endl;	// Su dung công thuc nCk = ...
+	}
+	return 0;
+}
