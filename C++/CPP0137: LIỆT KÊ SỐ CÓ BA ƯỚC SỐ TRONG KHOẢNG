@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int prime[1000001]; 
+
+void Eratosthenes(){	
+	prime[0] = 0, prime[1] = 0;
+	for(int i=2; i<=1000000; i++){
+		prime[i] = 1;
+	}
+	for(int i=2; i<=1000; i++){
+		if(prime[i]){
+			for(int j=i*i; j<=1000000; j+=i){
+				prime[j] = 0;
+			}
+		}
+	}
+}
+
+int main(){
+	Eratosthenes();
+	int tc; cin >> tc;
+	while(tc--){
+		ll l, r; cin >> l >> r;
+		int cnt = 0;	
+		int a = sqrt(l);
+		if(a * a < l){ // Không duyêt from sqrt(a). Ví du: l = 5, r = 10 thì sqrt(5) = 2 nên in ra sô 4 < 5( ko thuôc [l, r])
+			a++;
+		}
+		for(int i=a; i<=sqrt(r); i++){
+			if(prime[i]) cnt++;
+		}
+		cout << cnt << endl;
+	}
+	return 0;
+}
