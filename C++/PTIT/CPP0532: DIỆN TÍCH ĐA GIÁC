@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct ToaDo{
+	double x, y;
+	friend istream& operator >> (istream& in, ToaDo& A){
+		in >> A.x >> A.y;
+		return in;	
+	}
+	friend ToaDo operator - (const ToaDo A, const ToaDo B){ // Tinh vector AB
+		ToaDo AB;
+		AB.x = A.x - B.x;
+		AB.y = A.y - B.y;
+		return AB;
+	}
+};
+
+double Det(ToaDo A, ToaDo B){	// Tinh dinh thuc |A.x	A.y|
+	return A.x * B.y - B.x * A.y;			//    |B.x	B.y|
+}
+
+double Dientich(ToaDo A, ToaDo B, ToaDo C){	// Tinh dien tich tam giac ABC
+	ToaDo AB = B - A;
+	ToaDo AC = C - A;
+	return 0.500 * abs(Det(AB, AC));  // Chú ý: Phai nhân vs 0.5 mà ko phai 1/2 vì là kiêu double
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		ToaDo A[n];
+		for(int i=0; i<n; i++) cin >> A[i];
+		double sum = 0.000;
+		for(int i=1; i<n-1; i++){	// Chia Ða Giác thành các tam giác chung dinh A[0] (ve ra là hiêu)
+			sum += Dientich(A[0], A[i], A[i+1]);
+		}
+		cout << fixed << setprecision(3) << sum << endl;
+	}
+	return 0;
+}
