@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+using namespace std;  // Ý tuong tu thuât toán Kadane
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, k; cin >> n >> k;
+		int a[n];
+		for(int i=0; i<n; i++) cin >> a[i];
+		multiset<int> s;	// Luu các so theo thu tu tu bé dên lon (có thê trùng nhau)
+		for(int i=0; i<k; i++){	// Luu k sô dau tiên vào multiset
+			s.insert(a[i]);
+		}
+		cout << *s.rbegin() << " ";	// In ra phân tu cuoi cùng (sô lon nhât)
+		for(int i=k; i<n; i++){	// <Kadane time>: Xoá phan tu cuôi cua dãy con truoc, thêm phân tu moi
+			s.erase(s.find(a[i-k]));	// Cho phép ta xoá Ðúng cái phân tu o vi trí a[i-k]
+			s.insert(a[i]);
+			cout << *s.rbegin() << " ";	// In ra phân tu cuôi cùng
+		}
+		cout << endl;
+	}
+	return 0;
+}
+		
