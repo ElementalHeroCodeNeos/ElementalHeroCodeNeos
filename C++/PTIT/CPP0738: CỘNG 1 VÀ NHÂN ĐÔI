@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+// Ta se không xét tu mang khoi dau (0, 0, 0) mà xét tu kêt qua (16 16 16)
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int i=0; i<n; i++) cin >> a[i];
+		int cnt = 0;	
+		while(1){	// Vòng lap vinh viên, chi châm dut khi dùng "break"
+			for(int i=0; i<n; i++){
+				if(a[i] % 2 == 1){	
+					cnt++;
+				}
+			}
+			for(int i=0; i<n; i++){	
+				a[i] /= 2;
+			}
+			cnt++;
+			bool ok = true;
+			for(int i=0; i<n; i++){
+				if(a[i] != 0){
+					ok = false;	// ok = true khi tât ca phan tu = 0
+				}
+			}
+			if(ok) break;	// khi ok = true thì moi dc thoát vong lap while
+		}
+		cout << cnt - 1 << endl;
+	}
+	return 0;
+}
