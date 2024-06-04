@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int prime[10001];	// Mang luu uoc nguyên tô nho nhât cua 10000 sô dau tiên
+
+void Eratosthenes(){
+	for(int i=1; i<=10000; i++){
+		prime[i] = i;	// Ban dau luu uoc nguyên tô nho nhât cua tât ca các sô là chính nó (tuc sô do là sô nguyên tô)
+	for(int i=2; i<=100; i++){
+		if(prime[i] == i){
+			for(int j=i*i; j<=10000; j+=i){
+				if(prime[j] == j){	// Ðê tránh ví du: 12 da luu là 2, tí i=3 thì 12 lai luu thành 3 -> SAI
+					prime[j] = i;
+				}
+			}
+		}
+	}
+}	
+
+int main(){
+	Eratosthenes();
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		for(int i=1; i<=n; i++){
+			cout << prime[i] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
