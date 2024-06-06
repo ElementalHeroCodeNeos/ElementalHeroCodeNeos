@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int Bin_search(int a[], int n, int X){
+	int k = binary_search(a, a + n, X);
+	if(k) return 1;
+	return -1;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, X; cin >> n >> X;
+		int a[n];
+		for(int i=0; i<n; i++) cin >> a[i];
+		sort(a, a + n);
+		cout << Bin_search(a, n, X) << endl;
+	}
+	return 0;
+}
