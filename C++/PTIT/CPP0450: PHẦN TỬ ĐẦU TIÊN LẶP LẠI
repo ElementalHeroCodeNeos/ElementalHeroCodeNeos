@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	map<int, int> mp;
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int i=0; i<n; i++) cin >> a[i];
+		int ok = 0;
+		int ans;
+		for(int i=0; i<n; i++){
+			if(mp[a[i]]){
+				ok = 1; 
+				ans = a[i];
+				break;
+			}
+			mp[a[i]]++;
+		}
+		if(ok) cout << ans << endl;
+		else cout << "-1\n";
+		mp.clear();
+	}
+	return 0;
+}
