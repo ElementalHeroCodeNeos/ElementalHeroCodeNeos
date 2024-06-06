@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int Bin_search(int a[], int l, int r, int X){	// Hàm tìm 1 vi trí cua phân tu X
+	if(l <= r){
+		int m = (l + r) / 2;
+		if(a[m] < X){
+			return Bin_search(a, m + 1, r, X);
+		}
+		else if(a[m] > X){
+			return Bin_search(a, l, m - 1, X);
+		}
+		return m;
+	}
+	return -1;	
+}
+
+void solve(int a[], int n, int X){
+	int idx = Bin_search(a, 0, n - 1, X);
+	if(idx == -1){
+		cout << "-1\n"; return;
+	}
+	int cnt = 1;	// Chí ít da có 1 sô
+	int left = idx - 1;	// Dem các sô là X phía bên trái
+	int right = idx + 1;	// Dem các sô là X phía bên phai
+	while(left >= 0 && a[left] == X){
+		cnt++; left--;
+	}
+	while(right < n && a[right] == X){
+		cnt++; right++;
+	}
+	cout << cnt << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, X; cin >> n >> X;
+		int a[n];
+		for(int i=0; i<n; i++) cin >> a[i];
+		solve(a, n, X);
+	}
+	return 0;
+}
