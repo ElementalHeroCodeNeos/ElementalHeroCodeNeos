@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+// Ý tuong: Tính chat cua so Fibo i là: 5*i*i - 4 hoac 5*i*i + 4 là sô chính phuong
+bool Square(int n){	// Kiem tra so chính phuong
+	int x = sqrt(n);
+	return x * x == n;
+}
+
+int prime[10001];	// Kiem tra sô nguyên to bang sàng Eratosthenes
+void Eratosthenes(){
+	prime[0] = 0, prime[1] = 0;
+	for(int i=2; i<=10000; i++){
+		prime[i] = 1;
+	}
+	for(int i=2; i<=sqrt(1000); i++){
+		if(prime[i]){
+			for(int j=i*i; j<=10000; j+=i){
+				prime[j] = 0;
+			}
+		}
+	}
+}
+
+int main(){
+	Eratosthenes();
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		for(int i=2; i<=n; i++){
+			if(prime[i] && (Square(5*i*i - 4) || Square(5*i*i + 4))){
+				cout << i << " ";
+			}
+		}
+		cout << endl;
+	}
+	return 0;
+}
