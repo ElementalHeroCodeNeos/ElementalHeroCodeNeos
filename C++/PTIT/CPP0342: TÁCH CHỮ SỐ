@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void solve(string s){
+	multiset<char> ms;	// Luu các kí tu theo thu tu tang dân và có thê lap lai
+	int sum = 0;	// Tính tông các chu sô
+	for(int i=0; i<s.size(); i++){
+		if(isdigit(s[i])){
+			sum += s[i] - '0';
+		}
+		else{
+			ms.insert(s[i]);
+		}
+	}
+	for(char x : ms) cout << x;
+	cout << sum << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		solve(s);
+	}
+	return 0;
+}
