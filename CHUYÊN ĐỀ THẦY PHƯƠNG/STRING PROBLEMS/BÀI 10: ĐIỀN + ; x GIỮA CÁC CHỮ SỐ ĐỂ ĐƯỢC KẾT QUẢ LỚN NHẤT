@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+// Chú ý: Các sô duoc công, nhân tuâfn tuwj tu trái sang phai (bo qua qui luât nhân chia truoc công tru sau)
+// Phép nhân (a x b) chi tao ra sô lon hon khi: b = 2, 3,... và a(res) = 2, 3,...
+using ll = long long;
+
+int solve(string s){
+	ll res = s[0] - '0';
+	for(int i=1; i<s.size(); i++){
+		if(s[i] == '0' || s[i] == '1' || res < 2){
+			res += s[i] - '0';
+		}
+		else res *= (s[i] - '0');
+	}
+	return res;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		cout << solve(s) << endl;
+	}
+	return 0;
+}
