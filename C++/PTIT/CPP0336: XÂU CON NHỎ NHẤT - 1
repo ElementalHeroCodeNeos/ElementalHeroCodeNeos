@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void solve(string a, string b){
+	map<char, int> dem1;	// Dem sô lân xuât hien cua các chu cái trong xâu a
+	map<char, int> dem2;	// Dem sô lân xuât hien cua các chu cái trong xâu b
+	for(char x : b) dem2[x]++;
+	int l = 0, len = 0, res = 101, idx;	// res: Ðô dài min, len: sô chu cái(tính ca trùng) cua xâu b da có mat trong xâu a
+	for(int r=0; r<a.size(); r++){	// l, r là con tro dau và cuoi xâu
+		dem1[a[r]]++;
+		if(dem1[a[r]] <= dem2[a[r]]) len++;
+		if(len == b.size()){	// Có du các kí tu cua xâu b
+			while(dem1[a[l]] > dem2[a[l]] || dem2[a[l]] == 0){	// Cat bot kí tu thua
+				if(dem1[a[l]] > dem2[a[l]]){
+					dem1[a[l]]--;
+				}
+				l++;
+			}
+			if(res > r - l + 1){
+				res = r - l + 1;
+				idx = l;	// Câp nhât xâu min bat dau tu idx den r
+			}	
+		}
+	}
+	if(res == 101) cout << "-1\n";
+	else{
+		cout << a.substr(idx, res) << endl;
+	}
+}
