@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+ll giaithua(int a){	// Hàm tính giai thua cua a
+	if(a == 0) return 1;
+	return a * giaithua(a - 1);
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, r, b, g; cin >> n >> r >> b >> g;
+		ll cnt = 0;
+		for(int i=r; i<=n-b-g; i++){	
+			for(int j=b; j<=n-i-g; j++){
+				cnt = cnt + giaithua(n) / (giaithua(i) * giaithua(j) * giaithua(n - i - j));	// Voi moi so r, b, g, n cu thê, ta tính sô cách sap xep các chu cái R, B, G de tao thành 1 xâu
+			}
+		}
+		cout << cnt << endl;
+	}
+	return 0;
+}
