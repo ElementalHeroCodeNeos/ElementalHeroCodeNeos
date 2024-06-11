@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void solve(string a){
+	map<char, int> dem1;	// Ðêm sô lân xuat hien cua các kí tu xong xâu a
+	map<char, int> dem2;	// Dùng de dem sô các chu cái riêng biet trong xâu a (dem2.size())
+	for(char x : a) dem2[x]++;
+	int l = 0, len = 0, res = 100001;	// res: Ðô dài min cua xâu, len: Sô các kí tu riêng biêt da xuat hien cua xâu a
+	for(int r=0; r<a.size(); r++){	// l, r: con tro dau và cuoi xâu cân tìm
+		dem1[a[r]]++;
+		if(dem1[a[r]] == 1) len++;
+		if(len == dem2.size()){
+			while(dem1[a[l]] > 1){
+				dem1[a[l]]--;
+				l++;
+			}
+			res = min(res, r - l + 1);
+		}		
+	}
+	cout << res << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string a; cin >> a;
+		solve(a);
+	}
+	return 0;
+}
