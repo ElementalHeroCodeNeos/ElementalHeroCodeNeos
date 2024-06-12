@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+// Ý tuong: Tong phân tu các hàng, cot = nhau và = tong lon nhat cua hang, cot (baxo hoà)
+int n;
+int a[100][100];
+
+void solve(){
+	int sumrow[n] = {0};	
+	int sumcol[n] = {0};
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			sumrow[i] += a[i][j];	// Tông các phan tu hàng thu i
+			sumcol[j] += a[i][j];	// Tông các phan tu hàng thu j
+		}
+	}
+	int res = INT_MIN;	// Tong các phan tu lon nhât cua hàng, cot
+	for(int i=0; i<n; i++){
+		res = max(res, sumrow[i]);
+		res = max(res, sumcol[i]);
+	}
+	int h=0, c=0, cnt=0;	// Con tro hàng, côt
+	while(h<n && c<n){
+		int diff = min(res - sumrow[h], res - sumcol[c]);	// Chênh lêch
+		a[h][c] += diff;
+		cnt += diff;
+		sumrow[h] += diff;
+		sumcol[c] += diff;
+		if(sumrow[h] == res){	// Hàng h da baox hoà
+			h++;
+		}
+		if(sumcol[c] == res){
+			c++;
+		}
+	}
+	cout << cnt << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				cin >> a[i][j];
+			}
+		}
+		solve();
+	}
+	return 0;
+}
