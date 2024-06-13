@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+// Ý tuong: Ðêm xem N! phân tích dc thành bn sô nguyên tô p, tuc là dêm xem môi sô 1,2,3..,N có bao nhiêu uoc p
+/* int solve(int N, int p){
+	int cnt = 0;
+	for(int i=p; i<=N; i+=p){
+		int tmp = i;
+		while(tmp % i == 0){
+			tmp /= i;
+			cnt++;
+		}
+	}
+	return cnt;
+}*/
+int Legendre(int N, int p){	// Công thuc Legendre
+	int cnt = 0;
+	for(int i=p; i<=N; i*=p){
+		cnt += N/i;
+	}
+	return cnt;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int N, p; cin >> N >> p;
+		cout << Legendre(N, p) << endl;
+	}
+	return 0;
+}
