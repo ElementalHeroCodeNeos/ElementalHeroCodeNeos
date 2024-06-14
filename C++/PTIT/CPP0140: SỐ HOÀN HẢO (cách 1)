@@ -1,0 +1,30 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+using ll = long long;
+
+ll tongUoc(ll n){
+	ll sum = 1;
+	for(int i=2; i<=sqrt(n); i++){
+		if(n%i == 0){
+			if(i != n/i) sum = sum + i + n/i;
+			else sum += i;
+		}
+	}
+	return sum;
+}
+
+bool perfect(ll n){
+	if(n > 1e12) return 0;  // Các số hoàn hảo kiểu long long chỉ tu 1 đén 1o
+	return n == tongUoc(n);
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		ll n; cin >> n;
+		cout << perfect(n) << endl;
+	}
+	return 0;
+}
