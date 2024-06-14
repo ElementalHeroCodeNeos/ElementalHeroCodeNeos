@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int x, y, z, n; 
+
+ll GCD(ll a, ll b){
+	if(b == 0) return a;
+	return GCD(b, a%b);
+}
+
+ll LCM(ll a, ll b){
+	return a * b / GCD(a, b);
+}
+
+ll solve(){
+	ll d = LCM(x, LCM(y, z));	// Bôi chung nho nhât cua x, y, z
+	ll m = pow(10, n - 1);	// Sô nho nhât có n chu sô
+	ll ans = (m + d - 1) / d * d;	// Sô nho nhât >= m và chia hêt cho d
+	if(ans < pow(10, n)){	// ans có n chu sô
+		return ans;
+	}
+	return -1;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> x >> y >> z >> n;
+		cout << solve() << endl;
+	}
+	return 0;
+}
