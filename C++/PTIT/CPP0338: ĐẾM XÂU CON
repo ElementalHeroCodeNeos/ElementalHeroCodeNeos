@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int Dem(string s, int k){
+	int ans = 0;
+	for(int i=0; i<s.size(); i++){
+		int cnt[256] = {0};
+		int len = 0;
+		for(int j=i; j<s.size(); j++){
+			cnt[s[j]]++;
+			if(cnt[s[j]] == 1) len++;
+			if(len == k) ans++;
+			else if(len > k) break;
+		}
+	}
+	return ans;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; int k; cin >> s >> k;
+		cout << Dem(s, k) << endl;
+	}
+	return 0;
+}
