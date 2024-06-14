@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+	// Tính chât sô hoàn hao: Nêu p là so ngto, 2^p  - 1 là sô ngto thì A = 2^p-1 * (2^p  - 1) là sô ngto
+using ll = long long;
+
+int prime(int n){	// Kiêm tra sô ngto
+	for(int i=2; i<=sqrt(n); i++){
+		if(n%i == 0) return 0;
+	}
+	return n > 1;
+}
+
+ll P[10];	// Mang các sô hoàn hao long long
+int cnt = 0;
+
+void hoanhao(){
+	for(int i=2; i<=32; i++){	// Sô ngto p chi cân tu 2 den 32 
+		if(prime(i)){
+			int tmp = pow(2, i) - 1;
+			if(prime(tmp)){
+				P[cnt++] = 1ll * tmp * pow(2, i-1);
+			}
+		}
+	}
+}
+
+int main(){
+	hoanhao();
+	int tc; cin >> tc;
+	while(tc--){
+		ll n; cin >> n;
+		int ok = 0;
+		for(int i=0; i<cnt; i++){
+			if(P[i] == n){
+				ok = 1;
+				cout << "1\n";
+				break;
+			}
+		}
+		if(!ok) cout << "0\n";
+	}
+	return 0;
+}
