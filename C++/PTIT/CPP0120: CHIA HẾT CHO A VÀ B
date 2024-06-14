@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+// <ATTENTION>: Thuc ra de bài sai, nó yêu câu tìm các sô chia hêt cho a HOAC b trong [m, n]
+// Ta có duyêt for(i : m -> n) và ktra if(i%a == 0 || i%b == 0) cnt++; 
+int GCD(int a, int b){	// Tìm ucln
+	if(b == 0) return a;
+	return GCD(b, a%b);
+}
+
+int LCM(int a, int b){	// Tìm bcnn tu ucln
+	return a * b / GCD(a, b);
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){	// Ý tuong: |AUB| = |A| + |B| - |A giao B|
+		int m, n, a, b; cin >> m >> n >> a >> b;
+		int cnt = 0;
+		int a1, a2, b1, b2, d1, d2;
+		a2 = n / a * a;		// Sô lon nhât <= n và chia hêt cho a
+		a1 = (m + a - 1) / a * a;	// Sô nho nhât >= n và chia hêt cho a
+		cnt += (a2 - a1) / a + 1;	// Ðêm trong doan [m, n] có bn sô chia hêt cho a
+		
+		b2 = n / b * b;
+		b1 = (m + b - 1) / b * b;
+		cnt += (b2 - b1) / b + 1;
+		
+		int d = LCM(a, b);
+		d2 = n / d * d;
+		d1 = (m + d - 1) / d * d;
+		cnt -= (d2 - d1) / d + 1;
+		cout << cnt << endl;
+	}
+	return 0;
+}
