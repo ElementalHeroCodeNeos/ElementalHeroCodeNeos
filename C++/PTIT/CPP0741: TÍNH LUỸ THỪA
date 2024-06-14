@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+ll binpow(ll x, int y, ll p){	// Luu ý: Ðê x kiêu long long vì x còn res *= x và x %= p
+	ll res = 1;
+	while(y){
+		if(y % 2 == 1){
+			res *= x;
+			res %= p;
+		}
+		x *= x;
+		x %= p;
+		y /= 2;	
+	}
+	return res;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int y; ll x, p; cin >> x >> y >> p;
+		cout << binpow(x, y, p) << endl;
+	}
+	return 0;
+}
