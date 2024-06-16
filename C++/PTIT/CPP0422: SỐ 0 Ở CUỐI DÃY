@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		ll a[n];
+		int cnt = 0;
+		for(int i=0; i<n; i++) cin >> a[i];
+		for(int i=0; i<n; i++){
+			if(a[i] != 0){
+				cout << a[i] << " ";
+				cnt++;
+			}
+		}
+		for(int i=0; i<n-cnt; i++){
+			cout << "0 ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
