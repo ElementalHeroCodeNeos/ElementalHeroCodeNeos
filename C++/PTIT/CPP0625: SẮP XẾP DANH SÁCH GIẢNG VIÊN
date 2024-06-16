@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int cnt = 0;	// Biên dem ma sô giang viên
+
+class GiangVien{
+	private:
+		string ma, ten, mon;
+	public:
+		friend istream& operator >> (istream&, GiangVien&);
+		friend ostream& operator << (ostream&, GiangVien);
+		string getten(){
+			return this->ten;
+		}	
+		string getma(){
+			return this->ma;
+		}
+};
+
+string Ten(string s){	// Tách tên
+	vector<string> v;
+	string tmp;
+	stringstream ss(s);
+	while(ss >> tmp){
+		v.push_back(tmp);
+	}
+	return v[v.size() - 1];	
+}
+
+string chuanHoa(string s){	// Tách chu cái dau cua bô môn và in hoa
+	vector<string> v;
+	string tmp;
+	stringstream ss(s);
+	while(ss >> tmp){
+		v.push_back(tmp);
+	}
+	string ans = "";
+	for(int i=0; i<v.size(); i++){
+		ans += toupper(v[i][0]);
+	}
+	return ans;
+}
+
+istream& operator >> (istream& in, GiangVien& a){
+	cnt++;
+	getline(in, a.ten);
+	getline(in, a.mon);
+	if(cnt < 10) a.ma = "GV0" + to_string(cnt);
+	else a.ma = "GV" + to_string(cnt);
+	a.mon = chuanHoa(a.mon);
+	return in;
+}
+
+ostream& operator << (ostream& out, GiangVien a){
+	out << a.ma << " " << a.ten << " " << a.mon << endl;
+	return out;
+}
+
+bool cmp(GiangVien a, GiangVien b){	// cmp sap xep giang viên
+	string x = Ten(a.getten());
+	string y = Ten(b.getten());
+	if(x != y) return x < y;
+	return a.getma() < b.getma();
+}
+
+int main(){
+	int n; cin >> n;
+	cin.ignore();
+	GiangVien a[n];
+	for(int i=0; i<n; i++) cin >> a[i];
+	sort(a, a + n, cmp);
+	for(int i=0; i<n; i++) cout << a[i];
+	return 0;
+}
