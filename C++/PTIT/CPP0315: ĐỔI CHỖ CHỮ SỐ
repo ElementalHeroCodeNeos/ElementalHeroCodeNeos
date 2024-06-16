@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+// Day tang se không thê hoán vi de duoc sô nho hon
+void solve(string s){
+	int i = s.size() - 2;
+	while(i >= 0 && s[i] <= s[i+1]){
+		i--;
+	}
+	if(i == -1){
+		cout << "-1\n";
+		return;
+	}
+	int j = s.size() - 1;	
+	while(s[j] >= s[i] || s[j] == s[j-1]){	
+		j--;
+	}
+	swap(s[i], s[j]);
+	cout << s << endl;	
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		solve(s);
+	}
+	return 0;
+}
