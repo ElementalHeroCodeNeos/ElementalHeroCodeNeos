@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int check(ll n){
+	while(n >= 10){
+		if(abs(n%10 - (n/10)%10) != 1){
+			return 0;
+		}
+		n /= 10;
+	}
+	return 1;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		ll n; cin >> n;
+		if(check(n)) cout << "YES\n";
+		else cout << "NO\n";
+	}
+	return 0;
+}
