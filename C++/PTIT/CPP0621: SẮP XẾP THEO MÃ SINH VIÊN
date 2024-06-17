@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class SinhVien{
+	private:
+		string ma, ten, lop, ema;
+	public:
+		friend istream& operator >> (istream&, SinhVien&);
+		friend ostream& operator << (ostream&, SinhVien);	
+		string getma(){
+			return this->ma;
+		}
+};
+
+istream& operator >> (istream& in, SinhVien &a){
+	getline(in, a.ma);
+	getline(in, a.ten);
+	getline(in, a.lop);
+	getline(in, a.ema);
+	return in;
+}
+
+ostream& operator << (ostream& out, SinhVien a){
+	out << a.ma << " " << a.ten << " " << a.lop << " " << a.ema;
+	return out;
+}
+
+bool cmp(SinhVien a, SinhVien b){
+	return a.getma() < b.getma();
+}
+
+int main(){
+	SinhVien a[1000];
+	int n = 0;
+	while(cin >> a[n]){	// Chú ý
+		n++;
+	}
+	sort(a, a + n, cmp);
+	for(int i=0; i<n; i++){
+		cout << a[i] << endl;
+	}
+	return 0;
+}
