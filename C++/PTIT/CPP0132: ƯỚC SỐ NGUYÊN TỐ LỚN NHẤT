@@ -5,15 +5,15 @@ using namespace std;
 using ll = long long;
 
 ll solve(ll n){
-	ll res = 0;
+	ll ans;
 	for(int i=2; i<=sqrt(n); i++){
 		while(n%i == 0){
-			res = i;
+			ans = i;
 			n /= i;
 		}
 	}
-	if(n != 1) res = n;
-	return res;
+	if(n != 1) ans = n;
+	return ans;
 }
 
 int main(){
