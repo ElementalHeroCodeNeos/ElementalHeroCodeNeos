@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		int idx = s.find("084");	// Tra vê vi trí dau tiên có mat xâu "084" trong xâu s 
+		s.erase(idx, 3);	
+		cout << s << endl;
+	}
+	return 0;
+}
