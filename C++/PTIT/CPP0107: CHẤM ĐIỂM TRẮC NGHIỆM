@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string m101 = "ABBADCCABDCCABD";
+string m102 = "ACCABCDDBBCDDBB";
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		cin.ignore();
+		string s; getline(cin, s);
+		double x = 0.0;	// Kêt qua
+		string ans = "";	// Bài làm cua hoc sinh
+		for(int i=0; i<s.size(); i++){
+			if(isalpha(s[i])){
+				ans += s[i];
+			}
+		}
+		if(n == 101){
+			for(int i=0; i<m101.size(); i++){
+				if(ans[i] == m101[i]){
+					x += 10.0/15;
+				}
+			}
+		}
+		else{
+			for(int i=0; i<m102.size(); i++){
+				if(ans[i] == m102[i]){
+					x += 10.0/15;
+				}
+			}
+		}
+		cout << fixed << setprecision(2) << x << endl;
+	}
+	return 0;
+}
