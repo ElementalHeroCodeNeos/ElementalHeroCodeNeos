@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int cnt = 0;
+
+string chuanHoa(string s){	// Viêt tat môn hoc
+	string ans = "";
+	string tmp;
+	stringstream ss(s);
+	while(ss >> tmp){
+		ans += toupper(tmp[0]);
+	}
+	return ans;
+}
+
+class GiangVien{
+	private:
+		string ten, mon, ma;
+	public:
+		friend istream& operator >> (istream&, GiangVien&);
+		friend ostream& operator << (ostream&, GiangVien);
+		string getmon(){
+			return this->mon;
+		}
+};
+
+istream& operator >> (istream& in, GiangVien &a){
+	cnt++;
+	if(cnt < 10) a.ma = "GV0" + to_string(cnt);
+	else a.ma = "GV" + to_string(cnt);
+	getline(in, a.ten);
+	getline(in, a.mon);
+	a.mon = chuanHoa(a.mon);
+	return in;
+}
+
+ostream& operator << (ostream& out, GiangVien a){
+	out << a.ma << " " << a.ten << " " << a.mon << endl;
+	return out;
+}
+
+
+int main(){
+	int n; cin >> n;
+	cin.ignore();
+	GiangVien a[n];
+	for(int i=0; i<n; i++) cin >> a[i];
+	int Q; cin >> Q;
+	cin.ignore();
+	while(Q--){
+		string s; getline(cin, s);
+		s = chuanHoa(s);
+		cout << "DANH SACH GIANG VIEN BO MON " << s <<":\n";
+		for(int i=0; i<n; i++){
+			if(a[i].getmon() == s){
+				cout << a[i];
+			}
+		}
+	}
+	return 0;
+}
