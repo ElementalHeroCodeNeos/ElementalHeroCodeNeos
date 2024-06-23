@@ -10,7 +10,7 @@ void solve(int a[], int n){
 			min2 = min1;
 			min1 = a[i];
 		}
-		else if(a[i] < min2 && a[i] != min1){
+		else if(a[i] < min2 && a[i] > min1){
 			min2 = a[i];
 		}
 	}
