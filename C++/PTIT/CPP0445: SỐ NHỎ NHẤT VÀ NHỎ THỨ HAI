@@ -14,10 +14,8 @@ void solve(int a[], int n){
 			min2 = a[i];
 		}
 	}
-	if(min2 == INT_MAX){	
-		cout << "-1\n"; return;
-	}
-	cout << min1 << " " << min2 << endl;
+	if(min2 == INT_MAX) cout << "-1\n"; 
+	else cout << min1 << " " << min2 << endl;
 }
 
 int main(){
