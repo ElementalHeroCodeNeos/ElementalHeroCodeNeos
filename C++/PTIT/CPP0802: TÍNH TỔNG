@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+using namespace std; 
+
+using ll = long long;
+
+int check(string s){	// Kiêm tra xâu s có phai là sô kiêu int hay không ?
+	if(s.size() > 10) return 0;	
+	for(int i=0; i<s.size(); i++){
+		if(!isdigit(s[i])){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int main(){
+	ifstream in;
+	in.open("DATA.in");
+	string s;
+	ll sum = 0;
+	while(in >> s){
+		if(check(s)){
+			sum += stoi(s);
+		}
+	}
+	cout << sum << endl;
+	in.close();
+}
