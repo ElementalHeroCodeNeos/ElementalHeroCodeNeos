@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std; 
+
+void inThuong(string &s){
+	for(int i=0; i<s.size(); i++){
+		s[i] = tolower(s[i]);
+	}
+}
+
+int main(){
+	ifstream in1, in2;
+	in1.open("DATA1.in");
+	in2.open("DATA2.in");
+	string s;
+	set<string> hop, giao;
+	map<string, int> mp;
+	while(in1 >> s){
+		inThuong(s);
+		hop.insert(s);
+		mp[s]++;
+	}
+	while(in2 >> s){
+		inThuong(s);
+		if(mp[s]){
+			giao.insert(s);
+		}
+		hop.insert(s);
+	}
+	for(string x : hop){
+		cout << x << " ";
+	}
+	cout << endl;
+	for(string x : giao){
+		cout << x << " ";
+	}
+	in1.close();
+	in2.close();
+}
