@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+using namespace std; 
+// Chú ý: 2 mang ban dâu không phai tâp hop nên vân phai dùng set
+int main(){
+	ifstream in;
+	in.open("DATA.in");
+	int n, m; in >> n >> m;
+	int a[n], b[m];
+	map<int, int> mp;
+	set<int> se;
+	for(int i=0; i<n; i++){
+		in >> a[i];
+		mp[a[i]]++;
+	}
+	for(int i=0; i<m; i++){
+		in >> b[i];
+		if(mp[b[i]]){
+			se.insert(b[i]);
+		}
+	}
+	for(int x : se){
+		cout << x << " ";
+	}
+	in.close();
+}
