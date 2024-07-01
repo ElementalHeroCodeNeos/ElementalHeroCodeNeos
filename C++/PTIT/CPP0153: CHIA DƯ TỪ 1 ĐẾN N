@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int solve(int n, ll k){
+	int sum = 0;
+	int x = n / k;	// Chia 1,2,...,n thành x doan chia du cho k là: 1,2,...,k-1,0
+	int y = n % k;	// Du ra 1 doan chia du cho k là: 1,2,..,y 
+	sum += k*(k-1)/2 * x;
+	sum += (y+1)*y/2;
+	return sum;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; ll k; cin >> n >> k;
+		cout << solve(n, k) << endl;
+	}
+	return 0;
+}
