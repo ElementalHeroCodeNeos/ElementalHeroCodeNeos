@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int x = 0, y = 0, z = 0;
+
+class KhachHang;
+class MatHang;
+class HoaDon;
+map<string, KhachHang> m1;
+map<string, MatHang> m2;
+
+class KhachHang{
+	public:
+		string ma, hoten, sex, ns, add;
+		friend istream& operator >> (istream& in, KhachHang& a){
+			x++; 
+			if(x < 10) a.ma = "KH00" + to_string(x);
+			else a.ma = "KH0" + to_string(x);
+			getline(in >> ws, a.hoten);
+			in >> a.sex >> a.ns;
+			getline(in >> ws, a.add);
+			m1[a.ma] = a;
+			return in;
+		}
+};
+
+class MatHang{
+	public:
+		string ms, ten, dvi;
+		ll mua, ban;
+		friend istream& operator >> (istream& in, MatHang& a){
+			y++;
+			if(y < 10) a.ms = "MH00" + to_string(y);
+			else a.ms = "MH0" + to_string(y);
+			getline(in >> ws, a.ten);
+			getline(in >> ws, a.dvi);
+			in >> a.mua >> a.ban;
+			m2[a.ms] = a;
+			return in;	
+		}
+};
+
+class HoaDon{
+	public:
+		string md, mk, mm;
+		int so;
+		friend istream& operator >> (istream& in, HoaDon& a){
+			z++; 
+			if(z < 10) a.md = "HD00" + to_string(z);
+			else a.md = "HD0" + to_string(z);
+			in >> a.mk >> a.mm >> a.so;
+			return in;
+		}	
+		friend ostream& operator << (ostream& out, HoaDon a){
+			out << a.md << " " << m1[a.mk].hoten << " " << m1[a.mk].add << " ";
+			out << m2[a.mm].ten << " " << m2[a.mm].dvi << " ";
+			out << m2[a.mm].mua << " " << m2[a.mm].ban << " ";
+			out << a.so << " " << (ll)a.so * m2[a.mm].ban << endl;
+			return out;
+		}
+};
+
+int main(){
+	ifstream in1, in2, in3;
+	in1.open("KH.in");
+	in2.open("MH.in");
+	in3.open("HD.in");
+	int n; KhachHang a[25];
+	in1 >> n;
+	for(int i=0; i<n; i++){
+		in1 >> a[i];
+	}
+
+	int m; MatHang b[45];
+	in2 >> m;
+	for(int i=0; i<m; i++){
+		in2 >> b[i];
+	}
+	
+	int p; HoaDon c[105];
+	in3 >> p;
+	for(int i=0; i<p; i++){
+		in3 >> c[i];
+	}
+	
+	for(int i=0; i<p; i++){
+		cout << c[i];
+	}
+	in1.close();
+	in2.close();
+	in3.close();
+	return 0;
+}
