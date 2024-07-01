@@ -6,9 +6,9 @@ int main(){
 	int tc; cin >> tc;
 	while(tc--){
 		string s; cin >> s;
-		string tmp = s;
-		reverse(s.begin(), s.end());
-		if(tmp == s) cout << "YES\n";
+		string rev = s;
+		reverse(rev.begin(), rev.end());
+		if(rev == s) cout << "YES\n";
 		else cout << "NO\n";
 	}
 	return 0;
