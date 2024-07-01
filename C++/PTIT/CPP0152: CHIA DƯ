@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int a, m; cin >> a >> m;
+		bool ok = 0;
+		for(int x=0; x<=m-1; x++){
+			if((a*x) % m == 1){
+				cout << x << endl;
+				ok = 1;
+				break;
+			}
+		}
+		if(!ok) cout << "-1\n";
+	}
+	return 0;
+}
