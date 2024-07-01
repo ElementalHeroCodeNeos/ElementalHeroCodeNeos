@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool check(string s){
+	return s[s.size() - 1] == '6' && s[s.size() - 2] == '8';
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		cout << check(s) << endl;
+	}
+	return 0;
+}
