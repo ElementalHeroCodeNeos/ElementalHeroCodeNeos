@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, k; cin >> n >> k;
+		int a[n];
+		map<int, int> mp;
+		for(int i=0; i<n; i++){
+			cin >> a[i];
+			mp[a[i]]++;
+		}
+		int cnt = 0;
+		for(int i=0; i<n; i++){
+			if(a[i] == k - a[i]){
+				cnt += mp[k - a[i]] - 1;
+			}
+			else{
+				cnt += mp[k - a[i]];
+			}
+		}
+		cout << cnt / 2 << endl;  
+	}
+	return 0;
+}
