@@ -6,15 +6,14 @@ int main(){
 	int tc; cin >> tc;
 	while(tc--){
 		int n, Q; cin >> n >> Q;
-		int a[10001];
+		int a[n+1];
 		for(int i=1; i<=n; i++) cin >> a[i];
-		int prefix[10001];	// Khai báo duw 1 phân tu de prefix[0] = 0
+		int prefix[n+1];
 		for(int i=1; i<=n; i++){
 			prefix[i] = prefix[i-1] + a[i];
 		}
-		int l, r; 
 		while(Q--){
-			cin >> l >> r;
+			int l, r; cin >> l >> r;
 			cout << prefix[r] - prefix[l-1] << endl;
 		}
 	}
