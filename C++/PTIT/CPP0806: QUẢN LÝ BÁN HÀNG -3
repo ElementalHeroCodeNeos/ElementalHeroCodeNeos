@@ -58,7 +58,7 @@ class HoaDon{
 			out << a.md << " " << m1[a.mk].hoten << " " << m1[a.mk].add << " ";
 			out << m2[a.mm].ten << " " << m2[a.mm].dvi << " ";
 			out << m2[a.mm].mua << " " << m2[a.mm].ban << " ";
-			out << a.so << " " << (ll)a.so * m2[a.mm].ban << endl;
+			out << a.so << " " << (ll)a.so * m2[a.mm].ban << endl;	// Chú ý: nêu sô dung truoc là int thì phai thêm (ll) còn nêu đã là ll thì không can (có thê viêt: m2[a.mm].ban * a.so)
 			return out;
 		}
 };
