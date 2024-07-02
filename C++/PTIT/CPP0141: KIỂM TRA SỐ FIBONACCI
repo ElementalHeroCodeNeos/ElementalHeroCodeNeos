@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+ll F[93];
+map<ll, int> mp;
+
+void Fibo(){
+	F[0] = 0, F[1] = 1;
+	mp[0]++; mp[1]++;
+	for(int i=2; i<93; i++){
+		F[i] = F[i-1] + F[i-2];
+		mp[F[i]]++;
+	}
+}
+
+int main(){
+	Fibo();
+	int tc; cin >> tc;
+	while(tc--){
+		ll n; cin >> n;
+		if(mp[n]) cout << "YES\n";
+		else cout << "NO\n";
+	}
+	return 0;
+}
