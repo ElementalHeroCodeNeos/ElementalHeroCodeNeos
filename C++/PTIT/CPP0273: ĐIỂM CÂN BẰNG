@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int solve(int a[], int n, int sum){
+	int s = 0;	// s là tông các phân tu bên trái a[i + 1]
+	for(int i=0; i<n-1; i++){
+		s += a[i];
+		if(s == sum - s - a[i + 1]){
+			return i + 2;
+		}
+	}
+	return -1;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		int sum = 0;
+		for(int i=0; i<n; i++){
+			cin >> a[i];
+			sum += a[i];
+		}
+		cout << solve(a, n, sum) << endl;
+	}
+	return 0;
+}
