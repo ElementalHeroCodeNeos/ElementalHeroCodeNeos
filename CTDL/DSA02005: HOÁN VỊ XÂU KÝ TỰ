@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, x[12];
+string s;
+bool used[12];
+
+void in(){
+	for(int i=1; i<=n; i++){
+		cout << s[x[i] - 1];
+	}
+	cout << " ";
+}
+
+void Try(int i){
+	for(int j=1; j<=n; j++){
+		if(used[j] == 0){
+			x[i] = j;
+			used[j] = 1;
+			if(i == n){
+				in();
+			}
+			else Try(i + 1);
+			used[j] = 0;
+		}
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> s;
+		sort(s.begin(), s.end());
+		n = s.size();
+		Try(1);
+		cout << endl;
+	}
+	return 0;
+}
