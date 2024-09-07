@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, x[101], cnt;
+bool col[101], cheo1[101], cheo2[101];
+
+void Try(int i){
+	for(int j=1; j<=n; j++){
+		if(!col[j] && !cheo1[i - j + n] && !cheo2[i + j - 1]){
+			x[i] = j;
+			col[j] = 1;
+			cheo1[i - j + n] = 1;
+			cheo2[i + j - 1] = 1;
+			if(i == n){
+				cnt++;
+			}
+			else Try(i + 1);
+			col[j] = 0;
+			cheo1[i - j + n] = 0;
+			cheo2[i + j - 1] = 0;
+		}
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		cnt = 0;
+		Try(1);
+		cout << cnt << endl;
+	}
+	return 0;
+}
