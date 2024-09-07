@@ -14,7 +14,7 @@ void in(){
 }
 
 void Try(int i){
-	for(int j=x[i-1]+1; j<=v.size(); j++){
+	for(int j=x[i-1]+1; j<=v.size()-k+i; j++){
 		x[i] = j;
 		if(i == k){
 			in();
