@@ -3,23 +3,23 @@
 using namespace std;
 
 int n, k, a[12], x[12];
-int sum;
 bool ok;
 
-void Try(int i, int pos){
-	for(int j=pos; j<=n; j++){
-		x[i] = a[j];
-		sum += a[j];
-		if(sum == k){
-			ok = 1;
-			cout << "[";
-			for(int l=1; l<=i-1; l++){
-				cout << x[l] << " ";
-			}
-			cout << x[i] << "] ";
+void Try(int i, int sum){
+	for(int j=x[i-1]+1; j<=n; j++){
+		x[i] = j;
+		if(sum + a[j] > k){
+			return;
 		}
-		else Try(i + 1, j + 1);
-		sum -= a[j];
+		if(sum + a[j] == k){
+			cout << "[" << a[x[1]];
+			for(int l=2; l<=i; l++){
+				cout << " " << a[x[l]];
+			}
+			cout << "] ";
+			ok = 1;
+		}
+		else Try(i + 1, sum + a[j]);
 	}
 }
 
@@ -32,10 +32,9 @@ int main(){
 			cin >> a[i];
 		}
 		sort(a + 1, a + n + 1);
-		Try(1, 1);
+		Try(1, 0);
 		if(!ok) cout << "-1";
 		cout << endl;
 	}
 	return 0;
 }
-		
