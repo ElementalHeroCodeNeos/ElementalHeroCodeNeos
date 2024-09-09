@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char c; int k;
+string tmp;
+
+void Try(char x){
+	for(char j=x; j<=c; j++){
+		tmp += j;
+		if(tmp.size() == k){
+			cout << tmp << endl;
+		}
+		else Try(j);
+		tmp.pop_back();
+	}
+}
+
+int main(){
+	cin >> c >> k;
+	Try('A');
+	return 0;
+}
