@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char c; int n;
+string tmp;
+bool used[100];
+
+bool NGam(char c){
+	return c == 'A' || c == 'E';
+}
+
+bool check(string s){
+	for(int i=1; i<s.size()-1; i++){
+		if(NGam(s[i]) && !NGam(s[i-1]) && !NGam(s[i+1])){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+void Try(){
+	for(char j='A'; j<=c; j++){
+		if(!used[j]){
+			tmp += j;
+			used[j] = 1;
+			if(tmp.size() == n){
+				if(check(tmp)){
+					cout << tmp << endl;
+				}
+			}
+			else Try();
+			tmp.pop_back();
+			used[j] = 0;
+		}
+	}
+}
+
+int main(){
+	cin >> c;
+	n = c - 'A' + 1;
+	Try();
+	return 0;
+}
