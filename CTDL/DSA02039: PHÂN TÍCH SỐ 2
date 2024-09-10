@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, sum;
+vector<int> tmp;
+vector<vector<int>> res;
+
+void Try(int idx){
+	for(int j=idx; j>=1; j--){
+		tmp.push_back(j);
+		sum += j;
+		if(sum == n){
+			res.push_back(tmp);
+		}
+		else if(sum < n){
+			Try(j);
+		}
+		tmp.pop_back();
+		sum -= j;
+	}
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		Try(n);
+		cout << res.size() << endl;
+		for(vector<int> tmp : res){
+			cout << "(" << tmp[0];
+			for(int i=1; i<tmp.size(); i++){
+				cout << " " << tmp[i];
+			}
+			cout << ") ";
+		}
+		cout << endl;
+		res.clear();
+	}
+	return 0;
+}
