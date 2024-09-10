@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, k, a[16];
+string tmp;
+
+void Try(int idx){
+	for(int j=idx; j<=n; j++){
+		tmp.push_back(a[j]);
+		if(tmp.size() == k){
+			for(int x : tmp){
+				cout << x << " ";
+			}
+			cout << endl;
+		}
+		else Try(j + 1);
+		tmp.pop_back();
+	}
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> k;
+		for(int i=1; i<=n; i++){
+			cin >> a[i];
+		}
+		sort(a + 1, a + n + 1);
+		Try(1);
+	}
+	return 0;
+}
