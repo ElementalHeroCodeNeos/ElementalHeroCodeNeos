@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, p, s, cnt;
+vector<int> tmp;
+vector<vector<int>> res;
+
+bool CheckPrime(int n){
+	for(int i=2; i<=sqrt(n); i++){
+		if(n % i == 0) return 0;
+	}
+	return n > 1;
+}
+
+vector<int> prime;
+void init(){
+	for(int i=2; i<=200; i++){
+		if(CheckPrime(i)){
+			prime.push_back(i);
+		}
+	}
+}
+
+void Try(int idx, int sum){
+	for(int j=idx; j<prime.size(); j++){
+		tmp.push_back(prime[j]);
+		if(tmp.size() == n && sum + prime[j] == s){
+			res.push_back(tmp);
+		}
+		else if(tmp.size() < n && sum + prime[j] < s){
+			Try(j + 1, sum + prime[j]);
+		}
+		tmp.pop_back();
+	}
+}
+
+int main(){ 
+	init();
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> p >> s;
+		cnt = 0;
+		while(prime[cnt] <= p){
+			cnt++;
+		}
+		Try(cnt, 0);
+		sort(res.begin(), res.end());
+		cout << res.size() << endl;
+		for(vector<int> tmp : res){
+			for(int x : tmp){
+				cout << x << " ";
+			}
+			cout << endl;
+		}
+		res.clear();
+	}
+	return 0;
+}	
