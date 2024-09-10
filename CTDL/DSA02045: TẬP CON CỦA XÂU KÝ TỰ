@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n; string s; 
+vector<char> tmp;
+vector<vector<char>> res;
+
+void Try(int idx){
+	for(int j=idx; j<s.size(); j++){
+		tmp.push_back(s[j]);
+		res.push_back(tmp);
+		Try(j + 1);
+		tmp.pop_back();
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> s;
+		sort(s.begin(), s.end());
+		Try(0);
+		sort(res.begin(), res.end());
+		for(vector<char> tmp : res){
+			for(char x : tmp){
+				cout << x;
+			}
+			cout << " ";
+		}
+		cout << endl;
+		res.clear();
+	}
+	return 0;
+}
