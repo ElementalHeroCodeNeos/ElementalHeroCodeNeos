@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int k, n; 
+string s, res;
+
+void Try(int cnt){
+	if(cnt == k) return;
+	for(int i=0; i<n-1; i++){
+		for(int j=i+1; j<n; j++){
+			if(s[j] > s[i]){
+				swap(s[i], s[j]);
+				if(s > res){
+					res = s;
+				}
+				Try(cnt + 1);
+				swap(s[j], s[i]);
+			}
+		}
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> k >> s;
+		n = s.size();
+		res = s;
+		Try(0);
+		cout << res << endl;
+	}
+	return 0;
+}
