@@ -9,9 +9,9 @@ void Try(int n, char a, char b, char c){
 		cout << a << " -> " << c << endl;
 		return;
 	}	
-	Try(n - 1, a, c, b);
-	Try(1, a, b, c);
-	Try(n - 1, b, a, c);
+	Try(n - 1, a, c, b);	// Di chuyển (n - 1) đĩa từ cột A -> B
+	Try(1, a, b, c);	// Di chuyển 1 đĩa còn lại từ cột A -> C
+	Try(n - 1, b, a, c);	// Di chuyển (n - 1) đĩa từ B -> C
 }
 
 int main(){
