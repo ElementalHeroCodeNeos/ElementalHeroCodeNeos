@@ -5,14 +5,14 @@ using namespace std;
 int n, k, a[15], S, dem = 0;
 
 void Try(int start, int sum, int cnt){
-	if(cnt == k && start == n + 1){
+	if(cnt == k && start == n + 1){	// Đã xong dãy con cuối cùng 
 		dem++;
 		return;
 	}
-	for(int end = start; end <= n; end++){
+	for(int end = start; end <= n; end++){	
 		sum += a[end];
 		if(sum == S){
-			Try(end + 1, 0, cnt + 1);
+			Try(end + 1, 0, cnt + 1);	// Dãy con tiếp theo bắt đầu từ start = end (dãy trước) + 1
 		}		
 	}
 }
