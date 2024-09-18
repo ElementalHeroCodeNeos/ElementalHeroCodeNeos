@@ -2,20 +2,25 @@
 
 using namespace std;
 
-int k, n; 
+int k; 
 string s, res;
 
-void Try(int cnt){
-	if(cnt == k) return;
-	for(int i=0; i<n-1; i++){
-		for(int j=i+1; j<n; j++){
-			if(s[j] > s[i]){
-				swap(s[i], s[j]);
-				if(s > res){
-					res = s;
-				}
-				Try(cnt + 1);
-				swap(s[j], s[i]);
+void Try(int i, string tmp, int cnt){
+	if(cnt > k || i >= s.size()) return;  // Chú ý: i >= s.size()
+	res = max(res, tmp);
+	char max_val = tmp[i];
+	for(int j=i+1; j<s.size(); j++){
+		max_val = max(max_val, tmp[j]);
+	}
+	if(max_val == tmp[i]){
+		Try(i + 1, tmp, cnt);
+	}
+	else{
+		for(int j=i+1; j<s.size(); j++){
+			if(tmp[j] == max_val){
+				swap(tmp[i], tmp[j]);
+				Try(i + 1, tmp, cnt + 1);
+				swap(tmp[i], tmp[j]);
 			}
 		}
 	}
@@ -25,10 +30,9 @@ int main(){
 	int tc; cin >> tc;
 	while(tc--){
 		cin >> k >> s;
-		n = s.size();
 		res = s;
-		Try(0);
-		cout << res << endl;
+		Try(0, s, 0); 
+		cout << stoi(res) << endl;
 	}
 	return 0;
 }
