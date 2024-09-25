@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, s, m; cin >> n >> s >> m;
+		int CanDeSong = s * m;
+		int max_SoNgayDiCho = s - s / 7;
+		int max_LuongMua = max_SoNgayDiCho * n;
+		if(max_LuongMua < CanDeSong){
+			cout << "-1\n";
+		}
+		else{
+			cout << (CanDeSong + n - 1) / n << endl;
+		}
+	}
+	return 0;
+}
