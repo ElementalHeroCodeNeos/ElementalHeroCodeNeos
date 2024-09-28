@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string gray; cin >> gray;
+		string bin;
+		bin = gray[0];
+		for(int i=1; i<gray.size(); i++){
+			int x = gray[i] - '0';
+			int y = bin[i - 1] - '0';
+			bin += (char)(x ^ y + '0');
+		}
+		cout << bin << endl;
+	}
+	return 0;
+}
