@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, k, a[11][11], x[11], cnt = 0;
+bool used[11];
+vector<vector<int>> res;
+
+void Try(int i, int sum){
+	for(int j=1; j<=n; j++){
+		if(!used[j]){
+			x[i] = j;
+			used[j] = 1;
+			if(i == n && sum + a[i][j] == k){
+				cnt++;
+				vector<int> tmp(x + 1, x + n + 1);
+				res.push_back(tmp);
+			}
+			else if(i < n && sum + a[i][j] < k){
+				Try(i + 1, sum + a[i][j]);
+			}
+			used[j] = 0;
+		}
+	}
+}
+
+int main(){
+	cin >> n >> k;
+	for(int i=1; i<=n; i++){
+		for(int j=1; j<=n; j++){
+			cin >> a[i][j];
+		}
+	}
+	Try(1, 0);
+	cout << cnt << endl;
+	for(vector<int> tmp : res){
+		for(int x : tmp){
+			cout << x << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
