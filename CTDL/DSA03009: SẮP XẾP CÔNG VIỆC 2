@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Job{
+	int ms, dl, pt;
+	friend istream& operator >> (istream& in, Job& a){
+		in >> a.ms >> a.dl >> a.pt;
+		return in;
+	}
+};
+
+bool cmp(Job a, Job b){
+	return a.dl > b.dl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		struct Job a[n];
+		for(int i=0; i<n; i++){
+			cin >> a[i];
+		}
+		sort(a, a + n, cmp);
+		int i = 0, cnt = 0, res = 0;
+		int max_day = a[0].dl;
+		priority_queue<int> q;
+		for(int day=max_day; day>=1; day--){
+			while(i < n && a[i].dl >= day){
+				q.push(a[i].pt);
+				i++;
+			}
+			if(!q.empty()){
+				cnt++;
+				res += q.top();
+				q.pop();
+			}
+		}
+		cout << cnt << " " << res << endl;
+	}
+	return 0;
+}
+		
