@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int x, y;
+		bool ok = 0;
+		for(y = n / 7; y >= 0; y--){
+			int tmp = n - 7 * y;
+			if(tmp % 4 == 0){
+				x = tmp / 4;
+				for(int i=1; i<=x; i++){
+					cout << "4";
+				}
+				for(int i=1; i<=y; i++){
+					cout << "7";
+				}
+				ok = 1;
+				break;
+			}
+		} 
+		if(!ok) cout << "-1";
+		cout << endl;
+	}
+	return 0;
+}
+		
