@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int d; 
+string s;
+
+void solve(){
+	map<char, int> mp;
+	int n = s.size();
+	int fre = INT_MIN;
+	for(char x : s){
+		mp[x]++;
+		fre = max(fre, mp[x]);
+	}
+	if((d - 1) * (fre - 1) <= n - fre){
+		cout << "1\n";
+		return;
+	}
+	cout << "-1\n";
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> d >> s;
+		solve();
+	}
+	return 0;
+}
