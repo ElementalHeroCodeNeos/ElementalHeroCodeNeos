@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int n; cin >> n;
+	vector<int> c, l;
+	for(int i=1; i<=n; i++){
+		int x; cin >> x;
+		if(i % 2 == 1){
+			l.push_back(x);
+		}
+		else c.push_back(x);
+	}
+	sort(l.begin(), l.end());
+	sort(c.begin(), c.end(), greater<int>());
+	int i1 = 0, i2 = 0;
+	for(int i=1; i<=n; i++){
+		if(i % 2 == 1){
+			cout << l[i1++] << " ";
+		}
+		else cout << c[i2++] << " ";
+	}
+	return 0;
+}
+	
+	
