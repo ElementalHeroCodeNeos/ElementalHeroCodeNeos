@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+ll GCD(ll a, ll b){
+	if(b == 0) return a;
+	return GCD(b, a % b);
+}
+
+ll LCM(ll a, ll b){
+	return a * b / GCD(a, b);
+}
+
+struct PhanSo{
+	ll tu, mau;
+	friend istream& operator >> (istream& in, PhanSo& a){
+		in >> a.tu >> a.mau;
+		return in;
+	}
+	void rutgon(){
+		ll uc = GCD(this->tu, this->mau);
+		this->tu /= uc;
+		this->mau /= uc;
+	}
+	PhanSo operator - (PhanSo b){
+		PhanSo Hieu;
+		ll mc = LCM(this->mau, b.mau);
+		this->tu = mc / this->mau * this->tu;
+		b.tu = mc / b.mau * b.tu;
+		Hieu.tu = this->tu - b.tu;
+		Hieu.mau = mc;
+		Hieu.rutgon();
+		return Hieu;
+	}
+};
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		PhanSo a; cin >> a;
+		while(a.tu){
+			ll x = (a.mau + a.tu - 1) / a.tu;
+			PhanSo DonVi;
+			DonVi.tu = 1ll;
+			DonVi.mau = x;
+			cout << 1 << "/" << x;
+			a = a - DonVi;
+			if(a.tu) cout << " + ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+		
+		
+		
+		
+		
+		
+		
+		
+		
