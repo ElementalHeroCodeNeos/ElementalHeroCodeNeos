@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, a[100001], sum;
+
+int Balance(){
+	int sum1 = 0;
+	for(int i=1; i<=n; i++){
+		if(sum1 == sum - sum1 - a[i]){
+			return i;
+		}
+		sum1 += a[i];
+	}
+	return -1;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		sum = 0;
+		for(int i=1; i<=n; i++){
+			cin >> a[i];
+			sum += a[i];
+		}
+		cout << Balance() << endl;
+	}
+	return 0;
+}
+		
+		
