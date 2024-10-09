@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; ll k; cin >> n >> k;
+		ll a[n];
+		for(ll &x : a) cin >> x;
+		sort(a, a + n);
+		ll cnt = 0;
+		for(int i=0; i<n-1; i++){
+			auto it1 = lower_bound(a + i + 1, a + n, k - a[i]);
+			auto it2 = upper_bound(a + i + 1, a + n, k - a[i]);
+			cnt += (it2 - it1);
+		}
+		cout << cnt << endl;
+	}
+	return 0;
+}
+
