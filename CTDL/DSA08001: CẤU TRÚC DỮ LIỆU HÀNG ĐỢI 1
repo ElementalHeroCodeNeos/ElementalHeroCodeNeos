@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int Q; cin >> Q;
+		deque<int> q;
+		while(Q--){
+			int t; cin >> t;
+			if(t == 1){
+				cout << q.size() << endl;
+			}
+			else if(t == 2){
+				if(q.empty()) cout << "YES\n";
+				else cout << "NO\n";
+			}
+			else if(t == 3){
+				int x; cin >> x;
+				q.push_back(x);
+			}
+			else if(t == 4){
+				if(!q.empty()) q.pop_front();
+			}
+			else if(t == 5){
+				if(!q.empty()) cout << q.front() << endl;
+				else cout << "-1\n";
+			}
+			else if(t == 6){
+				if(!q.empty()) cout << q.back() << endl;
+				else cout << "-1\n";
+			}
+		}
+	}
+	return 0;
+}
