@@ -3,7 +3,6 @@
 using namespace std;
 
 int n, m, a[1001][1001];
-bool used[1001][1001];
 
 void nhap(){
 	cin >> n >> m;
@@ -15,9 +14,9 @@ void nhap(){
 }
 
 void solve(){
-	memset(used, 0, sizeof(used));
 	queue<pair<pair<int, int>, int>> q;
 	q.push({{0, 0}, 0});
+	bool used[1001][1001] = {0};
 	while(!q.empty()){
 		pair<pair<int, int>, int> top = q.front(); q.pop();
 		int i = top.first.first, j = top.first.second;
