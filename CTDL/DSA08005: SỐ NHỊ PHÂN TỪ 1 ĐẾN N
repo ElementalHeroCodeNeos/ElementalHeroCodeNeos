@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> v;
+void init(){
+	queue<string> q;
+	q.push("1");
+	while(v.size() <= 10000){
+		string top = q.front(); q.pop();
+		v.push_back(top);
+		q.push(top + "0");
+		q.push(top + "1");
+	}
+}
+
+int main(){
+	init();
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int cnt = 0;
+		for(int i=1; i<=n; i++){
+			cout << v[cnt++] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
