@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		map<int, int> mp;
+		for(int &x : a){
+			cin >> x;
+			mp[x]++;
+		}
+		bool check = 0;
+		for(int x : a){
+			if(mp[x] > 1){
+				cout << x << endl;
+				check = 1;
+				break;
+			}
+		}
+		if(!check) cout << "NO\n";
+	}
+	return 0;
+}
