@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int crossSum(int a[], int n, int l, int r, int mid){
+	int leftSum = 0, maxleftSum = 0;
+	int rightSum = 0, maxrightSum = 0;
+	for(int i=mid; i>=l; i--){
+		leftSum += a[i];
+		maxleftSum = max(maxleftSum, leftSum);
+	}
+	for(int i=mid+1; i<=r; i++){
+		rightSum += a[i];
+		maxrightSum = max(maxrightSum, rightSum);
+	}
+	return maxleftSum + maxrightSum;
+}
+
+int maxSum(int a[], int n, int l, int r){
+	if(l == r) return a[l];
+	int mid = (l + r) / 2;
+	return max({
+			maxSum(a, n, l, mid),
+			maxSum(a, n, mid + 1, r),
+			crossSum(a, n, l, r, mid)
+	});
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int &x : a) cin >> x;
+		cout << maxSum(a, n, 0, n - 1) << endl;
+	}
+	return 0;
+}
