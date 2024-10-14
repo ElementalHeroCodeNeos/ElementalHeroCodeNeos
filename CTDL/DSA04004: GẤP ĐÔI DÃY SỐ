@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+int search(int n, ll k){
+	if(k < pow(2, n - 1)){
+		return search(n - 1, k);
+	}
+	else if(k > pow(2, n - 1)){
+		return search(n - 1, k - pow(2, n - 1));
+	}
+	else return n;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; ll k; cin >> n >> k;
+		cout << search(n, k) << endl;
+	}
+	return 0;
+}
