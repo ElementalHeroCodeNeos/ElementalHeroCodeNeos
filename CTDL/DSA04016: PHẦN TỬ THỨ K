@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, m, k; cin >> n >> m >> k;
+		int a[n], b[m];
+		for(int &x : a) cin >> x;
+		for(int &x : b) cin >> x;
+		int i = 0, j = 0;
+		vector<int> v;
+		while(i < n && j < m){
+			if(a[i] <= b[j]){
+				v.push_back(a[i]);
+				i++;
+			}
+			else{
+				v.push_back(b[j]);
+				j++;
+			}	
+		}
+		cout << v[k - 1] << endl;
+	}
+	return 0;
+}
