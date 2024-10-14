@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+const int MOD = 1e9 + 7;
+
+int n, k;
+
+struct Matrix{
+	ll f[11][11];
+	friend istream& operator >> (istream& in, Matrix& a){
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				in >> a.f[i][j];
+			}
+		}
+		return in;
+	}
+	friend ostream& operator << (ostream& out, Matrix a){
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				out << a.f[i][j] << " ";
+			}
+			out << endl;
+		}
+		return out;
+	}
+	friend Matrix operator * (Matrix a, Matrix b){
+		Matrix ans;
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				ll tmp = 0;
+				for(int k=0; k<n; k++){
+					tmp += (a.f[i][k] * b.f[k][j]) % MOD; 
+					tmp %= MOD;
+				}
+				ans.f[i][j] = tmp;
+			}
+		}
+		return ans;
+	}
+};
+
+Matrix binpow(Matrix a, int k){
+	if(k == 1) return a;
+	Matrix x = binpow(a, k / 2);
+	if(k % 2 == 0) return x * x;
+	return x * x * a;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> k;
+		Matrix a; cin >> a;
+		cout << binpow(a, k);
+	}
+	return 0;
+}
