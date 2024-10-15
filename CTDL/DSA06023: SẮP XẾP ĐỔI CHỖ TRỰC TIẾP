@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int cnt = 1;
+
+void interchangeSort(int a[], int n){
+	for(int i=0; i<n-1; i++){
+		for(int j=i+1; j<n; j++){
+			if(a[j] < a[i]){
+				swap(a[i], a[j]);
+			}
+		}
+		cout << "Buoc " << cnt << ": ";
+		for(int i=0; i<n; i++) cout << a[i] << " ";
+		cnt++;
+		cout << endl;
+	}	
+}
+
+int main(){
+	int n; cin >> n;
+	int a[n];
+	for(int &x : a) cin >> x;
+	interchangeSort(a, n);
+	return 0;
+}
