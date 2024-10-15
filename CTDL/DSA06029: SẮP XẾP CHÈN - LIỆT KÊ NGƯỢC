@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<vector<int>> res;
+int cnt = 0;
+
+void insertionSort(int a[], int n){
+	vector<int> tmp;
+	tmp.push_back(a[0]);
+	res.push_back(tmp);
+	for(int i=1; i<n; i++){
+		int val = a[i], pos = i - 1;
+		while(pos >= 0 && val < a[pos]){
+			a[pos + 1] = a[pos];
+			pos--;
+		}
+		a[pos + 1] = val;
+		vector<int> tmp(a, a + i + 1);
+		res.push_back(tmp);
+		cnt++;
+	}
+}
+
+int main(){
+	int n; cin >> n;
+	int a[n];
+	for(int &x : a) cin >> x;
+	insertionSort(a, n);
+	while(cnt >= 0){
+		cout << "Buoc " << cnt << ": ";
+		for(int x : res[cnt]){
+			cout << x << " ";
+		}
+		cnt--;
+		cout << endl;
+	}
+	return 0;
+}
