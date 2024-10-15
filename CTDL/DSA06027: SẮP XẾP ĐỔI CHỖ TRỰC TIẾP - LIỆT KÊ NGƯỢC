@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<vector<int>> res;
+
+void interchangeSort(int a[], int n){
+	for(int i=0; i<n-1; i++){
+		for(int j=i+1; j<n; j++){
+			if(a[j] < a[i]){
+				swap(a[i], a[j]);
+			}
+		}
+		vector<int> tmp(a, a + n);
+		res.push_back(tmp);
+	}	
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int &x : a) cin >> x;
+		interchangeSort(a, n);
+		for(int i=res.size()-1; i>=0; i--){
+			cout << "Buoc " << i + 1 << ": ";
+			for(int x : res[i]){
+				cout << x << " ";
+			}
+			cout << endl;
+		}
+		res.clear();
+	}
+	return 0;
+}
