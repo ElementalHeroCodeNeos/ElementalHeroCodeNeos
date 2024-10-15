@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void insertionSort(int a[], int n){
+	cout << "Buoc 0: " << a[0] << endl; 
+	int cnt = 1;
+	for(int i=1; i<n; i++){
+		int val = a[i], pos = i - 1;
+		while(pos >= 0 && val < a[pos]){
+			a[pos + 1] = a[pos];
+			pos--;
+		}
+		a[pos + 1] = val;
+		cout << "Buoc " << cnt++ << ": ";
+		for(int j=0; j<=i; j++) cout << a[j] << " ";
+		cout << endl; 
+	}
+}
+
+int main(){
+	int n; cin >> n;
+	int a[n];
+	for(int &x : a) cin >> x;
+	insertionSort(a, n);
+	return 0;
+}
