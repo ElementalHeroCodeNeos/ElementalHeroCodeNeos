@@ -1,0 +1,30 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+int main(){ 
+	int tc; cin >> tc;
+	cin.ignore();
+	while(tc--){
+		string s; getline(cin, s);
+		stack<char> st;
+		bool ok = 0;	// ok = 0 là không thua dâu ()
+		for(int i=0; i<s.size(); i++){
+			if(s[i] == '(' || s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/'){
+				st.push(s[i]);
+			}
+			else if(s[i] == ')'){	
+				if(st.top() == '('){
+					ok = 1;	// Ý tuong bài toán: Nêu giua '(' và ')' có +, -, *, / thì hop lê. VD: (a + b), (a * b)
+					// Nguoc lai, nêu không có toán tu o giua '(' và ')' thì không hop lê. VD: a * (b), (a + (b))
+					break;
+				}
+				st.pop(); 
+				st.pop();		
+			}
+		}
+		if(ok) cout << "Yes\n";
+		else cout << "No\n";	
+	}
+	return 0;
+}
