@@ -1,0 +1,28 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n], b[n];
+		// Mang b[] là mang chua các phân tu thoa mãn(Key) cho môi vi trí cua a[]
+		for(int &x : a) cin >> x;
+		stack<int> st;	// Luu vi trí cua phân tu cân tìm Key
+		for(int i=0; i<n; i++){
+			while(!st.empty() && a[st.top()] < a[i]){
+				b[st.top()] = a[i];	// Tìm thây Key cho phân tu o vi trí st.top()
+				st.pop();	
+			}
+			st.push(i);
+		}
+		while(!st.empty()){
+			b[st.top()] = -1;	// Nhung phân tu không có Key
+			st.pop();
+		}
+		for(int x : b) cout << x << " ";
+		cout << endl;
+	}
+	return 0;
+}
