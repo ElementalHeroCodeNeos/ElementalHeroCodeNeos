@@ -1,0 +1,23 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+using ll = long long;
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		ll F[51] = {0};
+		F[0] = 1;
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=3; j++){
+				if(i >= j){
+					F[i] += F[i - j];
+				}
+			}
+		}
+		cout << F[n] << endl;
+	}
+	return 0;
+}
