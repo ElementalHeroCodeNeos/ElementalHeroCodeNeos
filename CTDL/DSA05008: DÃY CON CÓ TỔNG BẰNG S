@@ -1,0 +1,32 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n, s; cin >> n >> s;
+		int a[n + 1];
+		for(int i=1; i<=n; i++){
+			cin >> a[i];
+		}
+		bool F[n + 1][s + 1];	// F[i][j] (0 hoac 1): kiêm tra: Tôn tai dãy con tính dên chi sô i mà có tông bang j không ? 
+		memset(F, false, sizeof(F));
+		for(int i=0; i<=n; i++){
+			F[i][0] = true;
+		}
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=s; j++){
+				if(j >= a[i]){
+					F[i][j] = F[i - 1][j] || F[i - 1][j - a[i]];
+					// F[i - 1][j]: nêu không lây a[i] thì ktra: Tôn tai dãy con tính dên chi sô (i - 1) mà có tông j không ?
+					// F[i - 1][j - a[i]]: nêu lây a[i] thì ktra: Tôn tai dãy con tính dên chi sô (i - 1) mà có tông (j - a[i]) không ?
+				}
+				else F[i][j] = F[i - 1][j];
+			}
+		}
+		if(F[n][s]) cout << "YES\n";	
+		else cout << "NO\n";
+	}
+	return 0;
+}
