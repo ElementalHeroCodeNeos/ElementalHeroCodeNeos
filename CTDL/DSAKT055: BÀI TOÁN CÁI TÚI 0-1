@@ -1,0 +1,25 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n, V; cin >> n >> V;
+		int a[n + 1], c[n + 1];
+		for(int i=1; i<=n; i++) cin >> a[i];	// Thê tích cua dô vât thu i
+		for(int i=1; i<=n; i++) cin >> c[i];	// Giá tri cua dô vât thu i
+		int F[n + 1][V + 1];	// Tông giá tri lon nhât tính dên dô vât thu i, mà tông thê tích không duoc vuot quá V
+		memset(F, 0, sizeof(F));
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=V; j++){
+				if(j >= a[i]){
+					F[i][j] = max(F[i - 1][j], c[i] + F[i - 1][j - a[i]]);
+				}
+				else F[i][j] = F[i - 1][j];
+			}
+		}
+		cout << F[n][V] << endl;
+	}
+	return 0;
+}
