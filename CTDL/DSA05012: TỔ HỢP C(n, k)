@@ -1,0 +1,28 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+using ll = long long;
+
+const int MOD = 1e9 + 7;
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n, k; cin >> n >> k;
+		ll F[n + 1][n + 1] = {0};	// F[i][j]: Tô hop châp j cua i
+		for(int i=1; i<=n; i++){
+			F[i][0] = 1;	// C(n, 0) = 1
+			F[i][i] = 1;	// C(n, n) = 1
+			F[i][1] = i;	// C(n, 1) = n
+		}
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<i; j++){
+				F[i][j] = F[i - 1][j] + F[i - 1][j - 1];	// Công thuc Pascal: C(n, k) = C(n - 1, k) + C(n - 1, k - 1)
+				F[i][j] %= MOD;
+			}
+		}
+		cout << F[n][k] << endl;
+	}
+	return 0;
+}
