@@ -1,0 +1,27 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+// Ý tuong: tìm dãy con tang dài nhât (res). Kêt qua là (n - res), tuc là ta chi cân chèn nhung phân tu còn lai trong mang vào dãy con tang dài nhât dó
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n + 1];
+		for(int i=1; i<=n; i++){
+			cin >> a[i];
+		}
+		int F[n + 1];
+		int res = 1;
+		for(int i=1; i<=n; i++){
+			F[i] = 1;
+			for(int j=1; j<i; j++){
+				if(a[j] <= a[i]){
+					F[i] = max(F[i], F[j] + 1);
+				}
+			}
+			res = max(res, F[i]);
+		}
+		cout << n - res << endl;
+	}
+	return 0;
+}
