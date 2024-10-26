@@ -1,0 +1,28 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+using ll = long long;
+
+const int MOD = 1e9 + 7;
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n, k; cin >> n >> k;
+		int a[n + 1];
+		for(int i=1; i<=n; i++) cin >> a[i];
+		ll F[k + 1] = {0};	// F[j]: Sô các câu hình (có tính hoán vi và lap lai) lây tu mang a[] mà có tông là j
+		F[0] = 1;
+		for(int j=1; j<=k; j++){
+			for(int i=1; i<=n; i++){
+				if(j >= a[i]){
+					F[j] += F[j - a[i]];
+					F[j] %= MOD;
+				}
+			}
+		}
+		cout << F[k] << endl;
+	}
+	return 0;
+}
