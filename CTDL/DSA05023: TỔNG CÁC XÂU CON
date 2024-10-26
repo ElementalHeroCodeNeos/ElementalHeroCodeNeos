@@ -1,0 +1,22 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+using ll = long long;
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		int n = s.size();
+		s = "@" + s;
+		ll F[n + 1] = {0};	// F[i]: Tông các sô kêt thúc tai s[i]. VD: s = 1234 thì: F[2] = 2 + 12, F[3] = 3 + 23 + 123
+		ll ans = 0;		// Kêt qua bài toán ans là F[1] + F[2] + ... + F[n]
+		for(int i=1; i<=n; i++){
+			F[i] = 10 * F[i - 1] + i * (s[i] - '0');
+			ans += F[i];
+		}
+		cout << ans << endl;
+	}
+	return 0;
+}
