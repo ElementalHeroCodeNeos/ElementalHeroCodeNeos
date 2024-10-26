@@ -1,0 +1,21 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int F[n + 1];	// F[j]: Sô luong ít nhât các sô nho hon n mà có tông bình phuong bang j
+		for(int j=0; j<=n; j++){
+			F[j] = j;
+			for(int i=1; i<=sqrt(n); i++){
+				if(j >= i * i){
+					F[j] = min(F[j], F[j - i * i] + 1);
+				}
+			}
+		}
+		cout << F[n] << endl;
+	}
+	return 0;
+}
