@@ -1,0 +1,44 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+int n;
+
+void solve(){
+	queue<pair<int, int>> q;
+	q.push({n, 0});
+	set<int> se;
+	se.insert(n);
+	while(1){
+		auto it = q.front(); q.pop();
+		int x = it.first, cnt = it.second;
+		if(x == 1){
+			cout << cnt << endl;
+			break;
+		}
+		if(x > 1 && se.count(x - 1) == 0){
+			q.push({x - 1, cnt + 1});
+			se.insert(x - 1);
+		}
+		if(x > 3){
+			for(int i=2; i<=sqrt(x); i++){
+				if(x % i == 0){
+					int tmp = max(i, x / i);
+					if(se.count(tmp) == 0){
+						q.push({tmp, cnt + 1});
+						se.insert(tmp);
+					}
+				}
+			}
+		}	
+	}
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		solve();
+	}
+	return 0;
+}
