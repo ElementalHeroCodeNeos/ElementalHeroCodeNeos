@@ -1,0 +1,64 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+int prime[10001];
+set<int> se;
+void sieve(){
+	prime[0] = prime[1] = 0;
+	for(int i=2; i<=10000; i++){
+		prime[i] = 1;
+	}
+	for(int i=2; i<=100; i++){
+		for(int j=i*i; j<=10000; j+=i){
+			if(prime[i]){
+				prime[j] = 0;
+			}
+		}
+	}
+	for(int i=1000; i<=9999; i++){
+		if(prime[i]){
+			se.insert(i);
+		}
+	}
+}
+
+bool test(int x, int y){
+	int cnt = 0;
+	while(x != 0 && y != 0){
+		int c = x % 10;
+		int d = y % 10;
+		x /= 10;
+		y /= 10;
+		if(c != d) cnt++;
+	}
+	return cnt == 1;
+}
+
+int main(){ 
+	sieve();
+	int tc; cin >> tc;
+	while(tc--){
+		int s, t; cin >> s >> t;
+		bool check[10001] = {0};
+		queue<pair<int, int>> q;
+		q.push({s, 0});
+		check[s] = 1;
+		while(1){
+			auto it = q.front(); q.pop();
+			int x = it.first, cnt = it.second;
+			if(x == t){
+				cout << cnt << endl;
+				break;
+			}
+			for(int y : se){
+				if(!check[y] && se.count(y) != 0 && test(x, y)){
+					q.push({y, cnt + 1});
+					check[y] = 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+		
