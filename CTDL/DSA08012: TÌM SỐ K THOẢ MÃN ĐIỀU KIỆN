@@ -1,0 +1,45 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+vector<int> res;
+void init(){
+	queue<pair<int, vector<bool>>> q;
+	q.push({1, {0, 1, 0, 0, 0, 0}});
+	q.push({2, {0, 0, 1, 0, 0, 0}});
+	q.push({3, {0, 0, 0, 1, 0, 0}});
+	q.push({4, {0, 0, 0, 0, 1, 0}});
+	q.push({5, {0, 0, 0, 0, 0, 1}});
+	for(int i=0; i<=5; i++){
+		res.push_back(i);
+	}
+	while(1){
+		auto top = q.front(); q.pop();
+		int x = top.first;
+		if(x > 100000) break;
+		vector<bool> tmp = top.second;
+		for(int i=0; i<=5; i++){
+			if(tmp[i] == 0){
+				tmp[i] = 1;
+				q.push({x * 10 + i, tmp});
+				res.push_back(x * 10 + i);
+				tmp[i] = 0;
+			}
+		}
+	}	
+}
+
+int main(){ 
+	init();
+	int tc; cin >> tc;
+	while(tc--){
+		int l, r; cin >> l >> r;
+		int idx1 = lower_bound(res.begin(), res.end(), l) - res.begin();
+		int idx2 = lower_bound(res.begin(), res.end(), r) - res.begin();
+		if(res[idx2] != r){
+			idx2--;
+		}
+		cout << idx2 - idx1 + 1 << endl;
+	}
+	return 0;
+}
