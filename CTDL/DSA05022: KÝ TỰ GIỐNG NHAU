@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, x, y, z; cin >> n >> x >> y >> z;
+		int F[n + 2] = {0};
+		F[1] = x;
+		F[2] = F[1] + min(x, z);
+		for(int i=3; i<=n+1; i++){
+			F[i] = F[i - 1] + x;
+			if(i % 2 == 0){
+				F[i] = min(F[i], F[i / 2] + z);
+			}
+			F[i - 1] = min(F[i - 1], F[i] + y);
+		}
+		cout << F[n] << endl;
+	}
+	return 0;
+}
