@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+vector<ll> v;
+void init(){
+	queue<ll> q;
+	q.push(1);
+	set<ll> se;
+	se.insert(1);
+	while(1){
+		ll top = q.front(); q.pop();
+		if(top > 1e18) break;
+		v.push_back(top);
+		if(!se.count(2 * top)){
+			q.push(2 * top);
+			se.insert(2 * top);
+		}
+		if(!se.count(3 * top)){
+			q.push(3 * top);
+			se.insert(3 * top);
+		}
+		if(!se.count(5 * top)){
+			q.push(5 * top);
+			se.insert(5 * top);
+		}
+	}
+	sort(v.begin(), v.end());
+}
+
+int main(){
+	init();
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		cout << v[n - 1] << endl;
+	}
+	return 0;
+}
