@@ -1,0 +1,40 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+void solve(string s){
+	int n = s.size();
+	s = "@" + s;
+	if(s[1] == '0'){	// CHú ý xét riêng truong hop này.VD: 0123
+		cout << "0\n";
+		return;
+	}
+	int F[n + 1] = {0};		// F[i]: sô cách giai mã cho xâu con [1, i]
+	F[0] = F[1] = 1;
+	for(int i=2; i<=n; i++){
+		int tmp = (s[i - 1] - '0') * 10 + s[i] - '0';
+		if(s[i] == '0'){	// Xét i = 4
+			if(tmp < 10 || tmp > 26){	// VD: 1200 or 1230 
+				cout << "0\n";
+				return;
+			}
+			else F[i] = F[i - 2];	// VD: 1210 or 1220
+		}
+		else{
+			if(tmp >= 10 && tmp <= 26){
+				F[i] = F[i - 1] + F[i - 2];	// VD: 1214
+			}
+			else F[i] = F[i - 1];	// VD: 1234
+		}
+	}
+	cout << F[n] << endl;
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		solve(s);
+	}
+	return 0;
+}
