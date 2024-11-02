@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+const int MOD = 1e9 + 7;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, s; cin >> n >> s;
+		ll F[n + 1][s + 1];		// F[i][j]: Sô luong sô có i chu sô có tông các chu sô bang j
+		memset(F, 0, sizeof(F));
+		for(int i=1; i<=9; i++){
+			F[1][i] = 1;
+		}
+		for(int i=2; i<=n; i++){
+			for(int j=1; j<=s; j++){
+				for(int k=0; k<=9; k++){
+					if(j >= k){
+						F[i][j] += F[i - 1][j - k];		// Chèn thêm sô k vào sau
+						F[i][j] %= MOD;
+					}
+				}
+			}
+		}
+		cout << F[n][s] << endl;
+	}
+	return 0;
+}
