@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+const int MOD = 1e9 + 7;
+
+ll C[110][110];
+void init(){
+	for(int i=1; i<=109; i++){
+		C[i][0] = 1;
+		C[i][1] = i;
+		C[i][i] = 1;
+	}
+	for(int i=1; i<=109; i++){
+		for(int j=1; j<i; j++){
+			C[i][j] = C[i - 1][j - 1] + C[i - 1][j];	// Công thuc: C(n, k) = C(n-1, k-1) + C(n-1, k)
+			C[i][j] %= MOD;
+		}
+	}
+}
+
+int main(){
+	init();
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		cout << C[9 + n][n] << endl;	// Kêt qua là C(9 + n, n)
+	}
+	return 0;
+}
