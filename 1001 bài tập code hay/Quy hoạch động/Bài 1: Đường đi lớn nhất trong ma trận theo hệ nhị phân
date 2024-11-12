@@ -1,0 +1,68 @@
+ #include<bits/stdc++.h>
+
+using namespace std;
+// Ý tưởng: Giống bài Maximum Path Sum, dùng quy hoạch động và tìm cha cho ô (i, j) đang xét
+int n;
+char a[101][101];
+string s[101][101];  // s[i][j]: số nhị phân đại diện cho đường đi lớn nhất từ ô (1, 1) đến ô (i, j)
+
+char xuli1(string s){  // Chuyển số nhị phân có 4 chữ số sang hệ cơ số 16 (hexa)
+	int res = 0, lt = 1;
+	for(int i=3; i>=0; i--){
+		res += (s[i] - '0') * lt;
+		lt *= 2;
+	}
+	if(res < 10) return res + '0';  // Quy tắc: chuyển số nhị phân có 4 chữ số đó sang hệ thập phân. Nếu số ở hệ thập phân là 0, 1, 2, ..., 9 thì kết quả chính là chữ số đó, còn lớn hơn hoặc bằng 10 thì là A, B, C, D, E, F
+	return res - 10 + 'A';
+}
+
+string xuli2(string bin){  // Chuyển số nhị phân sang hệ cơ số 16
+	string res = "";
+	int mod = bin.size() % 4;  
+	if(mod != 0) bin = string(4 - mod, '0') + bin;  // Nếu mod != 0 thì bổ sung (4 - mod) chữ số 0 vào trước bin để ta có 1 xâu nhị phân có độ dài chia hết cho 4
+	for(int i=0; i<bin.size(); i+=4){
+		res += xuli1(bin.substr(i, 4));  // Quy tắc chuyển số nhị phân sang hệ 16: Lần lượt chuyển từng bộ 4 chữ số hệ nhị phân thành 1 chữ số nhị phân. Ví dụ: 111011000. Đầu tiên ta bổ sung 3 chữ số 0 vào đầu xâu nhị phân, thành: 0001|1101|1000 -> 1D8
+	}
+	int i = 0;
+	while(res[i] == '0'){  // Loại bỏ các chữ số 0 vô nghĩa ở đầu xâu kết quả
+		i++;
+	}
+	return res.substr(i);
+}
+
+void nhap(){
+	cin >> n; 
+	for(int i=1; i<=n; i++){
+		for(int j=1; j<=n; j++){
+			cin >> a[i][j];
+		}
+	}
+}
+
+void solve(){
+	string tmp = "";
+	for(int j=1; j<=n; j++){
+		tmp += a[1][j];
+		s[1][j] = tmp;
+	}
+	tmp = "";
+	for(int i=1; i<=n; i++){
+		tmp += a[i][1];
+		s[i][1] = tmp;
+	}
+	for(int i=1; i<=n; i++){
+		for(int j=1; j<=n; j++){
+			s[i][j] = max(s[i][j-1], s[i-1][j]) + a[i][j];
+		}
+	}
+	cout << xuli2(s[n][n]) << endl;
+}
+
+int main(){
+	nhap();
+  solve();
+  return 0;
+}
+	solve();
+	return 0;
+}
