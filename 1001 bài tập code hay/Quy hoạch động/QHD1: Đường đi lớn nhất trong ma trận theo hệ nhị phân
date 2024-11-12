@@ -6,7 +6,7 @@ int n;
 char a[101][101];
 string s[101][101];  // s[i][j]: số nhị phân đại diện cho đường đi lớn nhất từ ô (1, 1) đến ô (i, j)
 
-char xuli1(string s){  // Chuyển số nhị phân có 4 chữ số sang hệ cơ số 16 (hexa)
+char xuly(string s){  // Chuyển số nhị phân có 4 chữ số sang hệ cơ số 16 (hexa)
 	int res = 0, lt = 1;
 	for(int i=3; i>=0; i--){
 		res += (s[i] - '0') * lt;
@@ -16,12 +16,12 @@ char xuli1(string s){  // Chuyển số nhị phân có 4 chữ số sang hệ c
 	return res - 10 + 'A';
 }
 
-string xuli2(string bin){  // Chuyển số nhị phân sang hệ cơ số 16
+string bintohex(string bin){  // Chuyển số nhị phân sang hệ cơ số 16
 	string res = "";
 	int mod = bin.size() % 4;  
 	if(mod != 0) bin = string(4 - mod, '0') + bin;  // Nếu mod != 0 thì bổ sung (4 - mod) chữ số 0 vào trước bin để ta có 1 xâu nhị phân có độ dài chia hết cho 4
 	for(int i=0; i<bin.size(); i+=4){
-		res += xuli1(bin.substr(i, 4));  // Quy tắc chuyển số nhị phân sang hệ 16: Lần lượt chuyển từng bộ 4 chữ số hệ nhị phân thành 1 chữ số nhị phân. Ví dụ: 111011000. Đầu tiên ta bổ sung 3 chữ số 0 vào đầu xâu nhị phân, thành: 0001|1101|1000 -> 1D8
+		res += xuli(bin.substr(i, 4));  // Quy tắc chuyển số nhị phân sang hệ 16: Lần lượt chuyển từng bộ 4 chữ số hệ nhị phân thành 1 chữ số nhị phân. Ví dụ: 111011000. Đầu tiên ta bổ sung 3 chữ số 0 vào đầu xâu nhị phân, thành: 0001|1101|1000 -> 1D8
 	}
 	int i = 0;
 	while(res[i] == '0'){  // Loại bỏ các chữ số 0 vô nghĩa ở đầu xâu kết quả
@@ -55,7 +55,7 @@ void solve(){
 			s[i][j] = max(s[i][j-1], s[i-1][j]) + a[i][j];
 		}
 	}
-	cout << xuli2(s[n][n]) << endl;
+	cout << bintohex(s[n][n]) << endl;
 }
 
 int main(){
