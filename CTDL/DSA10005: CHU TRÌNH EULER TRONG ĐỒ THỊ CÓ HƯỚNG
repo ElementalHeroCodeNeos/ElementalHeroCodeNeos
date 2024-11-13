@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Ý tưởng: Đồ thị có hướng liên thông yếu tồn tại chu trình Euler khi bán bậc vào và bán bậc ra của mọi đỉnh trên đồ thị là bằng nhau
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, m; cin >> n >> m;
+		int bbv[1001], bbr[1001];
+		memset(bbv, 0, sizeof(bbv));
+		memset(bbr, 0, sizeof(bbr));
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			bbr[x]++;
+			bbv[y]++;
+		}
+		bool ok = 1;
+		for(int i=1; i<=n; i++){
+			if(bbv[i] != bbr[i]){
+				ok = 0;
+				break;
+			}
+		}
+		cout << ok << endl;
+	}
+	return 0;
+}
