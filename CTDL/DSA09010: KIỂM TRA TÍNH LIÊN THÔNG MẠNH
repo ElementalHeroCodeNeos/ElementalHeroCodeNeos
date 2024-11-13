@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m; 
+vector<int> ke[1001], tke[1001];
+bool visited[1001];
+stack<int> st;
+
+void DFS1(int u){
+	visited[u] = true;
+	for(int v : ke[u]){
+		if(!visited[v]){
+			visited[v] = true;
+			DFS1(v);
+		}
+	}
+	st.push(u);
+}
+
+void DFS2(int u){
+	visited[u] = true;
+	for(int v : tke[u]){
+		if(!visited[v]){
+			visited[v] = true;
+			DFS2(v);
+		}
+	}
+}
+
+void Korasaju(){
+	for(int i=1; i<=n; i++){
+		if(!visited[i]){
+			DFS1(i);
+		}
+	}
+	memset(visited, false, sizeof(visited));
+	int scc = 0;
+	while(!st.empty()){
+		int top = st.top(); st.pop();
+		if(!visited[top]){
+			scc++;
+			DFS2(top);
+		}
+	}
+	if(scc == 1) cout << "YES\n";
+	else cout << "NO\n";
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			tke[y].push_back(x);
+		}
+		Korasaju();
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+			tke[i].clear();
+		}
+		memset(visited, false, sizeof(visited));
+	}
+	return 0;
+}
+		
+		
+		
