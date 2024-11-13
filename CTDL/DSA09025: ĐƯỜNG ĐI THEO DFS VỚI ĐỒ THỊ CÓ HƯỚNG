@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m, s, t; 
+vector<int> ke[1001];
+bool visited[1001];
+int parent[1001];
+
+void DFS(int u){
+	visited[u] = true;
+	for(int v : ke[u]){
+		if(!visited[v]){
+			parent[v] = u;  // Gán cha của v là u
+			DFS(v);
+		}
+	}
+	
+}
+
+void solve(){
+	DFS(s);
+	if(!visited[t]){  // Không có đường đi từ s đến t
+		cout << "-1\n";
+		return;
+	}
+	vector<int> res;
+	while(t != s){
+		res.push_back(t);
+		t = parent[t];  // Truy vết, con đi tìm cha
+	}
+	res.push_back(s);
+	reverse(res.begin(), res.end());
+	for(int x : res){
+		cout << x << " ";
+	}
+	cout << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m >> s >> t;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+		}
+		solve();
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		memset(visited, false, sizeof(visited));
+	}
+	return 0;
+}
