@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, m; cin >> n >> m;
+		vector<int> ke[1001];
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}  // Note: ban đầu mình chỉ nghĩ đến trường hợp dễ nhất (đồ thị là cây có n - 1 cạnh) nên chỉ cnt1++ khi ke[u].size() == 1, vậy là sai. Phải là cnt1++ khi ke[u].size() % 2 == 1
+		int cnt1 = 0;  // Số đỉnh u mà có tổng số đỉnh kề với nó là số lẻ
+		for(int i=1; i<=n; i++){
+			if(ke[i].size() % 2 == 1) cnt1++;
+		}
+		int cnt2 = n - cnt1;  // Số đỉnh u mà có tổng số đỉnh kề với nó là số chẵn
+		if(cnt1 == 2) cout << "1\n";
+		else if(cnt2 == n) cout << "2\n";
+		else cout << "0\n";
+	}
+	return 0;
+}
