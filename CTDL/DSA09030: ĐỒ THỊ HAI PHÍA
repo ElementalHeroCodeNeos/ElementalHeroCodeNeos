@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m;
+vector<int> ke[1001];
+int color[1001];
+bool ok;
+
+void DFS(int u){
+	for(int v : ke[u]){
+		if(!color[v]){
+			if(color[u] == 1) color[v] = 2;
+			else color[v] = 1;
+			DFS(v);
+		}
+		else if(color[v] == color[u]){
+			ok = 0;
+		}
+	}	
+}
+
+void solve(){
+	ok = 1;
+	for(int i=1; i<=n; i++){
+		if(!color[i]){
+			color[i] = 1;
+			DFS(i);
+			if(!ok){
+				cout << "NO\n";
+				return;
+			}
+		}
+	}
+	cout << "YES\n";
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}
+		solve();
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		memset(color, 0, sizeof(color));
+	}
+	return 0;
+}
