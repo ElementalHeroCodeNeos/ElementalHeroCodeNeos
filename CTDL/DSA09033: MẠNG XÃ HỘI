@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Đồ thị vô hướng n đỉnh hoàn hảo tức là mỗi đỉnh bất kì đều phải có cạnh nối với (n - 1) đỉnh còn lại và chỉ cần đủ số cạnh để nối thôi. VD: 3 đỉnh thì có 3 cạnh, 4 đỉnh thì có 6 cạnh
+int n, m;
+vector<int> ke[100001];
+bool visited[100001];
+int cnt;
+
+void DFS(int u){
+	cnt++;
+	visited[u] = true;
+	for(int v : ke[u]){
+		if(!visited[v]){
+			DFS(v);
+		}
+	}
+} 
+
+bool check(){
+	int socanh = 0;
+	for(int i=1; i<=n; i++){
+		if(!visited[i]){
+			cnt = 0;
+			DFS(i);
+			socanh += cnt * (cnt - 1) / 2;  // Trong mỗi thành phần liên thông có cnt đỉnh, số cạnh phải bằng tổ hợp C(cnt, 2) = cnt * (cnt - 1) / 2
+		}
+	}
+	return socanh == m;  // Cộng tổng số cạnh của từng tplt lại phải bằng số cạnh đồ thị, tức bằng m
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}
+		if(check()) cout << "YES\n";
+		else cout << "NO\n";
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		memset(visited, false, sizeof(visited));
+	}
+	return 0;
+}
