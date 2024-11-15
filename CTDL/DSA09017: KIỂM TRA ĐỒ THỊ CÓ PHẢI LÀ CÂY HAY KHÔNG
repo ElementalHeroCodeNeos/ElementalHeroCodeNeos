@@ -2,7 +2,7 @@
 
 using namespace std;
 // Ý tưởng: Cây là đồ thị vô hướng n đỉnh có: (n - 1) cạnh, không có chu trình, liên thông và luôn có đường đi giữa 2 đỉnh u, v bất kì. Do vậy, để kiểm tra đồ thị vô hướng có phải cây ta chỉ cần kiểm tra điều kiện 1 và 2 hoặc 1 và 3
-int n, m;
+int n;
 vector<int> ke[1001];
 bool visited[1001];
 
