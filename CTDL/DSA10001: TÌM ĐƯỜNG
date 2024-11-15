@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m, s1, s2, t1, t2;
+char a[501][501];
+bool ok;
+
+int dx[4] = {-1, 0, 0, 1};
+int dy[4] = {0, -1, 1, 0};
+// Dùng thuật toán quay lui (chứ không phải loang)
+void DFS(int i, int j, int direct, int cnt){  // direct: hướng đang đi; cnt: số lần đổi hướng
+	if(ok) return;
+	if(i == t1 && j == t2){
+		ok = 1;
+		return;
+	}
+	a[i][j] = '*';
+	for(int k=0; k<4; k++){
+		int i1 = i + dx[k];
+		int j1 = j + dy[k];  // Chú ý: Viết if(a[i1][j1] != '*') chứ không viết a[i1][j1] == '.' vì có thể đi qua a[i][j] = 'S' hoặc 'T'
+ 		if(i1 >= 1 && i1 <= n && j1 >= 1 && j1 <= m && a[i1][j1] != '*' && cnt <= 3){  // Chú ý: tăng thêm 1 ở chỗ cnt vì ban đầu gọi DFS(s1, s2, -1, 0) (có thể chạy tay để hiểu rõ hơn)
+ 			if(k == direct) DFS(i1, j1, k, cnt);  // Đi theo hướng cũ
+			else DFS(i1, j1, k, cnt + 1);  // Đi sang hướng mới
+		}
+	}
+	a[i][j] = '.';  // Chú ý: trả lại giá trị cho a[i][j] vì đây không phải loang mà là quay lui, tức duyệt toàn bộ cấu hình đường đi và có thể có nhiều đường đi cùng qua a[i][j]
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=m; j++){
+				cin >> a[i][j];
+				if(a[i][j] == 'S'){
+					s1 = i, s2 = j;
+				}
+				else if(a[i][j] == 'T'){
+					t1 = i, t2 = j;
+				}
+			}
+		}
+		ok = 0;
+		DFS(s1, s2, -1, 0);
+		if(ok) cout << "YES\n";
+		else cout << "NO\n";
+	}
+	return 0;
+}
+	
