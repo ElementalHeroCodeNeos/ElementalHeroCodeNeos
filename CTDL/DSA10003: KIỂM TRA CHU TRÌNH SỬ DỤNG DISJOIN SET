@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m;
+vector<int> ke[1001];
+bool visited[1001];
+int parent[1001];
+bool ok;
+
+void BFS(int u){
+	queue<int> q;
+	visited[u] = true;
+	q.push(u);
+	while(!q.empty()){
+		int top = q.front(); q.pop();
+		for(int v : ke[top]){
+			if(!visited[v]){
+				parent[v] = top;
+				visited[v] = true;
+				q.push(v);
+			}
+			else if(v != parent[top]){
+				ok = 1;
+				return;
+			}
+		}	
+	}
+}
+
+void solve(){
+	for(int i=1; i<=n; i++){
+		if(!visited[i]){
+			ok = 0;
+			BFS(i);
+			if(ok){
+				cout << "YES\n";
+				return;
+			}
+		}
+	}
+	cout << "NO\n";
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}
+		solve();
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		memset(visited, false, sizeof(visited));	
+	}
+	return 0;
+}
