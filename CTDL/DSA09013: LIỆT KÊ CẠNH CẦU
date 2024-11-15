@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m;
+vector<int> ke[1001];
+bool visited[1001];
+vector<pair<int, int>> dscanh;
+
+void DFS(int u, int s, int t){
+	visited[u] = true;
+	for(int v : ke[u]){
+		if((u == s && v == t) || (u == t && v == s))
+			continue;
+		if(!visited[v]){
+			DFS(v, s, t);
+		}
+	}
+}
+
+int tplt(int s, int t){
+	int cnt = 0;
+	for(int i=1; i<=n; i++){
+		if(!visited[i]){
+			cnt++;
+			DFS(i, s, t);
+		}
+	}
+	return cnt;
+}
+
+void solve(){
+	int cc = tplt(0, 0);
+	for(auto it : dscanh){
+		memset(visited, false, sizeof(visited));
+		if(cc < tplt(it.first, it.second)){
+			cout << it.first << " " << it.second << " ";
+		}
+	}
+	cout << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+			dscanh.push_back({x, y});
+		}
+		solve();
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		dscanh.clear();
+		memset(visited, false, sizeof(visited));
+	}
+	return 0;
+}
