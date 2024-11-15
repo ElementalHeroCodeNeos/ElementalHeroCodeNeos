@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m;
+vector<int> ke[100001];
+bool visited[100001];
+int cnt;
+
+void DFS(int u){
+	cnt++;
+	visited[u] = true;
+	for(int v : ke[u]){
+		if(!visited[v]){
+			DFS(v);
+		}
+	}
+} 
+
+void solve(){
+	int res = 1;
+	for(int i=1; i<=n; i++){
+		if(!visited[i]){
+			cnt = 0;
+			DFS(i);
+			res = max(res, cnt);
+		}
+	}
+	cout << res << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}
+		solve();
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		memset(visited, false, sizeof(visited));
+	}
+	return 0;
+}
