@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Chú ý: đồ thị có hướng nha !
+int n, m;
+vector<pair<int, int>> ke[1001];
+
+bool BellmanFord(int s){
+	int d[1001];
+	for(int i=1; i<=n; i++){
+		d[i] = 1e9;
+	}
+	d[s] = 0;
+	for(int i=1; i<=n-1; i++){  // Chỉ cần (n - 1) vòng lặp là ta có thể cập nhật đường đi ngắn nhất từ s đến mọi đỉnh u (d[u]). Do vậy, nếu lặp thêm 1 lần nữa mà làm d[v] thay đổi thì chứng tỏ đồ thị có chu trình âm
+		for(int u=1; u<=n; u++){
+			for(auto it : ke[u]){
+				int v = it.first, w = it.second;
+				d[v] = min(d[v], d[u] + w);
+			}
+		}
+	}
+	for(int u=1; u<=n; u++){  
+		for(auto it : ke[u]){
+			int v = it.first, w = it.second;
+			if(d[v] > d[u] + w){  // d[v] giảm do lợi dụng đi lòng vòng trong chu trình âm  
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool check(){
+	for(int i=1; i<=n; i++){  // Duyệt thuật toán BellmanFord ở tất cả các đỉnh
+		if(BellmanFord(i)){
+			return true;
+		}
+	}
+	return false;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y, w; cin >> x >> y >> w;
+			ke[x].push_back({y, w});
+		}
+		cout << check() << endl;
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+	}
+	return 0;
+}
