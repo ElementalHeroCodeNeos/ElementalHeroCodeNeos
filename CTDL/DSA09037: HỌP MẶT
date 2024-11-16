@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int k, n, m, pos[101];
+vector<int> ke[1001];
+bool visited[1001];
+map<int, int> mp;
+
+void DFS(int u){
+	mp[u]++;
+	visited[u] = true;
+	for(int v : ke[u]){
+		if(!visited[v]){
+			DFS(v);
+		}
+	}
+}
+
+void solve(){
+	for(int i=1; i<=k; i++){
+		memset(visited, false, sizeof(visited));
+		DFS(pos[i]);
+	}
+	int cnt = 0;
+	for(auto it : mp){
+		if(it.second == k){
+			cnt++;
+		}
+	}
+	cout << cnt << endl;
+}
+
+int main(){
+	cin >> k >> n >> m;
+	for(int i=1; i<=k; i++){
+		cin >> pos[i];
+	}
+	for(int i=1; i<=m; i++){
+		int x, y; cin >> x >> y;
+		ke[x].push_back(y);
+	}
+	solve();
+	return 0;
+}
