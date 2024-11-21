@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+struct node{
+	int data;
+	node *left;
+	node *right;
+	node(int x){
+		data = x;
+		left = right = NULL;
+	}
+};
+
+void makeRoot(node *root, int u, int v, char c){
+	if(c == 'L') root->left = new node(v);
+	else root->right = new node(v);
+}
+
+void insertNode(node *root, int u, int v, char c){
+	if(root == NULL) return;
+	if(root->data == u){
+		makeRoot(root, u, v, c);
+	}
+	else{
+		insertNode(root->left, u, v, c);
+		insertNode(root->right, u, v, c);
+	}
+}
+// Tư tưởng: Duyệt theo từng mức, nếu hàng có mức chẵn thì in ngược và hàng có mức lẻ thì in đúng thứ tự. 
+void spiralOrder(node *root){
+	queue<node*> q;
+	q.push(root);
+	int cnt = 0;
+	while(!q.empty()){
+		int s = q.size();
+		vector<node*> v;  // Lưu các node thuộc cùng 1 hàng (cùng mức)
+		for(int i=0; i<s; i++){  
+			node *u = q.front(); q.pop();
+			v.push_back(u);
+		} 
+		for(node *u : v){  // Duyệt các node trong vécto, với mỗi node thì ta sẽ đẩy node con trái và phải của nó vào hàng đợi
+			if(u->left != NULL) q.push(u->left);
+			if(u->right != NULL) q.push(u->right);
+		}
+		if(cnt % 2 == 0) reverse(v.begin(), v.end());  // Các node thuộc hàng có mức chẵn thì in ngược
+		for(node *u : v){
+			cout << u->data << " "; 
+		}
+		cnt++;
+	}
+	cout << endl;
+}
