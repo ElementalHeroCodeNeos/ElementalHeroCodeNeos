@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Ý tưởng: Thứ tự duyệt inorder của 1 cây nhị phân tìm kiếm là 1 mảng tăng dần
+bool check(int a[], int n){
+	for(int i=1; i<n; i++){
+		if(a[i] <= a[i - 1])
+			return false;
+	}
+	return true;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int &x : a) cin >> x;
+		cout << check(a, n) << endl;
+	}
+	return 0;
+}
