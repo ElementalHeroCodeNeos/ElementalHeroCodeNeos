@@ -10,8 +10,8 @@ int main(){
 		for(int i=1; i<=n; i++){
 			cin >> a[i];
 		}
-		int F[n + 1], G[n + 1];
-		F[1] = 1;
+		int F[n + 1], G[n + 1];		// F[i]: độ dài dài nhất của dãy con tăng liên tiếp kết thúc ở chỉ số i
+		F[1] = 1;			// G[i]: độ dài dài nhất của dãy con giảm liên tiếp kết thúc ở chỉ số i
 		for(int i=2; i<=n; i++){
 			F[i] = 1;
 			if(a[i] > a[i - 1]){
