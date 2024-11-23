@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n;
+vector<int> ke[100001];
+int res = 0;
+
+void DFS(int u, int cnt){
+	res = max(res, cnt);
+	for(int v : ke[u]){
+		DFS(v, cnt + 1);
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		for(int i=1; i<=n-1; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+		}
+		res = 0;
+		DFS(1, 0);
+		cout << res << endl;
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+	}
+	return 0;
+}
