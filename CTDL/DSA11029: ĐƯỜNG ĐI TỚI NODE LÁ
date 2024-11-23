@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n;
+vector<int> ke[1001];
+int parent[1001];
+vector<int> path;  // Lưu đường đi từ node gốc tới node u đang xét
+vector<vector<int>> res;  // Lưu kết quả
+
+void DFS(int u){
+	path.push_back(u);
+	if(ke[u].empty()){  // Nếu u là node lá thì đẩy vào vector kết quả
+		res.push_back(path);
+	}
+	else{
+		for(int v : ke[u]){
+			parent[v] = u;
+			DFS(v);
+		}
+	}
+	path.pop_back();  // BackTrack
+}
+
+bool cmp(vector<int> a, vector<int> b){  // Sắp xếp các vector theo phần tử cuối cùng tăng dần (để in ra đường đi của node lá có nhãn nhỏ hơn trước)
+	return a.back() < b.back();
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		for(int i=1; i<=n-1; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+		}
+		DFS(1);
+		sort(res.begin(), res.end(), cmp);
+		for(vector<int> v : res){
+			for(int x : v) cout << x << " ";
+			cout << endl;
+		}
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		res.clear();
+	}
+	return 0;
+}
