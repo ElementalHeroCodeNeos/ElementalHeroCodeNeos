@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+void solve(int a[], int n){
+	int b[n];
+	stack<int> st;  // Lưu index
+	for(int i=n-1; i>=0; i--){  
+		while(!st.empty() && a[i] > a[st.top()]){  // Tìm phần tử lớn hơn đầu tiên bên trái 
+			b[st.top()] = st.top() - i;
+			st.pop();
+		}
+		st.push(i);
+	}
+	while(!st.empty()){
+		b[st.top()] = st.top() + 1;  // Không tìm được phần tử lớn hơn đầu tiên bên trái cho a[st.top()] tức là các phần tử đứng trước a[st.top()] đều nhỏ hơn bằng nó
+		st.pop();
+	}
+	for(int x : b) cout << x << " ";
+	cout << endl;
+}
+	
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int &x : a) cin >> x;
+		solve(a, n);
+	}
+	return 0;
+}
