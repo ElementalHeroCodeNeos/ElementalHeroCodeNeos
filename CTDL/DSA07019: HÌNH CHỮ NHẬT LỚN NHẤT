@@ -3,7 +3,7 @@
 using namespace std;
 
 using ll = long long;
-// Ý tưởng: Ta xem xét ứng với mỗi độ cao a[i] thì diện tích HCN lớn nhất có thể là gì, sau đó tìm max của các HCN đó. Mỗi hình chữ nhật đó có chiều cao a[i] và chiều dài là R[i] - L[i] - 1
+// Ý tưởng: Ta xem xét ứng với mỗi độ cao a[i] thì diện tích HCN lớn nhất có thể là gì, sau đó tìm max của các HCN đó. Mỗi hình chữ nhật đó có chiều cao a[i] thì chiều rộng lớn nhất là R[i] - L[i] - 1
 ll solve(int a[], int n){
 	int L[n], R[n];  // L[i]: vị trí của phần tử nhỏ hơn đầu tiên bên trái của a[i]; R[i]: vị trí của phần tử nhỏ hơn đầu tiên bên phải của a[i]
 	stack<int> st;  // stack lưu chỉ số
