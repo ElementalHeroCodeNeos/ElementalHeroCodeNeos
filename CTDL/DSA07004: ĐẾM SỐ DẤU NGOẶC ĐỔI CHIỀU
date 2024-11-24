@@ -1,8 +1,9 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-// 2 trường hợp: 1/ Thừa dấu đóng ngoặc: )))())()() -> số lần cần đổi chiều: 2
-                 2/ Thừa dấu mở ngoặc: ((((  -> số lần cần đổi chiều: 4 / 2 = 2
+// 2 trường hợp (có thể xảy ra cả 2 trường hợp)
+		// 1/ Thừa dấu đóng ngoặc: )))())()() -> số lần cần đổi chiều: 2
+                // 2/ Thừa dấu mở ngoặc: ((((  -> số lần cần đổi chiều: 4 / 2 = 2
 int solve(string s){
 	stack<char> st;
 	int cnt = 0;  // Số lần cần đổi chiều dấu ')'
@@ -16,7 +17,7 @@ int solve(string s){
 			else st.pop();
 		}
 	}
-	return cnt + st.size() / 2;  // trong đó st.size() / 2 là số lần cần đổi chiều dấu '('
+	return cnt + st.size() / 2;  // Trong đó st.size() / 2 là số lần cần đổi chiều dấu '('
 }
 
 int main(){
