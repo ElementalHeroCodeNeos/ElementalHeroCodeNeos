@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+string solve(string s, int k){
+	stack<pair<char, int>> st;  // second: số kí tự first lặp lại liên tiếp
+	for(char x : s){
+		if(st.empty()) st.push({x, 1});  // Nếu stack rỗng, ta đẩy kí tự x vào stack kèm theo số lần lặp là 1
+		else{  // Ngược lại nếu stack không rỗng
+			if(x == st.top().first){  // Nếu kí tự x đang xét mà giống kí tự ở đỉnh stack
+				if(st.top().second + 1 == k){  // Nếu mà thêm phần tử x sẽ đủ k kí tự x liên tiếp
+					st.pop();  // thì ta xoá đi k kí tự x đó
+				}
+				else st.top().second++;  // Ngược lại, ta tăng số lần lặp của kí tự đó thêm 1 (thay vì push({x, st.top().second + 1}) thì chỉ cần làm như này. Mục đích để nếu tí pop() chỉ cần pop() 1 lần thay vì lặp while(x == st.top()) st.pop();)
+			}
+			else st.push({x, 1});  // Trường hợp kí tự x khác kí tự trên đỉnh stack
+		}
+	}
+	string res = "";
+	while(!st.empty()){
+		res += st.top().first;
+		st.pop();
+	}
+	reverse(res.begin(), res.end());
+	return res;
+}
+
+int main(){
+	string s; int k; cin >> s >> k;
+	cout << solve(s, k) << endl;
+	return 0;
+}
