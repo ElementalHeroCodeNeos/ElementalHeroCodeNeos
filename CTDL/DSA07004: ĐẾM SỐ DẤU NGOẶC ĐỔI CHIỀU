@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// 2 trường hợp: 1/ Thừa dấu đóng ngoặc: )))())()() -> số lần cần đổi chiều: 2
+                 2/ Thừa dấu mở ngoặc: ((((  -> số lần cần đổi chiều: 4 / 2 = 2
+int solve(string s){
+	stack<char> st;
+	int cnt = 0;  // Số lần cần đổi chiều dấu ')'
+	for(char x : s){
+		if(x == '(') st.push(x);  // Nếu x là dấu mở ngoặc, đẩy vào stack
+		else{  // Nếu x là dấu đóng ngoặc
+			if(st.empty()){  // nếu stack rỗng (không có dấu '(' tương ứng) thì chuyển nó thành dấu mở ngoặc rồi đẩy vào stack
+				st.push('(');
+				cnt++;  
+			}
+			else st.pop();
+		}
+	}
+	return cnt + st.size() / 2;  // trong đó st.size() / 2 là số lần cần đổi chiều dấu '('
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		cout << solve(s) << endl;
+	}
+	return 0;
+}
