@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+void solve(string s){
+	stack<int> st;
+	for(char x : s){
+		if(isdigit(x)) st.push(x - '0');
+		else{
+			int th1 = st.top(); st.pop();
+			int th2 = st.top(); st.pop();
+			if(x == '+') st.push(th2 + th1);
+			else if(x == '-') st.push(th2 - th1);
+			else if(x == '*') st.push(th2 * th1);
+			else st.push(th2 / th1); 
+		}
+	}
+	cout << st.top() << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		solve(s);
+	}
+	return 0;
+}
