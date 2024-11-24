@@ -30,7 +30,7 @@ ll solve(int a[], int n){
 		st.pop();
 	}
 	ll res = 1;
-	for(int i=0; i<n; i++){
+	for(int i=0; i<n; i++){		// Ứng với mỗi độ cao a[i], ta đi tìm diện tích HCN lớn nhất chiều cao a[i]
 		res = max(res, 1ll * a[i] * (R[i] - L[i] - 1));
 	}
 	return res;
