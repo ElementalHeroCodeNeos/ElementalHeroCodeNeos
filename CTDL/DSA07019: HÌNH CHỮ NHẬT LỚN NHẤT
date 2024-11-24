@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+// Ý tưởng: Ta xem xét ứng với mỗi độ cao a[i] thì diện tích HCN lớn nhất có thể là gì, sau đó tìm max của các HCN đó. Mỗi hình chữ nhật đó có chiều cao a[i] và chiều dài là R[i] - L[i] - 1
+ll solve(int a[], int n){
+	int L[n], R[n];  // L[i]: vị trí của phần tử nhỏ hơn đầu tiên bên trái của a[i]; R[i]: vị trí của phần tử nhỏ hơn đầu tiên bên phải của a[i]
+	stack<int> st;  // stack lưu chỉ số
+	for(int i=0; i<n; i++){
+		while(!st.empty() && a[i] < a[st.top()]){
+			R[st.top()] = i;
+			st.pop();
+		}
+		st.push(i);
+	}
+	while(!st.empty()){
+		R[st.top()] = n;
+		st.pop();
+	}
+	for(int i=n-1; i>=0; i--){
+		while(!st.empty() && a[i] < a[st.top()]){
+			L[st.top()] = i;
+			st.pop();
+		}
+		st.push(i);
+	}
+	while(!st.empty()){
+		L[st.top()] = -1;
+		st.pop();
+	}
+	ll res = 1;
+	for(int i=0; i<n; i++){
+		res = max(res, 1ll * a[i] * (R[i] - L[i] - 1));
+	}
+	return res;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n];
+		for(int &x : a) cin >> x;
+		cout << solve(a, n) << endl;
+	}
+	return 0;
+}
