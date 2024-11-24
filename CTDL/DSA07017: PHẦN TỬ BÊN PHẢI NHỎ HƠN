@@ -1,44 +1,46 @@
-#include<bits/stdc++.h> 
+#include<bits/stdc++.h>
 
-using namespace std; 
+using namespace std;
 
-int main(){ 
+void solve(int a[], int n){
+	int G[n], S[n];	// G[i]: phần tử lớn hơn đầu tiên bên phải của a[i] (lưu index); S[i]: phần tử nhỏ hơn đầu tiên bên phải của a[i] (lưu value)
+	stack<int> st;
+	for(int i=0; i<n; i++){	// Tìm phần tử lớn hơn đầu tiên bên phải của a[i]
+		while(!st.empty() && a[i] > a[st.top()]){
+			G[st.top()] = i;	// Lưu index
+			st.pop();
+		}
+		st.push(i);
+	}
+	while(!st.empty()){
+		G[st.top()] = -1;
+		st.pop();
+	}
+	for(int i=0; i<n; i++){	// Tìm phần tử nhỏ hơn đầu tiên bên phải của a[i]
+		while(!st.empty() && a[i] < a[st.top()]){
+			S[st.top()] = a[i];	// Lưu value
+			st.pop();
+		}
+		st.push(i);
+	}
+	while(!st.empty()){
+		S[st.top()] = -1;
+		st.pop();
+	}
+	for(int i=0; i<n; i++){
+		if(G[i] != -1) cout << S[G[i]] << " ";	
+		else cout << "-1 ";
+	}
+	cout << endl;
+}
+	
+int main(){
 	int tc; cin >> tc;
 	while(tc--){
 		int n; cin >> n;
-		int a[n], b[n], c[n];	// Mang b[i]: luu IDX cua phan tu lon nhât dau tiên bên phai cua a[i]
-								// Mang c[i]: luu IDX cua phan tu nho nhât tiêp theo bên phai cua a[i]
+		int a[n];
 		for(int &x : a) cin >> x;
-		stack<int> st;
-		for(int i=0; i<n; i++){
-			while(!st.empty() && a[i] > a[st.top()]){	
-				b[st.top()] = i;
-				st.pop();
-			}
-			st.push(i);
-		}
-		while(!st.empty()){
-			b[st.top()] = -1;	
-			st.pop();	
-		}
-		
-		for(int i=0; i<n; i++){
-			while(!st.empty() && a[i] < a[st.top()]){
-				c[st.top()] = i;
-				st.pop();
-			}
-			st.push(i);
-		}
-		while(!st.empty()){
-			c[st.top()] = -1;	
-			st.pop();	
-		}
-		
-		for(int i=0; i<n; i++){
-			if(b[i] == -1 || c[b[i]] == -1) cout << "-1 ";
-			else cout << a[c[b[i]]] << " ";
-		}
-		cout << endl;
+		solve(a, n);
 	}
 	return 0;
 }
