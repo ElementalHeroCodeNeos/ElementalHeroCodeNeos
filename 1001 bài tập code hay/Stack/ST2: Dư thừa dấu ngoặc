@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// 2 trường hợp: 1/ ((x+y)) : Nếu s[j] và s[i] là cặp đóng mở ngoặc mà s[j + 1] và s[i - 1] cũng là cặp đóng mở ngoặc
+                 2/ (x)     : Nếu vị trí của dấu đóng ngoặc trừ đi vị trí dấu mở ngoặc mà bằng 2
+bool check(string s){
+	stack<int> st;  // stack lưu vị trí của các kí tự trong xâu s thay vì lưu kí tự. Nếu muốn biết kí tự đó là gì, ta vẫn có thể truy cập s[i] -> tiện lợi hơn lưu kí tự. Việc này giúp ta có thể kiểm tra, xem xét các kí tự trong xâu s ban đầu thông qua chỉ số đã lưu trong stack
+	for(int i=0; i<s.size(); i++){
+		if(s[i] == '(') st.push(i);  // Nếu kí tự đang xét là dấu mở ngoặc, đẩy nó vào stack
+		else if(s[i] == ')'){  // Nếu kí tự đang xét là dấu đóng ngoặc
+			int j = st.top();  
+			if(i - j == 2 || (s[j + 1] == '(' && s[i - 1] == ')'))
+				return true;
+			else st.pop();
+		}
+	}
+	return false;
+}
+
+int main(){
+	string s; cin >> s;
+	if(check(s)) cout << "YES\n";
+	else cout << "NO\n";
+	return 0;
+}
