@@ -1,44 +1,38 @@
-#include<bits/stdc++.h> 
+#include<bits/stdc++.h>
 
-using namespace std; 
+using namespace std;
 
-int n;
-
-void solve(){
+int BFS(int s){
 	queue<pair<int, int>> q;
-	q.push({n, 0});
+	q.push({s, 0});
 	set<int> se;
-	se.insert(n);
-	while(1){
+	se.insert(s);
+	while(!q.empty()){
 		auto it = q.front(); q.pop();
 		int x = it.first, cnt = it.second;
-		if(x == 1){
-			cout << cnt << endl;
-			break;
-		}
-		if(x > 1 && se.count(x - 1) == 0){
+		if(x == 1) return cnt;
+		if(x > 1 && !se.count(x - 1)){
 			q.push({x - 1, cnt + 1});
 			se.insert(x - 1);
 		}
-		if(x > 3){
-			for(int i=2; i<=sqrt(x); i++){
-				if(x % i == 0){
-					int tmp = max(i, x / i);
-					if(se.count(tmp) == 0){
-						q.push({tmp, cnt + 1});
-						se.insert(tmp);
-					}
+		for(int i=2; i<=sqrt(x); i++){
+			if(x % i == 0){
+				int u = i, v = x / i;
+				int tmp = max(u, v);
+				if(!se.count(tmp)){
+					q.push({tmp, cnt + 1});
+					se.insert(tmp);
 				}
 			}
-		}	
+		}
 	}
-}
+}		
 
-int main(){ 
+int main(){
 	int tc; cin >> tc;
 	while(tc--){
-		cin >> n;
-		solve();
+		int s; cin >> s;
+		cout << BFS(s) << endl;
 	}
 	return 0;
 }
