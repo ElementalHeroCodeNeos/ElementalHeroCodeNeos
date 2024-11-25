@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int convert_10(string s, int k){  // Chuyển xâu s từ hệ cơ số k sang hệ thập phân
+	int res = 0;
+	int n = s.size();
+	for(int i=n-1; i>=0; i--){
+		res += (s[i] - '0') * pow(k, n - i - 1);
+	}
+	return res;
+}
+
+void convert_k(int n, int k){  // Chuyển từ hệ thập phân sang hệ cơ số k (in ra luôn)
+	if(n == 0) return;
+	convert_k(n / k, k);
+	cout << n % k;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int k; string a, b; cin >> k >> a >> b;
+		convert_k(convert_10(a, k) + convert_10(b, k), k);
+		cout << endl;
+	}
+	return 0;
+}
