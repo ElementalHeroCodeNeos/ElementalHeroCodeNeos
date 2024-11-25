@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+
+ll convert(string s){
+	ll res = 0;
+	int n = s.size();
+	for(int i=n-1; i>=0; i--){
+		res += 1ll * (s[i] - '0') * pow(2, n - i - 1);
+	}
+	return res;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string a, b; cin >> a >> b;
+		cout << convert(a) * convert(b) << endl;
+	}
+	return 0;
+}
