@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Ý tưởng: Thuật toán quay lui hoán vị
+int n, a[16][16], x[16];
+bool used[16];
+int cost, cmin;  // cost: tổng chi phí tính đến thành phố thứ i đang xét, cmin: chi phí nhỏ nhất 
+int res;
+
+void Try(int i){
+	for(int j=1; j<=n; j++){
+		if(!used[j]){
+			x[i] = j;
+			used[j] = 1;
+			cost += a[x[i - 1]][j];
+			if(i == n){
+				res = min(res, cost);
+			}
+			else if(cost + cmin * (n - i) <= res){  // Nhánh cận: Giả định tiếp tục hành trình đến (n - i) thành phố còn lại, với chi phí cmin mà tổng chi phí vẫn lớn hơn res thì không tiếp tục hành trình nữa (không quay lui nữa)
+				Try(i + 1);  // Ngược lại thì ta quay lui 
+			}
+			used[j] = 0;
+			cost -= a[x[i - 1]][j];
+		}
+	}
+}
+	
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=n; j++){
+				cin >> a[i][j];
+				cmin = min(cmin, a[i][j]);
+			}
+		}
+		cost = 0, res = 1e9;
+		Try(1);
+		cout << res << endl;
+	}
+	return 0;
+}
