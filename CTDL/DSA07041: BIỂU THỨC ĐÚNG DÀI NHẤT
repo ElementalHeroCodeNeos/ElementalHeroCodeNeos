@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int solve(string s){
+	map<int, int> dem;  // dem[i]: độ dài của dãy ngoặc đúng đứng sau kí tự s[i] (kí tự s[i] không nằm trong dãy ngoặc đúng nào cả, còn gọi là kí tự thừa)
+	stack<int> st;
+	st.push(-1);
+	for(int i=0; i<s.size(); i++){
+		if(!st.empty() && s[i] == ')' && s[st.top()] == '('){
+			int x = st.top();  // Kí tự ở chỉ số x tương ứng với dấu '(' trong cái if bên trên
+			st.pop();
+			dem[st.top()] = i - st.top();  // Sau khi thực hiện thao tác pop() bên trên thì st.top() chính là kí tự đứng trước dãy ngoặc đúng đang xét
+			dem[x] = 0;  // Do khi này, kí tự ở chỉ số x đã nằm trong dãy ngoặc đúng đang xét (xác nhận nó không phải kí tự thừa) 
+		}
+		else st.push(i);
+	}
+	int len = dem[-1];
+	for(int i=0; i<s.size(); i++){
+		len += dem[i];
+	}
+	return len;
+}
+	
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		cout << solve(s) << endl;
+	}
+	return 0;
+}
