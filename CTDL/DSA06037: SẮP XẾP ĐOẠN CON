@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+vector<int> res;
+// Ý tưởng: Chỉ số i thoả mãn khi và chỉ khi Lmax[i] <= Rmin[i] 
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		int a[n + 1];
+		for(int i=1; i<=n; i++) cin >> a[i];
+		int Lmax[n + 1], Rmin[n + 1];  // Lmax[i]: phần tử lớn nhất bên trái của a[i] (tính cả a[i])
+		int max_val = a[1];  // Rmin[i]: phần tử nhỏ nhất bên phải của a[i] (không tính a[i])
+		for(int i=1; i<=n; i++){
+			max_val = max(max_val, a[i]);
+			Lmax[i] = max_val;
+		}
+		int min_val = a[n];
+		for(int i=n; i>=1; i--){
+			Rmin[i] = min_val;
+			min_val = min(min_val, a[i]);
+		}
+		for(int i=1; i<=n-1; i++){
+			if(Lmax[i] <= Rmin[i]){  // Ý tưởng chính của bài toán
+				res.push_back(i);
+			}
+		}
+		cout << res.size() << endl;
+		if(res.size()){
+			for(int x : res) cout << x << " ";
+		}
+		cout << endl;
+		res.clear();
+	}
+	return 0;
+}
