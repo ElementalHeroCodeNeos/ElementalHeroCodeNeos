@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n, m; cin >> n >> m;
+		int a[n], b[m];
+		for(int i=0; i<n; i++) cin >> a[i];  // Hệ số của x^i của đa thức P(x)
+		for(int j=0; j<m; j++) cin >> b[j];  // Hệ số của x^j của đa thức Q(x)
+		int c[n + m];
+		memset(c, 0, sizeof(c));
+		for(int i=0; i<n; i++){
+			for(int j=0; j<m; j++){
+				c[i + j] += a[i] * b[j];
+			}
+		}
+		for(int i=0; i<n+m-1; i++){
+			cout << c[i] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
