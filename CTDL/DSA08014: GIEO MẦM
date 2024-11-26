@@ -1,0 +1,70 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+int n, m, a[501][501], cur[501][501], tmp[501][501];  // Mảng a sẽ không thay đổi trong suốt bài toán. Mảng cur: trạng thái khu vườn ở thời điểm hiện tại
+bool ok;
+
+int dx[4] = {-1, 0, 0, 1};
+int dy[4] = {0, -1, 1, 0};
+
+void DFS(int i, int j){  // DFS này không phải hàm đệ quy. Tức là
+	for(int k=0; k<4; k++){  // nếu a[i][j] = 2 thì khiến a[i1][j1] = 1 nảy mầm thành a[i1][j1] = 2 nhưng a[i1][j1] = 2 sẽ không tiếp tục làm các ô xung quanh nảy mầm. Đó cũng là lý do phải có thêm mảng tmp trung gian
+		int i1 = i + dx[k];
+		int j1 = j + dy[k];
+		if(i1 >= 1 && i1 <= n && j1 >= 1 && j1 <= m && cur[i1][j1] == 1){
+			tmp[i1][j1] = 2;	
+			ok = 1;  // Trạng thái khu vườn có thay đổi
+		}
+	}
+}
+
+bool checkNayMam(){  // Trả về true khi tất cả các hạt mầm đều biến thành cây non
+	for(int i=1; i<=n; i++){
+		for(int j=1; j<=m; j++){
+			if(a[i][j] == 1 && cur[i][j] == 1){
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+int solve(){
+	int cnt = 1;
+	while(1){  // Mỗi vòng lặp tương ứng với 1 ngày mới
+		ok = 0;  // Kiểm tra xem trạng thái của khu vườn sau 1 ngày có thay đổi hay không? (tức là có hạt mầm biến thành cây non không?). Biến ok này sẽ được thay đổi trong hàm DFS
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=m; j++){
+				if(cur[i][j] == 2){  // Mảng cur lưu trạng thái khu vườn hiện tại (ở dòng này là trạng thái khu vườn khi bắt đầu ngày mới)
+					DFS(i, j);  
+				}
+			}
+		}
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=m; j++){
+				cur[i][j] = tmp[i][j];  // Cập nhật lại mảng cur (trạng thái khu vườn hiện tại, tức là khi đã kết thúc ngày cnt)
+			}
+		}
+		if(checkNayMam()) break;  // Nếu tất cả các hạt mầm đều nảy mầm (biến thành cây non)
+		if(!ok && !checkNayMam()) return -1;  // Nếu trạng thái vườn không thay đổi sau ngày cnt và còn hạt mầm trong vườn 
+    cnt++;
+	}
+	return cnt;
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=n; i++){
+			for(int j=1; j<=m; j++){
+				cin >> a[i][j];
+				cur[i][j] = a[i][j];
+				tmp[i][j] = a[i][j];
+			}
+		}
+		cout << solve() << endl;
+	}
+	return 0;
+}
