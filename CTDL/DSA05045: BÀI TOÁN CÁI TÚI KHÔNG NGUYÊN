@@ -1,0 +1,36 @@
+#include<bits/stdc++.h> 
+
+using namespace std; 
+
+struct Thing{
+	double val, wei;
+};
+
+bool cmp(Thing a, Thing b){  // Sắp xếp giống bài toán cái túi nhánh cận trong toán rời rạc
+	return a.val / a.wei >= b.val / b.wei;
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		int n, k; cin >> n >> k;
+		Thing a[n];
+		for(int i=0; i<n; i++){
+			cin >> a[i].val >> a[i].wei;
+		}
+		sort(a, a + n, cmp);
+		double cur_val = 0, res_wei = (double)k;  // cur_val: Tổng giá trị sử dụng của các đồ vật trong túi, res_wei: Trọng lượng còn lại của túi
+		for(int i=0; i<n; i++){
+			if(res_wei >= a[i].wei){  // Nếu trọng lượng còn lại của túi >= trọng lượng của vật thứ i thì lấy vật đó (cập nhật lại cur_val và res_wei)
+				cur_val += a[i].val;  
+				res_wei -= a[i].wei;
+			}
+			else{  // Ngược lại, ta đem chia nhỏ đồ vật thứ i (cũng là chia nhỏ giá trị sử dụng) cho đủ với trọng lượng còn lại của túi (res_wei)
+				cur_val += res_wei * a[i].val / a[i].wei;
+				break;  // Ở đây phải break vì túi đã đầy, hoặc phải cho res_wei = 0 
+			}
+		}
+		cout << fixed << setprecision(2) << cur_val << endl;
+	}
+	return 0;
+}
