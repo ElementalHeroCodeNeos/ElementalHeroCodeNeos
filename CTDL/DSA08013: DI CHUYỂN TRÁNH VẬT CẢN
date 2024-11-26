@@ -1,0 +1,64 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+int n, s1, s2, t1, t2;
+char a[101][101];
+
+int BFS(){
+	queue<pair<pair<int, int>, int>> q;
+	q.push({{s1, s2}, 0});
+	set<pair<int, int>> se;
+	se.insert({s1, s2});
+	while(!q.empty()){
+		auto it = q.front(); q.pop();
+		int i = it.first.first;
+		int j = it.first.second;
+		int cnt = it.second;
+		if(i == t1 && j == t2) return cnt;
+		for(int i1 = i + 1; i1 < n; i1++){  // Di chuyển xuống các ô ở hàng dưới
+			if(a[i1][j] == '.' && !se.count({i1, j})){
+				q.push({{i1, j}, cnt + 1});
+				se.insert({i1, j});
+			}
+			else break;  // Gặp vật cản thì không di chuyển sang các ô tiếp theo được nữa
+		}
+		for(int i1 = i - 1; i1 >= 0; i1--){  // Di chuyển lên các ô ở hàng trên
+			if(a[i1][j] == '.' && !se.count({i1, j})){
+				q.push({{i1, j}, cnt + 1});
+				se.insert({i1, j});
+			}
+			else break;
+		}
+		for(int j1 = j + 1; j1 < n; j1++){  // Di chuyển sang các cô ở cột phải
+			if(a[i][j1] == '.' && !se.count({i, j1})){
+				q.push({{i, j1}, cnt + 1});
+				se.insert({i, j1});
+			}
+			else break;
+		}
+		for(int j1 = j - 1; j1 >= 0; j1--){  // Di chuyển sang các ô ở cột trái
+			if(a[i][j1] == '.' && !se.count({i, j1})){
+				q.push({{i, j1}, cnt + 1});
+				se.insert({i, j1});
+			}
+			else break;
+		}
+	}
+	return -1;
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				cin >> a[i][j];
+			}
+		}	
+		cin >> s1 >> s2 >> t1 >> t2;
+		cout << BFS() << endl;
+	}
+	return 0;
+}
