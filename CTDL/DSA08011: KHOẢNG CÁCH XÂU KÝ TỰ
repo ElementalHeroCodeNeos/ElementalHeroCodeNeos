@@ -1,0 +1,45 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+int n;
+string s, t;  // Xâu bắt đầu và xâu kết thúc
+set<string> word;  // Tập từ S
+// Chú ý: Bài này ý tưởng không khó (dùng BFS giống mấy bài biến s->t), nhưng khó ở chỗ làm thế nào để tối ưu để không bị TLE
+int BFS(){
+	queue<pair<string, int>> q;  // first: xâu hiện tại, second: số bước ít nhất để biến đổi từ xâu s thành xâu first
+	q.push({s, 1});
+  word.erase(s);
+	while(!q.empty()){
+		auto it = q.front(); q.pop();
+		string x = it.first;
+		int cnt = it.second;
+		if(x == t) return cnt;
+		for(int i=0; i<x.size(); i++){  // Duyệt từng kí tự của xâu x và lần lượt biến kí tự đó thành các kí tự từ 'A' đến 'Z'. Nếu xâu mới tmp mà xuất hiện trong tập từ word thì đấy là xâu có thể biến thành (do thoả mãn khác nhau 1 kí tự) 
+			string tmp = x;
+			for(char j='A'; j<='Z'; j++){  
+				tmp[i] = j;  // Xâu tmp sẽ thoả mãn khác xâu x một kí tự 
+				if(word.count(tmp)){  // Xâu tmp có xuất hiện trong tập từ word
+					q.push({tmp, cnt + 1});
+					word.erase(tmp);
+				}
+			}
+		}
+	}
+	return -1;
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		cin >> s >> t;
+		for(int i=0; i<n; i++){
+			string x; cin >> x;
+			word.insert(x);
+		}
+		cout << BFS() << endl;
+		word.clear();
+	}
+	return 0;
+}
