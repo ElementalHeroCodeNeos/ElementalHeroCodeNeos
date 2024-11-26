@@ -1,0 +1,71 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+vector<int> trai(vector<int> a){  // Trả về bảng HCN nếu quay hình vuông trái của a
+	vector<int> res = a;
+	int tmp = res[3];
+	res[3] =  res[4];
+	res[4] = res[1];
+	res[1] = res[0];
+	res[0] = tmp;
+	return res;
+}
+
+vector<int> phai(vector<int> a){  // Trả về bảng HCN nếu quay hình vuông phải của a
+	vector<int> res = a;
+	int tmp = res[4];
+	res[4] = res[5];
+	res[5] = res[2];
+	res[2] = res[1];
+	res[1] = tmp;
+	return res;
+}
+
+bool check(vector<int> a, vector<int> b){  // Kiểm tra 2 bảng hình chữ nhật có giống nhau?
+	for(int i=0; i<6; i++){
+		if(a[i] != b[i]) return false;
+	}
+	return true;
+}
+
+int BFS(vector<int> s, vector<int> t){
+	queue<pair<vector<int>, int>> q;  // first: trạng thái của bảng HCN hiện tại, second: số bước ít nhất để biến đổi từ bảng HCN s thành first
+	q.push({s, 0});
+	set<vector<int>> se; 
+	se.insert(s);
+	while(!q.empty()){
+		auto it = q.front(); q.pop();
+		vector<int> tmp = it.first;
+		int cnt = it.second;
+		if(check(tmp, t)) return cnt;  
+		vector<int> l = trai(tmp);
+		if(!se.count(l)){
+			q.push({l, cnt + 1});
+			se.insert(l);
+		}
+		vector<int> r = phai(tmp);
+		if(!se.count(r)){
+			q.push({r, cnt + 1});
+			se.insert(r);
+		}
+	}
+	return -1;	
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		vector<int> s, t;
+		for(int i=0; i<6; i++){
+			int x; cin >> x;
+			s.push_back(x);
+		}
+		for(int i=0; i<6; i++){
+			int x; cin >> x;
+			t.push_back(x);
+		}
+		cout << BFS(s, t) << endl;
+	}
+	return 0;
+}
