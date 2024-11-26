@@ -1,0 +1,38 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+int n, k, a[1001];
+
+void prev(){
+	int i = k - 1;  
+	while(i >= 1 && a[i] + 1 == a[i + 1]){
+		i--;
+	}
+	if(i == 0){  // Tập con trong input là tập con đầu tiên, nên in ra tập con cuối cùng
+		for(int i=1; i<=k; i++){
+			cout << n - k + i << " ";
+		}
+	}
+	else{
+		i++;  // Tăng chỉ số i lên
+		a[i]--;  
+		for(int j=i+1; j<=k; j++){  // Thay các phần tử a[j] bên phải a[i] bằng n - k + j
+			a[j] = n - k + j;
+		}	
+		for(int i=1; i<=k; i++){  // In ra tập con cần tìm
+			cout << a[i] << " ";
+		}
+	}
+	cout << endl;
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> k;
+		for(int i=1; i<=k; i++) cin >> a[i];
+		prev();
+	}
+	return 0;
+}
