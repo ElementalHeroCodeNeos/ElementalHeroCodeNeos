@@ -1,0 +1,59 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+int n, m;
+vector<int> ke[1001];
+bool visited[1001];
+int parent[1001];
+int t;  // Đỉnh gần cuối của chu trình. VD: chu trình là: 1 2 3 1 thì t = 3
+bool ok;  // Kiểm tra đồ thị có tồn tại chu trình từ đỉnh 1 hay không?
+void DFS(int u){	
+	if(ok) return;
+	visited[u] = true;
+	for(int v : ke[u]){
+		if(!visited[v]){
+			parent[v] = u;
+			DFS(v);
+		}
+		else if(v == 1 && v != parent[u]){
+			t = u;
+			ok = 1;
+			return;
+		}
+	}
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}
+		for(int i=1; i<=n; i++){
+			sort(ke[i].begin(), ke[i].end());
+		}
+		ok = 0;
+		DFS(1);
+		if(ok){
+			vector<int> res;
+			while(t != 1){  // Truy vết bằng mảng parent[]
+				res.push_back(t);
+				t = parent[t];
+			}
+			res.push_back(1);
+			reverse(res.begin(), res.end());
+			for(int x : res) cout << x << " ";
+			cout << "1\n";
+		}
+		else cout << "NO\n";
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		memset(visited, false, sizeof(visited));
+	}
+	return 0;
+}
