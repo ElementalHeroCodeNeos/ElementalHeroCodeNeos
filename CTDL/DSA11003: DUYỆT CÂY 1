@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+struct node{
+	int data;
+	node *left;
+	node *right;
+	node(int x){
+		data = x;
+		left = right = NULL;
+	}
+};
+
+int idx[10001], pre[1001];  // idx[x]: vị trí của phần tử x tring mảng inorder
+int cur_idx;  // Vị trí đang xét (trong mảng preorder)
+
+node* makeRoot(int l, int r){ // (l, r): phạm vi của node đang xét
+	if(l > r) return NULL;  // node đang xét không có node con bên trái và phải
+	node *root = new node(pre[cur_idx]);  // Tạo node mới với giá trị là pre[cur_idx]
+	int m = idx[pre[cur_idx]];  // Vị trí của node đó trong mảng inorder
+	cur_idx++;
+  root->left = makeRoot(l, m - 1);  // Xây dựng node con bên trái 
+	root->right = makeRoot(m + 1, r);  // Xây dựng node con bên phải
+	return root;
+}
+
+void postorder(node *root){
+	if(root == NULL) return;
+	postorder(root->left);
+	postorder(root->right);
+	cout << root->data << " ";
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		for(int i=0; i<n; i++){
+			int x; cin >> x;
+			idx[x] = i;
+		}
+		for(int i=0; i<n; i++){
+			cin >> pre[i];
+		}
+		cur_idx = 0;
+		node *root = makeRoot(0, n - 1);  // Tạo cây nhị phân
+		postorder(root);
+		cout << endl;
+	}
+	return 0;
+}
