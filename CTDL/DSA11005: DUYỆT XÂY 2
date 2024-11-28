@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Chú ý: ví dụ minh hoạ troll vl. Cây nhị phân là hoàn chỉnh và các node lá phải có cùng mức
+struct node{
+	int data;
+	node *left;
+	node *right;
+	node(int x){
+		data = x;
+		left = right = NULL;
+	}
+};
+
+int idx[10001], level[1001];
+
+node* makeRoot(int i, int l, int r){  // i: xét node ở vị trí i trong mảng level[]
+	if(l > r) return NULL;
+	node *root = new node(level[i]);  // Tạo node có giá trị là level[i]
+	int m = idx[level[i]];  // vị trí của node level[i] trong mảng inorder
+	root->left = makeRoot(2 * i + 1, l, m - 1);  // Xây dựng node bên trái. Trong mảng level[], node cha ở i thì node con bên trái ở vị trí 2 * i + 1
+	root->right = makeRoot(2 * i + 2, m + 1, r);
+	return root;
+}
+
+void postorder(node *root){
+	if(root == NULL) return;
+	postorder(root->left);
+	postorder(root->right);
+	cout << root->data << " ";
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		for(int i=0; i<n; i++){
+			int x; cin >> x;
+			idx[x] = i;
+		}
+		for(int i=0; i<n; i++){
+			cin >> level[i];
+		}
+		node *root = makeRoot(0, 0, n - 1);
+		postorder(root);
+		cout << endl;
+	}
+	return 0;
+}
