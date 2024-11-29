@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Ý tưởng: Tính tất cả tổng đường đi từ node lá này sang node lá khác rồi tìm max của các tổng đó. Core idea ở hàm path
+struct node{  // Có thêm 2 thành phần int level và node* parent
+	int data, level;  // level: mức của node
+	node *left;
+	node *right;
+	node *parent;  // Lưu địa chỉ của node cha
+	node(int x, int lv){  // Contructor có thêm tham số level
+		data = x;
+		level = lv;
+		left = right = parent = NULL;
+	}	
+};
+
+void makeRoot(node *root, int u, int v, char c){
+	if(c == 'L'){
+		root->left = new node(v, root->level + 1);
+		root->left->parent = root;  
+	}
+	else{
+		root->right = new node(v, root->level + 1);
+		root->right->parent = root;
+	}
+}
+
+void insertRoot(node *root, int u, int v, char c){
+	if(root == NULL) return;
+	if(root->data == u){
+		makeRoot(root, u, v, c);
+	}
+	else{
+		insertRoot(root->left, u, v, c);
+		insertRoot(root->right, u, v, c);
+	}
+}
+
+vector<node*> leaf;  // Lưu các node lá
+
+void DFS(node *root){  // Hàm này dùng để thêm các node lá vào vector leaf
+	if(root == NULL) return;
+	if(root->left == NULL && root->right == NULL){
+		leaf.push_back(root);
+	}
+	DFS(root->left);
+	DFS(root->right);
+}
+
+int path(node *leaf1, node *leaf2){  // Tính tổng giá trị của tất cả các node trên đường đi từ node lá 1 đến node lá 2
+	int sum = 0;
+	while(leaf1 != leaf2){  // Lặp chừng nào node lá 1 khác node lá 2
+		if(leaf1->level < leaf2->level){  // Nếu mức của node lá 1 nhỏ hơn mức của node lá 2 thì cho node lá 2 bằng cha của nó (dịch node lá 2 đi lên)
+			sum += leaf2->data;
+			leaf2 = leaf2->parent;
+		}
+		else if(leaf1->level > leaf2->level){  // Tương tự
+			sum += leaf1->data;
+			leaf1 = leaf1->parent;
+		}
+		else{  // Nếu chúng cùng mức thì dịch cả 2 node lá lên trên
+			sum += leaf1->data + leaf2->data;
+			leaf1 = leaf1->parent;
+			leaf2 = leaf2->parent;
+		}
+	}
+	return sum + leaf1->data;  
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		int n; cin >> n;
+		node *root = NULL;
+		for(int i=0; i<n; i++){
+			int u, v; char c; cin >> u >> v >> c;
+			if(root == NULL){
+				root = new node(u, 0);
+				makeRoot(root, u, v, c);
+			}
+			else{
+				insertRoot(root, u, v, c);
+			}
+		}
+		DFS(root);
+		int res = -1e9;  // Tổng lớn nhất từ một node lá này sang một node lá khác
+		for(int i=0; i<leaf.size(); i++){  // Duyệt tất cả các cặp node lá để tìm ra res
+			for(int j=i+1; j<leaf.size(); j++){
+				res = max(res, path(leaf[i], leaf[j]));
+			}
+		}
+		cout << res << endl;
+		leaf.clear();
+	}
+	return 0;
+}
