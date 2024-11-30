@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+// Áp dụng thuật toán chuyển biểu thức hậu tố sang trung tố
+void solve(string s){
+	stack<string> st;
+	for(char x : s){
+		if(isalpha(x)){
+			st.push(string(1, x));
+		}
+		else{
+			if(!st.empty()){
+				string th1 = st.top(); st.pop();
+				string th2 = st.top(); st.pop();
+				st.push(th2 + x + th1);
+			}
+		}
+	}
+	cout << st.top() << endl;
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		string s; cin >> s;
+		solve(s);
+	}
+	return 0;
+}
