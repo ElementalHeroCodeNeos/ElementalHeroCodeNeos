@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int n, k, a[1001], x[1001];
+int n, k, a[1001];
 
 void next(){
 	int i = k;
