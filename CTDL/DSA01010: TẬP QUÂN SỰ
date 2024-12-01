@@ -1,43 +1,41 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 
 using namespace std;
 
-int n, k, a[101], cnt;
+int n, k, a[41];
+bool ok = 1;
 
-void solve(){
-	map<int, int> mp;
-	for(int i=1; i<=n; i++){
-		mp[a[i]]++;
-	}
-	
+void next(){
 	int i = k;
 	while(i >= 1 && a[i] == n - k + i){
 		i--;
 	}
-	if(i == 0) cnt = k;
+	if(i == 0) ok = 0;
 	else{
 		a[i]++;
 		for(int j=i+1; j<=k; j++){
 			a[j] = a[j - 1] + 1;
 		}
-		for(int i=1; i<=k; i++){
-			if(!mp[a[i]]) cnt++;
-		}
-	} 
-	cout << cnt << endl;
+	}
 }
 
 int main(){
 	int tc; cin >> tc;
 	while(tc--){
+		set<int> se;
 		cin >> n >> k;
 		for(int i=1; i<=k; i++){
 			cin >> a[i];
+			se.insert(a[i]);
 		}
-		cnt = 0;
-		solve();
+		ok = 1;
+		next();
+		int cnt = 0;
+		for(int i=1; i<=k; i++){
+			if(se.count(a[i])) cnt++;
+		}
+		if(ok) cout << k - cnt << endl;
+		else cout << k << endl;
 	}
 	return 0;
 }
-		
-	
