@@ -1,48 +1,32 @@
-#include<bits/stdc++.h> 
+#include<bits/stdc++.h>
 
-using namespace std; 
+using namespace std;
 
-int n, k; string s;
-bool ok;
+int n, k;
+string s = "";
 vector<string> res;
-// Ðê bài chua rõ, sua lai: Liêt kê các xâu có ít nhât 1 dãy k kí tu A liên tiêp VÀ không có dãy nào chua hon k kí tu A liên tiêp
-void ktao(){
-	s = string(n, 'A');
+
+bool check(){
+	if(s.find(string(k, 'A')) != -1 && s.find(string(k + 1, 'A')) == -1)
+		return true;
+	return false;
 }
 
-void sinh(){
-	int i = s.size() - 1;
-	while(i >= 0 && s[i] == 'B'){
-		s[i] = 'A';
-		i--;
-	}
-	if(i == -1) ok = 0;
-	else s[i] = 'B';
-}
-
-bool check(string s, int k){
-	string t = string(k, 'A');	
-	int pos = s.find(t);	// Vi trí cua t[0] trong xâu s
-	if(pos != string::npos){	// Nêu t là xâu con cua s	
-		if(pos + k == s.size() || s[pos + k] == 'B')	// VD:(n = 5, k = 3): BBAAA || AAABAB
-			return 1;
-	}
-	return 0;
-}
-
-int main(){ 
-	cin >> n >> k;
-	ktao();
-	ok = 1;
-	while(ok){
-		if(check(s, k)){
-			res.push_back(s);
+void Try(){
+	for(char j='A'; j<='B'; j++){
+		s += j;
+		if(s.size() == n){
+			if(check()) res.push_back(s);
 		}
-		sinh();
+		else Try();
+		s.pop_back();
 	}
+}
+
+int main(){
+	cin >> n >> k;
+	Try();
 	cout << res.size() << endl;
-	for(string x : res){
-		cout << x << endl;
-	}
+	for(string x : res) cout << x << endl;
 	return 0;
 }
