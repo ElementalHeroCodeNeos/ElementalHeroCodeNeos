@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int n, m, M;
+vector<int> ke[1001];
+int color[1001];  // color[i]: màu của đỉnh i
+bool ok;
+
+bool check(int u, int j){  // Kiểm tra xem màu j có thể gán cho đỉnh u không
+	for(int v : ke[u]){
+		if(color[v] == j)
+			return false;
+	}
+	return true;
+}
+
+void Try(int i){
+	if(ok) return;
+	for(int j=1; j<=M; j++){
+		if(check(i, j)){
+			color[i] = j;
+			if(i == n){
+				ok = 1;
+				return;
+			}
+			else Try(i + 1);
+			color[i] = 0;  // Chú ý: Backtrack lại color[i] = 0 
+		}
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m >> M;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}
+		ok = 0;
+		Try(1);
+		if(ok) cout << "YES\n";
+		else cout << "NO\n";
+		for(int i=1; i<=n; i++){
+			ke[i].clear();
+		}
+		memset(color, 0, sizeof(color));
+	}
+	return 0;
+}
