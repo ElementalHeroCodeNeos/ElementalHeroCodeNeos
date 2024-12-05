@@ -1,32 +1,36 @@
 #include<bits/stdc++.h> 
 
-using namespace std; 
+using namespace std;
+
+bool check(int n, int j){
+	while(n){
+		if(n % 10 == j)
+			return false;
+		n /= 10;
+	}
+	return true;
+}
 
 vector<int> res;
+
 void init(){
-	queue<pair<int, vector<bool>>> q;
-	q.push({1, {0, 1, 0, 0, 0, 0}});
-	q.push({2, {0, 0, 1, 0, 0, 0}});
-	q.push({3, {0, 0, 0, 1, 0, 0}});
-	q.push({4, {0, 0, 0, 0, 1, 0}});
-	q.push({5, {0, 0, 0, 0, 0, 1}});
-	for(int i=0; i<=5; i++){
-		res.push_back(i);
-	}
+	queue<int> q;
+	q.push(1);
+	q.push(2);
+	q.push(3);
+	q.push(4);
+	q.push(5);
+	res.push_back(0);
 	while(1){
-		auto top = q.front(); q.pop();
-		int x = top.first;
+		int x = q.front(); q.pop();
 		if(x > 100000) break;
-		vector<bool> tmp = top.second;
+		res.push_back(x);
 		for(int i=0; i<=5; i++){
-			if(tmp[i] == 0){
-				tmp[i] = 1;
-				q.push({x * 10 + i, tmp});
-				res.push_back(x * 10 + i);
-				tmp[i] = 0;
+			if(check(x, i)){
+				q.push(x * 10 + i);
 			}
 		}
-	}	
+	}
 }
 
 int main(){ 
