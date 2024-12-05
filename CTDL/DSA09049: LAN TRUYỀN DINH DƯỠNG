@@ -1,0 +1,43 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+using ll = long long;
+
+int n, sz[200001];
+ll val[200001];
+vector<int> ke[200001];
+bool visited[200001];
+
+void ktao(){
+	for(int i=1; i<=n; i++){
+		val[i] = 1;
+		sz[i] = 0;
+	}
+}
+
+void DFS(int u){
+	visited[u] = true;
+	for(int v : ke[u]){
+		if(!visited[v]){
+			DFS(v);
+			sz[u] += sz[v] + 1;
+			val[u] += val[v];
+		}
+	}
+	val[u] += sz[u];
+}
+
+int main(){ 
+	cin >> n;
+	for(int i=2; i<=n; i++){
+		int x; cin >> x;
+		ke[x].push_back(i);
+	}
+	ktao();
+	DFS(1);
+	for(int i=1; i<=n; i++){
+		cout << val[i] << " ";
+	}
+	return 0;
+}
