@@ -1,0 +1,50 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+struct node{
+	int data;
+	node *left;
+	node *right;
+	node(int x){
+		data = x;
+		left = right = NULL;
+	}
+};
+
+int n, a[1001];
+
+node* insert(node *root, int key){
+	if(root == NULL){
+		return new node(key);
+	}
+	if(key < root->data){
+		root->left = insert(root->left, key);
+	}
+	else if(key > root->data){
+		root->right = insert(root->right, key);
+	}
+	return root;
+}
+
+void Postorder(node *root){
+	if(root == NULL) return;
+	Postorder(root->left);
+	Postorder(root->right);
+	cout << root->data << " ";
+}
+
+int main(){ 
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n;
+		node *root = NULL;
+		for(int i=0; i<n; i++){
+			cin >> a[i];
+			root = insert(root, a[i]);
+		}
+		Postorder(root);
+		cout << endl;
+	}
+	return 0;
+}
