@@ -1,25 +1,22 @@
-#include<bits/stdc++.h>
+#include<bits/stdc++.h> 
 
 using namespace std;
 
 bool check(string s){
-	stack<int> st;
+	stack<char> st;
 	for(char x : s){
-		if(x == '(' || x == '[' || x == '{'){
-			st.push(x);
-		}
+		if(x == '(' || x == '[' || x == '{') st.push(x);
 		else{
-			if(st.empty()) return false;
-			char y = st.top(); st.pop();
-			if((x == ')' && y == '(') || (x == ']' && y == '[') || (x == '}' && y == '{'))
-				continue;
-			return false;
+			if(!st.empty() && ((x == ')' && st.top() == '(') || (x == ']' && st.top() == '[') || (x == '}' && st.top() == '{'))){
+				st.pop();
+			}
+			else return false;
 		}
 	}
 	return st.empty();
 }
 
-int main(){
+int main(){ 
 	int tc; cin >> tc;
 	while(tc--){
 		string s; cin >> s;
