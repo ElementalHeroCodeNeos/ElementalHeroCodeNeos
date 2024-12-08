@@ -2,27 +2,20 @@
 
 using namespace std;
 
-int n, x[12];
-string s;
-bool used[12];
+string s, tmp = "";
+bool used[11];
 
-void in(){
-	for(int i=1; i<=n; i++){
-		cout << s[x[i] - 1];
-	}
-	cout << " ";
-}
-
-void Try(int i){
-	for(int j=1; j<=n; j++){
-		if(used[j] == 0){
-			x[i] = j;
-			used[j] = 1;
-			if(i == n){
-				in();
+void Try(){
+	for(int j=0; j<s.size(); j++){
+		if(!used[j]){
+			tmp += s[j];
+			used[j] = true;
+			if(tmp.size() == s.size()){
+				cout << tmp << " ";
 			}
-			else Try(i + 1);
-			used[j] = 0;
+			else Try();
+			tmp.pop_back();
+			used[j] = false;
 		}
 	}
 }
@@ -31,9 +24,7 @@ int main(){
 	int tc; cin >> tc;
 	while(tc--){
 		cin >> s;
-		sort(s.begin(), s.end());
-		n = s.size();
-		Try(1);
+		Try();
 		cout << endl;
 	}
 	return 0;
