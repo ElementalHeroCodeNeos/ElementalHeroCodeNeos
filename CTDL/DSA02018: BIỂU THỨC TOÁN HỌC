@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int a[5];
+char x[5];
+char oprt[] = {'+', '-', '*'};
+bool ok = 0;
+
+int tinh(int a, int b, char c){
+	if(c == '+') return a + b;
+	if(c == '-') return a - b;
+	return a * b;
+}
+
+bool check(){
+	return tinh(tinh(tinh(tinh(a[0], a[1], x[1]) , a[2], x[2]), a[3], x[3]), a[4], x[4]) == 23;
+}
+
+void Try(int i){
+	if(ok) return;
+	for(int j=0; j<3; j++){
+		x[i] = oprt[j];
+		if(i == 4 && check()){
+			ok = 1;
+			return;
+		}
+		else if(i < 4) Try(i + 1);
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		for(int i=0; i<5; i++) cin >> a[i];
+		ok = 0;
+		sort(a, a + 5);
+		do{
+			Try(1);
+			if(ok) break;
+		}while(next_permutation(a, a + 5));
+		if(ok) cout << "YES\n";
+		else cout << "NO\n";
+	}
+	return 0;
+}
