@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, m, res = 0;
+vector<int> ke[21];
+bool visited[21][21];
+
+void Try(int u, int cnt){
+	res = max(res, cnt);
+	for(int v : ke[u]){
+		if(!visited[u][v]){
+			visited[u][v] = visited[v][u] = true;
+			Try(v, cnt + 1);
+			visited[u][v] = visited[v][u] = false;
+		}
+	}
+}
+
+int main(){
+	int tc; cin >> tc;
+	while(tc--){
+		cin >> n >> m;
+		for(int i=1; i<=m; i++){
+			int x, y; cin >> x >> y;
+			ke[x].push_back(y);
+			ke[y].push_back(x);
+		}
+		res = 0;
+		for(int i=0; i<n; i++){
+			Try(i, 0);
+		}
+		cout << res << endl;
+		for(int i=0; i<n; i++){
+			ke[i].clear();
+		}
+	}
+	return 0;
+}
