@@ -1,0 +1,15 @@
+
+P = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_.'
+
+if __name__ == '__main__':   
+    while True: 
+        ip = input()
+        if ip == '0':
+            break
+        k, s = ip.split()
+        k = int(k)
+        t = ''
+        for x in s:
+            idx = P.find(x)
+            t += P[(idx + k) % 28]
+        print(t[::-1])
