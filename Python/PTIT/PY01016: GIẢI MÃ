@@ -1,0 +1,9 @@
+
+if __name__ == '__main__':      
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        for i in range(len(s)):
+            if s[i].isdigit():
+                print(s[i - 1] * int(s[i]), end = '')
+        print()
