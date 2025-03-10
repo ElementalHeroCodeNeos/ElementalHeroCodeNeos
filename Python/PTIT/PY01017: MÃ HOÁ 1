@@ -1,0 +1,14 @@
+
+if __name__ == '__main__':      
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        s += '@'
+        tmp, cnt = s[0], 1
+        for i in range(1, len(s)):
+            if s[i] == tmp:
+                cnt += 1
+            else:
+                print(cnt, tmp, sep = '', end = '')
+                tmp, cnt = s[i], 1
+        print()
