@@ -1,0 +1,10 @@
+
+if __name__ == '__main__':      
+    a, k, n = map(int, input().split())
+    dau = k - a % k
+    ok = False
+    for i in range(dau, n - a + 1, k):
+        ok = True
+        print(i, end = ' ')
+    if not ok: 
+        print(-1)
