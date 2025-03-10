@@ -1,0 +1,17 @@
+import math
+
+def check(s):
+    cnt = 0
+    for x in s:
+        if x in '47':
+            cnt += 1
+        if cnt > 7:
+            return False
+    return cnt == 4 or cnt == 7
+
+if __name__ == '__main__':      
+    s = input()
+    if check(s):
+        print('YES')
+    else:
+        print('NO')
