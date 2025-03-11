@@ -1,0 +1,11 @@
+import math
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        a, b = int(s), int(s[::-1])
+        if math.gcd(a, b) == 1:
+            print('YES')
+        else:
+            print('NO')
