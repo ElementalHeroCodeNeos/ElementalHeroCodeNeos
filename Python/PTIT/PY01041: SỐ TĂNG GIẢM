@@ -1,0 +1,20 @@
+
+def solve(s):
+    i, n = 1, len(s)
+    while i < n and s[i] > s[i - 1]:  #Xét phần tăng chặt
+        i += 1   
+    if i == n:  #Vị trí chia xâu thành 2 phần tăng, giảm
+        print('NO')  #Khi i = n tức là số tăng chặt, loại
+        return
+    while i < n and s[i] < s[i - 1]:  #Xét phần giảm chặt
+        i += 1  
+    if i == n:  #Chỉ số i đi đến cuối xâu thì xâu đó là số tăng giảm
+        print('YES')
+    else:
+        print('NO')
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        solve(s)
