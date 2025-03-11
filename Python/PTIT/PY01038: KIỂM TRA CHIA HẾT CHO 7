@@ -1,0 +1,25 @@
+
+def rev(n):
+    rev = 0
+    while n != 0:
+        rev = rev * 10 + n % 10
+        n //= 10
+    return rev
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        ok = False
+        cnt = 0
+        while True:
+            if n % 7 == 0:
+                print(n)
+                ok = True
+                break
+            n = n + rev(n)
+            cnt += 1
+            if cnt > 1000:
+                break
+        if not ok :
+            print(-1)
