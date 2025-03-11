@@ -1,0 +1,15 @@
+
+def check(s):
+    for x in s:
+        if x not in  '012':
+            return False
+    return True
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        if check(s):
+            print('YES')
+        else:
+            print('NO')
