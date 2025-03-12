@@ -1,0 +1,22 @@
+import math
+
+def nto(n):
+    for i in range(2, math.isqrt(n) + 1):
+        if n % i == 0:
+            return False
+    return n > 1
+
+def check(s):
+    for i in range(len(s)):
+        if (not nto(i) and nto(int(s[i]))) or (nto(i) and not nto(int(s[i]))):
+            return False
+    return True
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        if check(s):
+            print('YES')
+        else:
+            print('NO')
