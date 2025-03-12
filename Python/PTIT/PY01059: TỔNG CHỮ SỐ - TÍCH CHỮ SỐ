@@ -1,0 +1,19 @@
+import math
+
+def solve(a):
+    ok, sum, p = False, 0, 1
+    for i in range(len(a)):
+        if i % 2 == 0:
+            sum += a[i]
+        elif i % 2 == 1 and a[i] != 0:
+            p *= a[i]
+            ok = True  #ok = True khi có ít nhất một phần tử a[i] != 0, với i lẻ
+    if not ok:  // ok vẫn = False thì tức là tất cả phần tử a[i] = 0, với i lẻ
+        p = 0
+    print(sum, p)
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        a = list(map(int, input()))
+        solve(a)
