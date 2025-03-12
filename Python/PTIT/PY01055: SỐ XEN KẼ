@@ -1,0 +1,18 @@
+
+def check(s):
+    if s[0] == s[1] or len(s) % 2 == 0:
+        return False
+    tmp = s[0]
+    for i in range(2, len(s), 2):
+        if s[i] != tmp:
+            return False
+    return True
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        if check(s):
+            print('YES')
+        else:
+            print('NO')
