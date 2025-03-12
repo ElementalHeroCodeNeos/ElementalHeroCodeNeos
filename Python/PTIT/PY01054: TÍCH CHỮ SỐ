@@ -1,0 +1,10 @@
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        ans = 1
+        for x in s:
+            if x != '0':
+                ans *= int(x)
+        print(ans)
