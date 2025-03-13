@@ -1,0 +1,23 @@
+import math
+
+def nto(n):
+    for i in range(2, math.isqrt(n) + 1):
+        if n % i == 0:
+            return False
+    return n > 1
+
+def check(a):
+    cnt = 0
+    for x in a:
+        if nto(x):
+            cnt += 1
+    return nto(len(a)) and cnt > len(a) - cnt
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        a = list(map(int, input()))
+        if check(a):
+            print('YES')
+        else:
+            print('NO')
