@@ -2,15 +2,18 @@ import math
 
 x = []
 
-def Try(a, k, idx):
+def inra():
+    for i in range(k):
+        print(x[i], end = ' ')
+    print()
+
+def Try(idx):
     for j in range(idx, len(a)):
         x.append(a[j])
         if len(x) == k:
-            for l in range(k):
-                print(x[l], end = ' ')
-            print()
+            inra()
         elif len(x) < k:
-            Try(a, k, j + 1)
+            Try(j + 1)
         x.pop()
 
 if __name__ == '__main__':   
@@ -20,4 +23,4 @@ if __name__ == '__main__':
     for val in a:
         s.add(val)
     a = sorted(s)
-    Try(a, k, 0)
+    Try(0)
