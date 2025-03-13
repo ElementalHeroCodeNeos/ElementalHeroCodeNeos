@@ -1,0 +1,8 @@
+import math
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        a = int(input())
+        b = int(input())
+        print(math.gcd(a, b))
