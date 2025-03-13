@@ -1,0 +1,21 @@
+import math
+
+def convert(s):  #Hàm chuyển số nhị phân 3 bit sang hệ thập phân. VD: 010 -> 2, 011 -> 3
+    ans, lt = 0, 1
+    for i in range(2, -1, -1):
+        ans += int(s[i]) * lt
+        lt *= 2
+    return ans
+
+def convert8(s):  #Hàm chuyển số nhị phân sang hệ 8
+    n = len(s)  #Lưu ý cập nhật lại n vì ta đã chèn thêm số 0 
+    for i in range(0, n - 2, 3): 
+        print(convert(s[i : i + 3]), end = '')  #Chuyển từng bộ 3 bit từ hệ nhị phân sang hệ thập phân
+
+if __name__ == '__main__':   
+    s = input()
+    n = len(s)
+    r = n % 3
+    if r != 0:
+        s = '0' * (3 - r) + s
+    convert8(s)
