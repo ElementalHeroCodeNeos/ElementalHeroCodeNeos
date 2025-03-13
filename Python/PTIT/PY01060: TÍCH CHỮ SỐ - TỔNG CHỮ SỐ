@@ -1,0 +1,16 @@
+import math
+
+def solve(a):
+    sum, p = 0, 1
+    for i in range(len(a)):
+        if i % 2 == 0 and a[i] != 0:
+            p *= a[i]
+        elif i % 2 == 1:
+            sum += a[i]
+    print(p, sum)
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        a = list(map(int, input()))
+        solve(a)
