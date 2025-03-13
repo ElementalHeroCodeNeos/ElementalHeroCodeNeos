@@ -1,0 +1,23 @@
+import math
+
+x = []
+
+def Try(a, k, idx):
+    for j in range(idx, len(a)):
+        x.append(a[j])
+        if len(x) == k:
+            for l in range(k):
+                print(x[l], end = ' ')
+            print()
+        elif len(x) < k:
+            Try(a, k, j + 1)
+        x.pop()
+
+if __name__ == '__main__':   
+    n, k = map(int, input().split())
+    a = list(map(int, input().split()))
+    s = set({})
+    for val in a:
+        s.add(val)
+    a = sorted(s)
+    Try(a, k, 0)
