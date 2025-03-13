@@ -1,0 +1,18 @@
+import math
+
+def convert(n, b):
+    if n == 0:
+        return
+    convert(n // b, b)
+    r = n % b
+    if r < 10:
+        print(r, end = '')
+    else:
+        print(chr(r + 55), end = '')
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        n, b = map(int, input().split())
+        convert(n, b)
+        print()
