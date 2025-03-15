@@ -1,0 +1,17 @@
+import collections
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        t = input()
+        d1 = dict(collections.Counter(s))
+        d2 = dict(collections.Counter(t))
+        ok = True
+        for x, y in d1.items():
+            if (x not in d2) or (x in d2 and y != d2[x]):
+                ok = False
+                break
+        print('Test ' + str(case + 1) + ': ', end = '')
+        if ok: print('YES')
+        else: print('NO')
