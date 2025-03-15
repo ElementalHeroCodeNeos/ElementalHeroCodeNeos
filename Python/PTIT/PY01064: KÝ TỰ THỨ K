@@ -1,0 +1,15 @@
+
+def solve(n, k):
+    if n == 1: 
+        return 'A'
+    if k == 2**(n - 1):
+        return chr(64 + n)
+    elif k < 2**(n - 1):
+        return solve(n - 1, k)
+    return solve(n - 1, k - 2**(n - 1))
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        n, k = map(int, input().split())
+        print(solve(n, k))
