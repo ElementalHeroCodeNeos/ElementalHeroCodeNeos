@@ -1,15 +1,8 @@
-import math
 
 if __name__ == '__main__':   
     tc = int(input())
     for case in range(tc):
         s = input()
-        a = []
-        sum = 0
-        for x in s:
-            if x.isalpha():
-                a.append(x)
-            else:
-                sum += int(x)
-        print(''.join(sorted(a)), end = '')
-        print(sum)
+        chu = sorted([x for x in s if x.isalpha()])
+        so = sum(int(x) for x in s if x.isdigit())
+        print(''.join(chu) + str(so))
