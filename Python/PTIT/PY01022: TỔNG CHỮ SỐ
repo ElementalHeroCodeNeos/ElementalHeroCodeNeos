@@ -1,0 +1,14 @@
+
+def tongcs(s):
+    sum = 0
+    for x in s:
+        sum += ord(x) - 48
+    return sum
+
+if __name__ == '__main__':   
+    s = input()
+    cnt = 0
+    while len(s) > 1:
+        s = str(tongcs(s))
+        cnt += 1
+    print(cnt)
