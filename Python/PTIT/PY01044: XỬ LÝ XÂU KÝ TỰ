@@ -1,0 +1,11 @@
+
+if __name__ == '__main__':   
+    s = set(input().lower().split())
+    t = set(input().lower().split())
+    hop = sorted(s.union(t))
+    giao = sorted(s.intersection(t))
+    for x in hop:
+        print(x, end = ' ')
+    print()
+    for x in giao:
+        print(x, end = ' ')
