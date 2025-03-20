@@ -1,0 +1,18 @@
+import math
+
+def check(a):
+    if len(a) != 4:  #Do địa chỉ ipv4 có tổng cộng 4 số
+        return False
+    for x in a:
+        if not x.isdigit():  
+            return False
+        elif x.isdigit() and (int(x) < 0 or int(x) > 255):
+            return False
+    return True
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        a = input().split('.')
+        if check(a): print('YES')
+        else: print('NO')
