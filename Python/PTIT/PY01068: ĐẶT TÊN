@@ -1,0 +1,19 @@
+import math
+
+s = []
+
+def Try(idx):
+    for j in range(idx, n):
+        s.append(a[j])
+        if len(s) == k:
+            print(' '.join(s))
+        elif len(s) < k:
+            Try(j + 1)
+        s.pop()
+
+if __name__ == '__main__':
+    n, k = map(int, input().split())
+    se = set(input().split())
+    a = sorted(se)
+    n = len(a)
+    Try(0)
