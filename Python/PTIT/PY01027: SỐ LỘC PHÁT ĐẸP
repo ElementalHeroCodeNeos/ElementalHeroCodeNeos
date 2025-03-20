@@ -1,0 +1,20 @@
+import math
+
+def check(s):
+    if s[0] not in '68' or s[1] not in '68':  #Điều kiện các chữ số chỉ được là 6 hoặc 8
+        return False
+    if s[0] == '8':  
+        return False
+    for i in range(2, len(s)):
+        if s[i] not in '68':  #Điều kiện các chữ số chỉ được là 6 hoặc 8
+            return False
+        if s[i] == '8' and s[i - 1] == '8' and s[i - 2] == '8':  #Nếu s[i] = '8 mà 2 kí tự trước đó cx là '8' thì xâu không hợp lệ
+            return False
+    return True
+
+if __name__ == '__main__':
+    s = input()
+    if check(s):
+        print('YES')
+    else:
+        print('NO')
