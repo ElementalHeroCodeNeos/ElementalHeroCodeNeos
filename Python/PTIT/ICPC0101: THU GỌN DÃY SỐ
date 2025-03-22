@@ -1,0 +1,18 @@
+import math
+#Tư tưởng: Xét từng cặp 2 phần tử liền kề: Nếu tổng chẵn thì xoá cặp phần tử đó; Nếu tổng lẻ thì xét cặp tiếp theo                                 
+if __name__ == '__main__':  
+    n = int(input())
+    a = list(map(int, input().split())) # Dùng 2 list a, b như 2 STACK
+    b = []
+    while len(a) >= 2:
+        if (a[-1] + a[-2]) % 2 == 1:  #Nếu tổng 2 phần tử ở đỉnh stack lẻ thì xét tiếp cặp phần tử tiếp theo BẰNG CÁCH tạm thời chuyển a[-1] sang stack b
+            b.append(a[-1])
+            a.pop()
+        else:  #Nếu tổng 2 phần tử ở đỉnh stack chẵn thì xoá chúng đi
+            a.pop()
+            a.pop()
+            if len(b) != 0:  #Sau khi xoá cặp phần tử có tổng chẵn, ktra nếu b chứa phần tử mà ở bước trước đó được tạm thời chuyển sang thì trả phần tử đó về a
+                a.append(b[-1])
+                b.pop()
+    print(len(a) + len(b))  #Kết quả cuối cùng là tổng phần tử của a và b
+#Vẫn lời khuyên đó: CHẠY CODE BẰNG TAY ĐỂ HIỂU RÕ HƠN
