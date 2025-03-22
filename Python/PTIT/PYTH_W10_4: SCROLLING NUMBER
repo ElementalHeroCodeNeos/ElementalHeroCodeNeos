@@ -1,0 +1,8 @@
+import math
+
+if __name__ == '__main__':
+    while True:
+        n = int(input())
+        if n == -1:
+            break
+        print(math.ceil(n / 9) * 9)
