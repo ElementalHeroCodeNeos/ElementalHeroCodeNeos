@@ -1,0 +1,20 @@
+import math
+
+def sumdigit(n):
+    sum = 0
+    while n != 0:
+        sum += n % 10
+        n //= 10
+    return sum
+
+if __name__ == '__main__':
+    while True:
+        iput = input()
+        if iput == '-1':
+            break
+        n, h = map(int, iput.split())
+        cnt = 0
+        for i in range(n):
+            if sumdigit(i) == h:
+                cnt += 1
+        print(cnt)
