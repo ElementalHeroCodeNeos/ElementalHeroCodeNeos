@@ -1,0 +1,26 @@
+import math
+
+def swap(s, i, j):
+    return s[:i] + s[j] + s[i+1:j] + s[i] + s[j+1:]
+
+def solve(s):
+    i = len(s) - 2
+    while i >= 0 and s[i] <= s[i + 1]:
+        i -= 1
+    if i == -1:
+        print(-1)
+        return
+    j = len(s) - 1
+    while s[j] >= s[i] or s[j] == s[j - 1]:
+        j -= 1
+    s = swap(s, i, j)
+    if s[0] == '0':
+        print(-1)
+    else:
+        print(s)
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        solve(s)
