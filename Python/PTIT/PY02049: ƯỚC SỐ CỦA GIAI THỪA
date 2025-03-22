@@ -1,0 +1,15 @@
+import math
+
+def Legendre(n, p): 
+    cnt = 0
+    i = p
+    while i <= n:
+        cnt += n // i
+        i *= p
+    return cnt
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        n, p = map(int, input().split())
+        print(Legendre(n, p))
