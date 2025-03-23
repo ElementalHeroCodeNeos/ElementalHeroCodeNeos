@@ -1,0 +1,26 @@
+import math
+
+f = [1] * (10**6 + 1)
+def sieve():
+    f[0], f[1] = 0, 0
+    for i in range(2, 1001):
+        if f[i]:
+            for j in range(i*i, 10**6 + 1, i):
+                f[j] = 0
+
+def dao(n):  #Trả về số nghịch đảo của n
+    s = str(n)
+    return int(s[::-1])
+
+if __name__ == '__main__':  
+    sieve()
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        se = set() 
+        for i in range(2, n):
+            rev = dao(i)
+            if i not in se and rev < n and i != rev and f[i] and f[rev]:
+                print(i, rev, end = ' ')
+                se.add(rev)
+        print()
