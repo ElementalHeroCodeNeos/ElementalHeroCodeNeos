@@ -4,10 +4,10 @@ if __name__ == '__main__':
     tc = int(input())
     for case in range(tc):
         p, q = input().split()
-        a = input().strip()
-        if a.count(' '):
-            a, b = a.split()
-        else: b = input()
+        a = input().strip()    #chú ý đoạn nhập: Bài này có 2 trường hợp: nhập 2 số X1, X2 ở trên cùng 1 dòng hoặc trên 2 dòng. Do đó, ta phải làm như sau:
+        if a.count(' '):    # Hàm strip() là để loại bỏ khoảng trắng ở đầu và cuối xâu
+            a, b = a.split()    #TH1: Nhập trên cùng 1 dòng
+        else: b = input()    #TH2: Nhập trên 2 dòng
         p, q = min(p, q), max(p, q)
         print(int(a.replace(q, p)) + int(b.replace(q, p)), end = ' ')
         print(int(a.replace(p, q)) + int(b.replace(p, q)))
