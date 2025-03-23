@@ -1,0 +1,13 @@
+import math
+
+if __name__ == '__main__':  
+    tc = int(input())
+    for case in range(tc):
+        p, q = input().split()
+        a = input().strip()
+        if a.count(' '):
+            a, b = a.split()
+        else: b = input()
+        p, q = min(p, q), max(p, q)
+        print(int(a.replace(q, p)) + int(b.replace(q, p)), end = ' ')
+        print(int(a.replace(p, q)) + int(b.replace(p, q)))
