@@ -1,0 +1,20 @@
+import math
+
+f = [1] * (10**6 + 1)
+def sieve():  #Sàng nguyên tố Eratosthenes
+    f[0], f[1] = 0, 0
+    for i in range(2, 1001):
+        if f[i]:
+            for j in range(i*i, 10**6 + 1, i):
+                f[j] = 0
+
+if __name__ == '__main__':  
+    sieve()
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        cnt = 0
+        for i in range(2, n - 6):
+            if (f[i] and f[i+2] and f[i+6]) or (f[i] and f[i+4] and f[i+6]):
+                cnt += 1
+        print(cnt)
