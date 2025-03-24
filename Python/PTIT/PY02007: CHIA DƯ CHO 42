@@ -1,0 +1,13 @@
+import math
+
+if __name__ == '__main__': 
+    a = []
+    while True:
+        a += list(map(int, input().split()))
+        if len(a) == 10:
+            break
+    se = set()
+    for x in a:
+        x %= 42
+        se.add(x)
+    print(len(se))
