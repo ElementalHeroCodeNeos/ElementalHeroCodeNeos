@@ -1,0 +1,20 @@
+import math
+#cHÚ Ý: Đề lừa vl, 2 <= n <= 10000 mới đúng!
+f = [1] * 10001
+p = []
+def sieve():
+    f[0], f[1] = 0, 0
+    for i in range(2, math.isqrt(10000) + 1):
+        if f[i]:
+            for j in range(i*i, 10001, i):
+                f[j] = 0
+    for i in range(2, 10001):
+        if f[i]:
+            p.append(i)
+
+if __name__ == '__main__': 
+    sieve()
+    n, x = map(int, input().split())
+    for d in range(n + 1):
+        print(x, end = ' ')
+        x += p[d]
