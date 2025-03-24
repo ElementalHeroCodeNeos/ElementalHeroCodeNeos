@@ -1,0 +1,18 @@
+import math
+
+if __name__ == '__main__': 
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        a = list(map(int, input().split()))
+        b = list(map(int, input().split()))
+        a.sort()
+        b.sort()
+        k = min(len(a), len(b))
+        ok = True
+        for i in range(k):
+            if a[i] > b[i]:
+                ok = False
+                break
+        if ok: print('YES')
+        else: print('NO')
