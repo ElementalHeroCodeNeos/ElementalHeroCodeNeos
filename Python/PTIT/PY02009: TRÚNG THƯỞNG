@@ -1,0 +1,14 @@
+import math
+
+if __name__ == '__main__': 
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        d = dict()  #Đếm tần suất của các số dự thưởng
+        for i in range(n):
+            x = int(input())  #Chương trình quay ngẫu nhiên ra số x
+            if x not in d:
+                d[x] = 1
+            else: d[x] += 1
+        d1 = sorted(d.items(), key = lambda x : (-x[1], x[0]))  #Sắp xếp dict theo 2 tiêu chí: tần suất giảm dần và nếu hai số cùng tần suất thì số nhỏ hơn đứng trước
+        print(d1[0][0])  #Kết quả
