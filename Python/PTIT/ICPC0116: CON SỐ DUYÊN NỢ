@@ -1,0 +1,10 @@
+import math
+
+if __name__ == '__main__':  
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        if s[0] == s[-1]:
+            print('YES')
+        else:
+            print('NO')
