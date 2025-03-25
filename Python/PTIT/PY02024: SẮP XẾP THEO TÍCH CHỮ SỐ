@@ -1,0 +1,18 @@
+import math
+
+def proDigit(n):
+    p = 1
+    while n != 0:
+        p *= n % 10
+        n //= 10
+    return p
+
+if __name__ == '__main__': 
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        a = list(map(int, input().split()))
+        a.sort(key = lambda x : (proDigit(x), x))
+        for x in a:
+            print(x, end = ' ')
+        print()
