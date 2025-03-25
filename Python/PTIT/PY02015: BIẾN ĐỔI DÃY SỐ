@@ -1,0 +1,20 @@
+import math
+
+def check(a):
+    return a[0] == a[1] and a[1] == a[2] and a[2] == a[3]
+
+if __name__ == '__main__': 
+    while True:
+        a = list(map(int, input().split()))
+        if a[0] == 0 and a[1] == 0 and a[2] == 0 and a[3] == 0:
+            break
+        cnt = 0
+        b = a[:]  #Ban đầu, khởi tạo mảng b = a
+        while True:  #Mảng a là mảng trước khi thay đổi, mảng b là mảng sau khi thay đổi và được tính dựa trên mảng a
+            if check(a): break  
+            for i in range(3):
+                b[i] = abs(a[i] - a[i+1])
+            b[3] = abs(a[3] - a[0])
+            cnt += 1
+            a = b[:]
+        print(cnt)
