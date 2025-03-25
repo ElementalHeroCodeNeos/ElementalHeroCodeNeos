@@ -1,0 +1,18 @@
+import math
+
+def sumDigit(n):
+    sum = 0
+    while n != 0:
+        sum += n % 10
+        n //= 10
+    return sum
+
+if __name__ == '__main__': 
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        a = list(map(int, input().split()))
+        a.sort(key = lambda x : (sumDigit(x), x))
+        for x in a:
+            print(x, end = ' ')
+        print()
