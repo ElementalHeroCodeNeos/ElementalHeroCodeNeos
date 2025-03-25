@@ -1,0 +1,14 @@
+import math
+import collections
+
+if __name__ == '__main__': 
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        a = list(map(int, input().split()))
+        d = dict(collections.Counter(a))
+        d1 = sorted(d.items(), key = lambda x : (-x[1], x[0]))  #Sắp xếp theo 2 tiêu chí: Tần suất giảm dần, nếu 2 số cùng tần suất thì số nhỏ hơn đứng trước
+        if d1[0][1] > n // 2:  #d1[0][0] là tần suất lớn nhất và d1[0][1] là số có tần suất lớn nhất đó và nhỏ nhất
+            print(d1[0][0])
+        else:
+            print('NO')
