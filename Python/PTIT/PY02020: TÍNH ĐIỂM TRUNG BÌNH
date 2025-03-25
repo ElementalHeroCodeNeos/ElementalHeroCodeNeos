@@ -1,0 +1,12 @@
+import math
+
+if __name__ == '__main__': 
+    n = int(input())
+    a = list(map(float, input().split()))
+    a.sort()
+    cnt, sum = 0, 0
+    for x in a:
+        if x != a[0] and x != a[-1]:
+            sum += x
+            cnt += 1
+    print('%.2f' % (sum / cnt))
