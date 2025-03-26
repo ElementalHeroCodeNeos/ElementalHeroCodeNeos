@@ -1,0 +1,19 @@
+import math
+
+if __name__ == '__main__': 
+    n = int(input())
+    a = []
+    for i in range(n):
+        b = list(map(int, input().split()))
+        a.append(b)
+    k = int(input())
+    sum1, sum2 = 0, 0  #sum1 ,sum2 là tổng các phần tử ở tam giác trên và dưới
+    for i in range(n):
+        for j in range(n):
+            if i < j: sum1 += a[i][j]
+            elif i > j: sum2 += a[i][j]
+    d = abs(sum1 - sum2)
+    if d <= k:
+        print('YES')
+    else: print('NO')
+    print(d)
