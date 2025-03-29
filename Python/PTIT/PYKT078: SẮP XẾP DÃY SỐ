@@ -5,9 +5,8 @@ if __name__ == '__main__':
     for case in range(tc):
         n, m = map(int, input().split())
         a = list(map(int, input().split()))
-        lon = max(a)
-        idx = a.index(lon)
-        a.insert(idx, m)
+        idx = a.index(max(a))    # a.index(x): trả về chỉ số đầu tiên của phần tử x
+        a.insert(idx, m)    #Chèn phần tử m vào vị trí idx
         for x in a:
             if x < 0: print(x, end = ' ')
         for x in a:
