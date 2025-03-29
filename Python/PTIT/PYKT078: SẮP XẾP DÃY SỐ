@@ -1,0 +1,15 @@
+import math
+
+if __name__ == '__main__': 
+    tc = int(input())
+    for case in range(tc):
+        n, m = map(int, input().split())
+        a = list(map(int, input().split()))
+        lon = max(a)
+        idx = a.index(lon)
+        a.insert(idx, m)
+        for x in a:
+            if x < 0: print(x, end = ' ')
+        for x in a:
+            if x >= 0: print(x, end = ' ')
+        print()
