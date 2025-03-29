@@ -1,0 +1,21 @@
+import math
+
+if __name__ == '__main__': 
+    n = int(input())
+    a = []  #Mảng a lưu số từ của mỗi câu thơ
+    for i in range(n):
+        a.append(len(input().split()))
+    v = []  #Mảng v lưu số câu của mỗi bài thơ
+    i = 0
+    while i < n:
+        if a[i] == 6:
+            while i < n and (a[i] == 6 or a[i] == 8):
+                i += 1
+            v.append(1)
+        elif a[i] == 7:
+            v.append(2)
+            i += 4
+        else: i += 1
+    print(len(v))
+    for x in v:
+        print(x)
