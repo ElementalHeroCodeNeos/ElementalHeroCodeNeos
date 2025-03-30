@@ -1,0 +1,17 @@
+import math
+
+if __name__ == '__main__': 
+    n, m = map(int, input().split())
+    a = set(map(int, input().split()))
+    b = set(map(int, input().split()))
+    hop = sorted(a.intersection(b))
+    h1 = sorted(a - b)
+    h2 = sorted(b - a)
+    for x in hop:
+        print(x, end = ' ')
+    print()
+    for x in h1:
+        print(x, end = ' ')
+    print()
+    for x in h2:
+        print(x, end = ' ')
