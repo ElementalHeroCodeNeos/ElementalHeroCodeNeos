@@ -1,0 +1,19 @@
+import math
+
+if __name__ == '__main__':  
+    s = input() 
+    k = int(input())
+    d = dict()
+    for i in range(0, len(s) - 1, 2):
+        num = s[i] + s[i+1]
+        if num not in d:
+            d[num] = 1
+        else: d[num] +=1
+    d1 = sorted(d.items())
+    ok = False
+    for val, fre in d1:
+        if fre >= k:
+            print(val, fre)
+            ok = True
+    if not ok:  
+        print('NOT FOUND')
