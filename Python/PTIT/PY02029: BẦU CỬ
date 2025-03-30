@@ -1,0 +1,16 @@
+import math
+import collections
+
+if __name__ == '__main__':  
+    n, m = map(int, input().split())
+    a = list(map(int, input().split()))
+    d = collections.Counter(a)
+    d1 = sorted(d.items(), key = lambda x : (-x[1], x[0]))
+    ok = False
+    max_fre = d1[0][1]
+    for val, fre in d1:
+        if fre < max_fre:
+            print(val)
+            ok = True
+            break
+    if not ok: print('NONE')
