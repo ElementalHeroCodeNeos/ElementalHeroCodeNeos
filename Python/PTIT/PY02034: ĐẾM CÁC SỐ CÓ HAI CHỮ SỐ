@@ -1,0 +1,12 @@
+import math
+
+if __name__ == '__main__':  
+    s = input()
+    d = dict()
+    for i in range(0, len(s) - 1, 2):
+        num = s[i] + s[i+1]
+        if num not in d:
+            d[num] = 1
+        else: d[num] +=1
+    for val, fre in d.items():
+        print(val, fre)
