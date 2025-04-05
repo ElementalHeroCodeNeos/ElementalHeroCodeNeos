@@ -1,0 +1,30 @@
+import math
+
+class ThiSinh:
+    def __init__(self, ma, ten, lt, th):
+        self.__ma = 'TS0' + str(ma)  #Chú ý: mã như là: TS01, TS020 chứ k phải TS20 :V
+        self.__ten = ten
+        if lt > 10: lt /= 10
+        if th > 10: th /= 10
+        self.__lt = lt
+        self.__th = th
+    def get_diemtb(self):
+        return (self.__lt + self.__th) / 2
+    def get_loai(self):
+        tb = self.get_diemtb()
+        if tb < 5: return 'TRUOT'
+        elif tb >= 5 and tb < 8: return 'CAN NHAC'
+        elif tb >= 8 and tb <= 9.5: return 'DAT'
+        return 'XUAT SAC'
+    def __str__(self):
+        return f'{self.__ma} {self.__ten} {self.get_diemtb():.2f} {self.get_loai()}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        t = ThiSinh(i+1, input(), float(input()), float(input()))
+        a.append(t)
+    a.sort(key = lambda x : -x.get_diemtb())
+    for x in a:
+        print(x)
