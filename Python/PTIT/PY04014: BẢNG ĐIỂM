@@ -1,0 +1,38 @@
+import math
+from decimal import ROUND_HALF_UP, Decimal  #Khai báo Module decimal 
+
+class HocSinh:
+    def __init__(self, ma, ten, diem):
+        self.__ma = format(ma, '02d')
+        self.__ma = 'HS' + self.__ma
+        self.__ten = ten
+        self.__diem = diem
+    def get_diemtb(self):
+        sum = (self.__diem[0] + self.__diem[1]) * 2
+        for i in range(2, 10):
+            sum += self.__diem[i]
+        sum /= 12
+        return sum.quantize(Decimal('0.1'), ROUND_HALF_UP)  #Hàm làm tròn nửa trên đối với số thực. VD: 2.15->2.2, 2.14->2.1
+    def get_ma(self):
+        return self.__ma
+    def get_hocluc(self):
+        tb = self.get_diemtb()
+        if tb >= 9: return 'XUAT SAC'
+        elif tb >= 8 and tb <= 8.9: return 'GIOI'
+        elif tb >= 7 and tb <= 7.9: return 'KHA'
+        elif tb >= 5 and tb <= 6.9: return 'TB'
+        return 'YEU'
+    def __str__(self):
+        return f'{self.__ma} {self.__ten} {self.get_diemtb()} {self.get_hocluc()}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        ten = input()
+        diem = list(map(Decimal, input().split()))  #Decimal: kiểu số thực chính xác tuyệt đối (chính xác, ít sai số hơn kiểu float - số thực)
+        h = HocSinh(i+1, ten, diem)
+        a.append(h)
+    a.sort(key = lambda x : (-x.get_diemtb(), x.get_ma()))
+    for x in a:
+        print(x)
