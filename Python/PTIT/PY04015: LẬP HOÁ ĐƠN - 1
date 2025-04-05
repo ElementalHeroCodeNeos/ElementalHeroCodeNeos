@@ -1,0 +1,36 @@
+import math
+
+class KhachHang:
+    def __init__(self, ma, ten, cu, moi):
+        self.__ma = format(ma, '02d')
+        self.__ma = 'KH' + self.__ma
+        self.__ten = ten
+        self.__cu = cu 
+        self.__moi = moi 
+    def get_tongtien(self):  #Chú ý: Cách tính tổng tiền vì đề không nói rõ
+        V = self.__moi - self.__cu 
+        if V <= 50: 
+            tien = V * 100
+            phuphi = tien * 0.02
+            tongtien = tien + phuphi
+        elif V > 50 and V <= 100:
+            tien = 50 * 100 + (V - 50) * 150
+            phuphi = tien * 0.03
+            tongtien = tien + phuphi
+        else:
+            tien = 50 * 100 + 50 * 150 + (V - 100) * 200
+            phuphi = tien * 0.05
+            tongtien = tien + phuphi
+        return round(tongtien)  #Không dùng int(tongtien) vì int() là hàm giữ phần nguyên và cắt bỏ phần thập phân; còn hàm round() là hàm làm tròn lên đối với số thực
+    def __str__(self):
+        return f'{self.__ma} {self.__ten} {self.get_tongtien()}' 
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        k = KhachHang(i+1, input(), int(input()), int(input()))
+        a.append(k)
+    a.sort(key = lambda x : -x.get_tongtien())
+    for x in a:
+        print(x)
