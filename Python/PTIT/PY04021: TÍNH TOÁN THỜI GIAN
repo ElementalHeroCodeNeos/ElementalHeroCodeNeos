@@ -1,0 +1,27 @@
+import math
+
+class Player:
+    def __init__(self, ma, ten, vao, ra):
+        self.__ma = ma
+        self.__ten = ten
+        self.__vao = vao
+        self.__ra = ra
+    def get_time(self):
+        gio1, phut1 = map(int, self.__vao.split(':'))
+        gio2, phut2 = map(int, self.__ra.split(':'))
+        time = gio2 * 60 + phut2 - gio1 * 60 - phut1
+        return time 
+    def __str__(self):
+        gio = self.get_time() // 60
+        phut = self.get_time() - gio * 60
+        return f'{self.__ma} {self.__ten} {gio} gio {phut} phut'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        p = Player(input(), input(), input(), input())
+        a.append(p)
+    a.sort(key = lambda x : -x.get_time())
+    for x in a:
+        print(x)
