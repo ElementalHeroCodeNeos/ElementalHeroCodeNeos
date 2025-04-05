@@ -1,0 +1,37 @@
+import math
+
+class SinhVien:
+    def __init__(self, ma, ten, lop, cc):
+        self.__ma = ma
+        self.__ten = ten
+        self.__lop = lop
+        self.__cc = cc
+    def get_ma(self):
+        return self.__ma
+    def set_cc(self, diemdanh):
+        for x in diemdanh:
+            if x == 'v':
+                self.__cc -= 2
+            elif x == 'm': self.__cc -= 1
+            if self.__cc <= 0:
+                self.__cc = 0
+                break
+    def __str__(self):
+        ghichu = ''
+        if self.__cc == 0: ghichu = ' KDDK'
+        return f'{self.__ma} {self.__ten} {self.__lop} {self.__cc}{ghichu}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        s = SinhVien(input(), input(), input(), 10)
+        a.append(s)
+    for i in range(n):
+        ma, diemdanh = input().split()
+        for x in a:
+            if x.get_ma() == ma:
+                x.set_cc(diemdanh)
+                break
+    for x in a:
+        print(x)
