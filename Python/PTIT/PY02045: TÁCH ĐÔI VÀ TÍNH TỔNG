@@ -1,0 +1,8 @@
+import math
+
+if __name__ == '__main__':
+    s = input()
+    while len(s) > 1:
+        k = len(s) // 2
+        s = str(int(s[:k]) + int(s[k:]))
+        print(s)
