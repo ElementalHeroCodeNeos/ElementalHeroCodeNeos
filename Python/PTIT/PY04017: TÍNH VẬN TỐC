@@ -1,0 +1,30 @@
+import math
+
+class Racer:
+    def __init__(self, ten, add, end):
+        self.ten = ten
+        self.add = add
+        self.end = end
+    def get_ma(self):
+        a = self.add.split() + self.ten.split()
+        tmp = ''
+        for x in a:
+            tmp += x[0]
+        return tmp
+    def get_vantoc(self):
+        gio = int(self.end[0])
+        phut = int(self.end[2:])
+        time = gio - 6 + phut / 60 
+        return 120 / time
+    def __str__(self):
+        return f'{self.get_ma()} {self.ten} {self.add} {round(self.get_vantoc())} Km/h'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        r = Racer(input(), input(), input())
+        a.append(r)
+    a.sort(key = lambda x : -x.get_vantoc())
+    for x in a:
+        print(x)
