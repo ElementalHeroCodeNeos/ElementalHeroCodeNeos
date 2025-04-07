@@ -1,0 +1,39 @@
+import math
+
+class Lich:
+    def __init__(self, ma, mahp, ngay, gio, nhom):
+        self.ma = 'T' + '{:03d}'.format(ma)
+        self.mahp = mahp
+        self.ngay = ngay
+        self.gio = gio
+        self.nhom = nhom
+    def get_mon(self):
+        return d[self.mahp]
+    def get_sxngay(self):
+        a = self.ngay.split('/')
+        tmp = ''
+        for x in a[::-1]:
+            tmp += x
+        return tmp
+    def get_gio(self):
+        return self.gio
+    def get_mahp(self):
+        return self.mahp
+    def __str__(self):
+        return f'{self.ma} {self.mahp} {self.get_mon()} {self.ngay} {self.gio} {self.nhom}'
+
+if __name__ == '__main__':
+    n, m = map(int, input().split())
+    d = dict()
+    for i in range(n):
+        mahp = input()
+        mon = input()
+        d[mahp] = mon
+    a = []
+    for i in range(m):
+        mahp, ngay, gio, nhom = input().split()
+        l = Lich(i + 1, mahp, ngay, gio, nhom)
+        a.append(l)
+    a.sort(key = lambda x : (x.get_sxngay(), x.get_gio(), x.get_mahp()))
+    for x in a:
+        print(x)
