@@ -1,0 +1,35 @@
+import math
+
+class ThiSinh:
+    def __init__(self, ma, ten, diem, dt, kv):
+        self.ma = 'TS' + '{:02d}'.format(ma)
+        self.ten = ten
+        self.diem = diem
+        self.dt = dt
+        self.kv = kv
+    def chuanHoa(self):
+        self.ten = ' '.join(self.ten.split()).title()
+    def get_tong(self):
+        tong = self.diem
+        if self.kv == 1: tong += 1.5
+        elif self.kv == 2: tong += 1
+        if self.dt != 'Kinh': tong += 1.5
+        return tong
+    def get_kq(self):
+        if self.get_tong() >= 20.5: return 'Do'
+        return 'Truot'
+    def get_ma(self):
+        return self.ma
+    def __str__(self):
+        return f'{self.ma} {self.ten} {self.get_tong():.1f} {self.get_kq()}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        s = ThiSinh(i + 1, input(), float(input()), input(), int(input()))
+        s.chuanHoa()
+        a.append(s)
+    a.sort(key = lambda x : (-x.get_tong(), x.get_ma()))
+    for x in a:
+        print(x)
