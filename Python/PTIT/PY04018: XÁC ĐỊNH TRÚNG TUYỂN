@@ -1,0 +1,37 @@
+import math
+
+class GiaoVien:
+    def __init__(self, ma, ten, sbd, d1, d2):
+        self.ma = 'GV' + '{:02d}'.format(ma)
+        self.ten = ten
+        self.sbd = sbd
+        self.d1 = d1
+        self.d2 = d2
+    def get_mon(self):
+        mon = self.sbd[0]
+        if mon == 'A': return 'TOAN'
+        elif mon == 'B': return 'LY'
+        return 'HOA'
+    def get_tong(self):
+        tong = self.d1 * 2 + self.d2
+        ut = int(self.sbd[1])
+        if ut == 1: return tong + 2
+        elif ut == 2: return tong + 1.5
+        elif ut == 3: return tong + 1
+        return tong 
+    def get_kq(self):
+        tong = self.get_tong()
+        if tong >= 18: return 'TRUNG TUYEN'
+        return 'LOAI'
+    def __str__(self):
+        return f'{self.ma} {self.ten} {self.get_mon()} {self.get_tong():.1f} {self.get_kq()}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        g = GiaoVien(i + 1, input(), input(), float(input()), float(input()))
+        a.append(g)
+    a.sort(key = lambda x : -x.get_tong())
+    for x in a:
+        print(x)
