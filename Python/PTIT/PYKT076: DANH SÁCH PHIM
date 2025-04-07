@@ -1,0 +1,40 @@
+import math
+
+class Phim:
+    def __init__(self, ma, type, ngay, ten, tap):
+        self.ma = 'P' + '{:03d}'.format(ma)
+        self.type = type
+        self.ngay = ngay
+        self.ten = ten
+        self.tap = tap
+    def get_sxngay(self):
+        a = self.ngay.split('/')
+        tmp = ''
+        for x in a[::-1]:
+            tmp += x
+        return tmp
+    def get_ten(self):
+        return self.ten
+    def get_tap(self):
+        return self.tap
+    def get_theloai(self):
+        type = self.type
+        pos = 0
+        while type[pos].isalpha():
+            pos += 1
+        return d[int(type[pos:]) - 1]
+    def __str__(self):
+        return f'{self.ma} {self.get_theloai()} {self.ngay} {self.ten} {self.tap}'
+
+if __name__ == '__main__':
+    n, m = map(int, input().split())
+    d = []
+    for i in range(n):
+        d.append(input())
+    a = []
+    for i in range(m):
+        p = Phim(i + 1, input(), input(), input(), int(input()))
+        a.append(p)
+    a.sort(key = lambda x : (x.get_sxngay(), x.get_ten(), -x.get_tap()))
+    for x in a:
+        print(x)
