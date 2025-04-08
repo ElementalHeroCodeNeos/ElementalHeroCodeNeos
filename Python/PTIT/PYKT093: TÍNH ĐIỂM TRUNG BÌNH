@@ -1,0 +1,35 @@
+from math import ceil
+
+class SinhVien:
+    rank = 1
+    def __init__(self, ma, ten, d1, d2, d3):
+        self.ma = 'SV' + '{:02d}'.format(ma)
+        self.ten = ten
+        self.d1 = d1
+        self.d2 = d2
+        self.d3 = d3
+    def get_rank(self):
+        return self.rank
+    def set_rank(self, rank):
+        self.rank = rank
+    def chuanHoa(self):
+        self.ten = ' '.join(self.ten.split()).title()
+    def get_tb(self):
+        return (self.d1 * 3 + self.d2 * 3 + self.d3 * 2) / 8
+    def __str__(self):
+        return '{:s} {:s} {:.2f} {:d}'.format(self.ma, self.ten, ceil(self.get_tb() * 100) / 100, self.rank)  #Chú ý: Do bài làm tròn lên (VD: 2.625 -> 2.63) và còn bắt buộc 2 chữ số sau dấu phẩy, nên phải 'Nhân điểm tb với 100, làm tròn bằng ceil, rồi chia lại cho 100, sau đó format
+    
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        s = SinhVien(i + 1, input(), int(input()), int(input()), int(input()))
+        s.chuanHoa()
+        a.append(s)
+    a.sort(key = lambda x : -x.get_tb())
+    print(a[0])  #In ra thông tin svien thứ 0
+    for i in range(1, len(a)):  #Duyệt từ svien thứ 1
+        if a[i].get_tb() == a[i-1].get_tb():  #Nếu điểm TB của svien i bằng svien i-1, thì cài đặt rank của svien i bằng svien i-1
+            a[i].set_rank(a[i-1].get_rank())
+        else: a[i].set_rank(i + 1)  #Ngược lại, cài đặt rank của svien i bằng (i + 1)
+        print(a[i])
