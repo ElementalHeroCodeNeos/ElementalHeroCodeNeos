@@ -1,0 +1,52 @@
+import math
+
+class KhachHang:
+    def __init__(self, ma, ten, loai, dau, cuoi):
+        self.ma = 'KH' + '{:02d}'.format(ma)
+        self.ten = ten
+        self.loai = loai
+        self.dau = dau
+        self.cuoi = cuoi
+    def chuanHoa(self):
+        self.ten = ' '.join(self.ten.split()).title()
+    def get_tong(self):
+        so = self.cuoi - self.dau
+        if self.loai == 'A': dm = 100
+        elif self.loai == 'B': dm = 500
+        else: dm = 200
+        if so < dm: 
+            trong = so * 450
+            vuot = 0
+        else: 
+            trong = dm * 450
+            vuot = (so - dm) * 1000
+        vat = vuot // 20
+        return trong + vuot + vat
+    def __str__(self):
+        so = self.cuoi - self.dau
+        if self.loai == 'A': dm = 100
+        elif self.loai == 'B': dm = 500
+        else: dm = 200
+        if so < dm: 
+            trong = so * 450
+            vuot = 0
+        else: 
+            trong = dm * 450
+            vuot = (so - dm) * 1000
+        vat = vuot // 20
+        tong = trong + vuot + vat
+        return self.ma + ' ' + self.ten + ' ' + str(trong) + ' ' + str(vuot) + ' ' + str(vat) + ' ' + str(tong)
+    
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        ten = input()
+        b = input().split()
+        loai, dau, cuoi = b[0], int(b[1]), int(b[2])
+        k = KhachHang(i + 1, ten, loai, dau, cuoi)
+        k.chuanHoa()
+        a.append(k)
+    a.sort(key = lambda x : -x.get_tong())
+    for x in a:
+        print(x)
