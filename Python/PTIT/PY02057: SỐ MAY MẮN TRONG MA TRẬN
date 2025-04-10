@@ -1,0 +1,24 @@
+import math
+
+if __name__ == '__main__':
+    n, m = map(int, input().split())
+    a = []
+    for i in range(n):
+        b = list(map(int, input().split()))
+        a.append(b) 
+    min_val, max_val = 10001, 1
+    for i in range(n):
+        for j in range(m):
+            min_val = min(a[i][j], min_val)
+            max_val = max(a[i][j], max_val)
+    luck = max_val - min_val
+    f = []
+    for i in range(n):
+        for j in range(m):
+            if a[i][j] == luck:
+                f.append((i, j))
+    if not f: print('NOT FOUND')
+    else: 
+        print(luck)
+        for x in f:
+            print('Vi tri [' + str(x[0]) + '][' + str(x[1]) + ']')
