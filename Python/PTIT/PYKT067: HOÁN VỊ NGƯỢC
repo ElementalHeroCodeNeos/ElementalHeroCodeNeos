@@ -1,0 +1,26 @@
+import math
+
+res, s = [], []
+used = [False] * 11
+def Try():
+    for j in range(n, 0, -1):
+        if used[j] == False:
+            s.append(str(j))
+            used[j] = True
+            if len(s) == n:
+                res.append(s.copy())
+            elif len(s) < n:
+                Try()
+            used[j] = False
+            s.pop()
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        Try()
+        print(len(res))
+        for x in res:
+            print(''.join(x), end = ' ')
+        print()
+        res.clear()
