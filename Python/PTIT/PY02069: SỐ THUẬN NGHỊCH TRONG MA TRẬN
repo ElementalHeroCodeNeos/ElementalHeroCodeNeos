@@ -1,0 +1,28 @@
+import math
+
+def tn(n):
+    s = str(n)
+    return len(s) > 1 and s == s[::-1]
+
+if __name__ == '__main__':
+    n, m = map(int, input().split())
+    a = []
+    for i in range(n):
+        b = list(map(int, input().split()))
+        a.append(b)
+    f = []
+    res = 1
+    for i in range(n):
+        for j in range(m):
+            if tn(a[i][j]):
+                if a[i][j] > res:
+                    res = a[i][j]
+                    f.clear()
+                    f.append((i, j))
+                elif a[i][j] == res:
+                    f.append((i, j))
+    if res == 1: print('NOT FOUND')
+    else:
+        print(res)
+        for x in f:
+            print('Vi tri [' + str(x[0]) + '][' + str(x[1]) + ']')
