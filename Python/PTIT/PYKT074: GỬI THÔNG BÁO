@@ -1,0 +1,17 @@
+import math
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        a = s.split()  #List a lưu các từ của thông báo
+        pos = 0  #Kí tự hiện đang xét
+        for i in range(len(a)):  #Duyệt từng từ của thông báo
+            for j in range(len(a[i])):  #Duyệt từng kí tự của từ đó
+                if pos == 99:  #Chữ cái thứ 100 nằm ở từ a[i]
+                    if j == len(a[i]) - 1: idx = i  #Nếu kí tự thứ 100 là chữ cái cuối cùng của từ thì in ra đến hết từ đó (idx là vị trí của từ cuối cùng được in ra)
+                    else: idx = i - 1  #Ngược lại thì in ra đến từ liền trước từ đó thôi
+                pos += 1  #Xét kí tự tiếp theo
+            if pos == 99: idx = i  #Nếu ' ' là kí tự thứ 100 thì in ra đến hết từ ở trước dấu ' '
+            pos += 1  #Do mỗi từ cách nhau ở 1 dấu cách
+        print(' '.join(a[:idx + 1]))
