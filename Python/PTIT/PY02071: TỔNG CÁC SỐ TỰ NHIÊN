@@ -1,0 +1,28 @@
+import math
+
+s, res = [], []
+
+def Try(idx, sum):
+    for j in range(idx, 0, -1):
+        s.append(j)
+        if sum + j == n:
+            res.append(s.copy())  #Nếu dùng res.append(s) thì là đang append trực tiếp s vào list res. Khi s thay đổi thì phần tử trong res cũng thay đổi theo do chúng cùng trỏ về 1 vùng nhớ. Tóm lại ta càn thêm dữ liệu s chứ k thêm ô nhớ s
+        elif sum + j < n:
+            Try(j, sum + j)
+        s.pop()
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        n = int(input())
+        Try(n, 0)
+        print(len(res))
+        for x in res:
+            print('(', end = '')
+            for i in range(len(x)):
+                print(x[i], end = '')
+                if i != len(x) - 1: 
+                    print(' ', end = '')
+            print(') ', end = '')
+        print()
+        res.clear()
