@@ -1,0 +1,20 @@
+import math
+
+if __name__ == '__main__':
+    n = int(input())
+    d = dict()
+    for i in range(n):
+        bien, loai, ghe, huong, ngay = input().split()
+        if ngay not in d: d[ngay] = 0
+        if huong == 'IN':
+            if loai == 'Xe_con' and ghe == '5': 
+                d[ngay] += 10000
+            elif loai == 'Xe_con' and ghe == '7':
+                d[ngay] += 15000
+            elif loai == 'Xe_tai' and ghe == '2':
+                d[ngay] += 20000
+            elif loai == 'Xe_khach' and ghe == '29':
+                d[ngay] += 50000
+            else: d[ngay] += 70000
+    for x, y in d.items():
+        print(x + ': ' + str(y))
