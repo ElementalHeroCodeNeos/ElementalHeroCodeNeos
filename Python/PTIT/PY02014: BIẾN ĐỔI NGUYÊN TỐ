@@ -1,0 +1,24 @@
+import math
+
+p = []
+f = [1] * 10001
+def sieve():
+    f[0] = f[1] = 0
+    for i in range(2, 101):
+        if f[i]:
+            for j in range(i*i, 10001, i):
+                f[j] = 0
+    for i in range(10001):
+        if f[i]: p.append(i)
+
+if __name__ == '__main__':
+    sieve()
+    n = int(input())
+    a = list(map(int, input().split()))
+    res = 0
+    for i in range(n):
+        d = 10*9
+        for x in p:
+            d = min(d, abs(a[i] - x))
+        res = max(res, d)
+    print(res)
