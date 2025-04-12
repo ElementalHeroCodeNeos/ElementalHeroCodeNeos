@@ -1,0 +1,34 @@
+import math
+from datetime import datetime  #import module
+
+class KhachHang:
+    def __init__(self, ma, ten, so, nhan, tra, phu):
+        self.ma = 'KH' + '{:02d}'.format(ma)
+        self.ten = ten
+        self.so = so
+        self.nhan = nhan
+        self.tra = tra
+        self.phu = phu
+    def get_time(self):  #Cách tính số ngày giữa 2 khoảng thời gian
+        nhan = datetime.strptime(self.nhan, '%d/%m/%Y')  
+        tra = datetime.strptime(self.tra, '%d/%m/%Y')
+        return (tra - nhan).days + 1
+    def get_tien(self):
+        tang = int(self.so[0])
+        if tang == 1: gia = 25
+        elif tang == 2: gia = 34
+        elif tang == 3: gia = 50
+        else: gia = 80
+        return gia * self.get_time() + self.phu
+    def __str__(self):
+        return f'{self.ma} {self.ten} {self.so} {self.get_time()} {self.get_tien()}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        k = KhachHang(i + 1, input().strip(), input().strip(), input().strip(), input().strip(), int(input()))  #Lưu ý: Dùng strip() để ngày nhận, trả phòng ko dư khoảng trắng ở đầu và cuối. Nếu không thì ko đúng định dạng '%d/%m/%Y'
+        a.append(k)
+    a.sort(key = lambda x : -x.get_tien())
+    for x in a:
+        print(x)
