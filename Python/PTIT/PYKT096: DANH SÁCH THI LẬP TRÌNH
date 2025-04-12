@@ -1,0 +1,45 @@
+import math
+
+class Team:
+    def __init__(self, mt, ten, truong):
+        self.mt = mt
+        self.ten = ten
+        self.truong = truong
+    def get_mt(self):
+        return self.mt
+    def get_ten(self):
+        return self.ten
+    def get_truong(self):
+        return self.truong
+
+class ThiSinh(Team):
+    def __init__(self, ma, hoten, mt, ten, truong):
+        self.ma = 'C' + '{:03d}'.format(ma)
+        self.hoten = hoten
+        Team.__init__(self, mt, ten, truong)
+    def get_hoten(self):
+        return self.hoten
+    def __str__(self):
+        return f'{self.ma} {self.hoten} {self.ten} {self.truong}'
+
+if __name__ == '__main__':
+    n = int(input())
+    te, ts = [], []
+    for i in range(n):
+        mt = 'Team' + '{:02d}'.format(i + 1)
+        t = Team(mt, input(), input())
+        te.append(t)
+    m = int(input())
+    for i in range(m):
+        hoten = input()
+        mt = input()
+        for x in te:
+            if x.get_mt() == mt:
+                ten = x.get_ten()
+                truong = x.get_truong()
+                break
+        s = ThiSinh(i + 1, hoten, mt, ten, truong)
+        ts.append(s)
+    ts.sort(key = lambda x : x.get_hoten())
+    for x in ts:
+        print(x)
