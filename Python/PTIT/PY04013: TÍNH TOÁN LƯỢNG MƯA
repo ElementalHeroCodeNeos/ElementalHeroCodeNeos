@@ -1,0 +1,34 @@
+import math 
+    
+class Tram:
+    def __init__(self, ma, ten, start, end, amount, time):
+        self.ma = 'T' + '{:02d}'.format(ma)
+        self.ten = ten
+        self.start = start
+        self.end = end
+        self.amount = amount
+        self.time = time
+    def set_time(self, time):
+        self.time = self.time + time
+    def set_amount(self, amount):
+        self.amount = self.amount + amount
+    def get_tb(self):
+        return self.amount / self.time
+    def __str__(self):
+        return f'{self.ma} {self.ten} {self.get_tb():.2f}'
+    
+if __name__ == '__main__':
+    n = int(input())
+    d = dict()
+    for i in range(n):
+        ten, start, end, amount = input(), input(), input(), int(input())
+        gio1, phut1 = int(start[:2]), int(start[3:])
+        gio2, phut2 = int(end[:2]), int(end[3:])
+        time = gio2 - gio1 + (phut2 - phut1) / 60
+        if ten not in d:
+            d[ten] = Tram(i + 1, ten, start, end, amount, time)
+        else: 
+            d[ten].set_amount(amount)
+            d[ten].set_time(time)
+    for x in d.values():
+        print(x)
