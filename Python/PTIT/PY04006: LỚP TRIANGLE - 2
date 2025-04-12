@@ -1,0 +1,28 @@
+import math
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    def distance(self, other):
+        return math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
+    
+if __name__ == '__main__':
+    tc = int(input())
+    d = []
+    for i in range(tc):
+        d += list(map(float, input().split()))  
+    i = 0
+    for _ in range(tc):
+        p1 = Point(d[i], d[i + 1])
+        p2 = Point(d[i + 2], d[i + 3])
+        p3 = Point(d[i + 4], d[i + 5])
+        a = p1.distance(p2)
+        b = p2.distance(p3)
+        c = p3.distance(p1)
+        if a + b <= c or b + c <= a or c + a <= b:
+            print('INVALID')
+        else:
+            s = math.sqrt((a + b + c) * (a + b - c) * (a - b + c) * (-a + b + c)) / 4  #Bắt buộc phải viết như này, t thay code là sai dù chỉ đổi chỗ vị trí a, b, c
+            print('{:.2f}'.format(s))
+        i += 6
