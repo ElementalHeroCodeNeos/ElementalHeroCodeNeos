@@ -1,0 +1,21 @@
+import math
+
+class Subject:
+    def __init__(self, ma, ten, ht):
+        self.ma = ma
+        self.ten = ten
+        self.ht = ht
+    def get_ma(self):
+        return self.ma
+    def __str__(self):
+        return f'{self.ma} {self.ten} {self.ht}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        s = Subject(input(), input(), input())
+        a.append(s)
+    a.sort(key = lambda x : x.get_ma())
+    for x in a:
+        print(x)
