@@ -1,0 +1,27 @@
+import math
+
+class SinhVien:
+    def __init__(self, ten, true, sub):
+        self.ten = ten
+        self.true = true
+        self.sub = sub
+    def get_ten(self):
+        return self.ten
+    def get_true(self):
+        return self.true
+    def get_sub(self):
+        return self.sub
+    def __str__(self):
+        return f'{self.ten} {self.true} {self.sub}'
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        ten = input()
+        true, sub = map(int, input().split())
+        s = SinhVien(ten, true, sub)
+        a.append(s)
+    a.sort(key = lambda x : (-x.get_true(), x.get_sub(), x.get_ten()))
+    for x in a:
+        print(x)
