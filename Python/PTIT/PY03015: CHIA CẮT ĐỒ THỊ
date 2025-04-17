@@ -1,0 +1,37 @@
+import math
+
+def DFS(u):
+    visited[u] = True
+    for v in ke[u]:
+        if not visited[v]:
+            DFS(v)
+
+def tplt():
+    cnt = 0
+    for i in range(1, n + 1):
+        if not visited[i]:
+            cnt += 1
+            DFS(i)
+    return cnt
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        n, m = map(int, input().split())
+        ke = []
+        visited = [False] * (n + 1)
+        for i in range(n + 1):
+            ke.append([])
+        for i in range(m):
+            x, y = map(int, input().split())
+            ke[x].append(y)
+            ke[y].append(x)
+        ans, res = 0, tplt()
+        for i in range(1, n + 1):
+            visited = [False] * (n + 1)  #Reset list visited
+            visited[i] = True  #Loại bỏ đỉnh i khỏi đồ thị
+            lt = tplt()  #Phải lưu lt = tplt() vì nếu gọi 2 lần tplt() thì kết quả 2 lần sẽ khác nhau (do trong hàm tplt() không có visited[i] = True)
+            if lt > res:
+                res = lt
+                ans = i
+        print(ans)
