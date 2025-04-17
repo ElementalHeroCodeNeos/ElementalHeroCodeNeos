@@ -1,0 +1,25 @@
+import math
+
+def DFS(u):
+    visited[u] = True
+    for v in ke[u]:
+        if not visited[v]:
+            DFS(v)
+
+if __name__ == '__main__':
+    n, m, s = map(int, input().split())
+    ke = []  
+    for i in range(n + 1):  #Cách tạo ra mảng các vecto 'vector<int> ke[n]' như trong C++
+        ke.append([])
+    visited = [False] * (n + 1)
+    for i in range(m):
+        x, y = map(int, input().split())
+        ke[x].append(y)
+        ke[y].append(x)
+    DFS(s)
+    ok = False
+    for i in range(1, n + 1):
+        if not visited[i]:
+            print(i)
+            ok = True
+    if not ok: print(0)
