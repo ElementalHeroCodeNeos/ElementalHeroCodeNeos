@@ -1,0 +1,20 @@
+import math
+import sys
+
+def chuanHoa(s):
+    a = s.split()
+    s = ' '.join(a).capitalize()
+    return s
+
+if __name__ == '__main__':
+    s = sys.stdin.read()  #Nhập xâu trên nhiều dòng
+    a = []
+    tmp = ''
+    for x in s:
+        if x in '.?!':  #Gặp những dấu này thì xác nhận kết thúc 1 câu
+            a.append(chuanHoa(tmp))
+            tmp = ''
+        else:
+            tmp += x
+    for x in a:
+        print(x)
