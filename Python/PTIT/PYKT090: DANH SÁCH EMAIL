@@ -1,0 +1,11 @@
+import math
+    
+if __name__ == '__main__':
+    f = open('CONTACT.in', 'r')
+    se = set()
+    for line in f:
+        se.add(line.strip().lower())
+    a = sorted(se)
+    for x in a:
+        print(x)
+    f.close()
