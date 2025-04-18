@@ -1,0 +1,55 @@
+import math
+import functools
+
+class DanhBa:
+    def __init__(self, ten, sdt, ngay):
+        self.ten = ten
+        self.sdt = sdt
+        self.ngay = ngay
+    def get_ten(self):
+        return self.ten
+    def to_string(self):
+        return self.ten + ': ' + self.sdt + ' ' + self.ngay
+
+def check(s):
+    return '/' in s
+
+def compare(x, y):
+    n1 = x.get_ten().split()
+    n2 = y.get_ten().split()
+    ten1, hodem1 = n1[-1], ' '.join(n1[:-1])
+    ten2, hodem2 = n2[-1], ' '.join(n2[:-1])
+    if ten1 < ten2:
+        return -1
+    elif ten1 > ten2:
+        return 1
+    else:
+        if hodem1 < hodem2:
+            return -1
+        return 1
+
+if __name__ == '__main__':
+    f1 = open('SOTAY.txt', 'r')
+    f2 = open('DIENTHOAI.txt', 'w')     
+    data = []
+    for line in f1:
+        data.append(line.strip())
+    a = []
+    for i in range(len(data)):
+        if check(data[i]):
+            ngay = data[i]  #Tách lấy ngày (phần số)
+            tmp = ngay.split()
+            ngay = tmp[1]
+            idx = i  #Lưu chỉ số của dòng ghi ngày gần nhất
+        else:
+            if (i - idx) % 2 == 1:  #Dòng thoả mãn là tên
+                ten = data[i]
+            else:  #Ngc lại là dòng ghi số điện thoại
+                sdt = data[i]
+                d = DanhBa(ten, sdt, ngay)
+                a.append(d)
+    a.sort(key = functools.cmp_to_key(compare))
+    for x in a:
+        f2.write(x.to_string() + '\n')
+    f1.close()
+    f2.close()
