@@ -1,0 +1,21 @@
+import math
+
+tmp = []
+used = [False] * 10
+
+def Try():
+    for j in range(0, n):
+        if not used[j]:
+            tmp.append(s[j])
+            used[j] = True
+            if len(tmp) == n:
+                print(''.join(tmp))
+            elif len(tmp) < n:
+                Try()
+            used[j] = False
+            tmp.pop()
+
+if __name__ == '__main__':      
+    s = input()
+    n = len(s)
+    Try()
