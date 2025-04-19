@@ -1,0 +1,21 @@
+import math
+
+if __name__ == '__main__':      
+    n = int(input())
+    d = dict()
+    for i in range(n):
+        s = input().lower()
+        tmp = ''
+        for x in s:
+            if x.isalpha():
+                tmp += x
+            else: 
+                tmp += ' '
+        a = tmp.split()
+        for x in a:
+            if x not in d:
+                d[x] = 1
+            else: d[x] += 1
+    d1 = sorted(d.items(), key = lambda x : (-x[1], x[0]))
+    for x, y in d1:
+        print(x, y)
