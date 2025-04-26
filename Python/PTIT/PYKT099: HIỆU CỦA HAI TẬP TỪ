@@ -1,0 +1,15 @@
+import math
+
+if __name__ == '__main__':
+    f1 = open('DATA1.in', 'r')
+    f2 = open('DATA2.in', 'r')
+    data1 = f1.read()
+    data2 = f2.read()
+    s1 = set(data1.lower().split())
+    s2 = set(data2.lower().split())
+    a = sorted(s1.difference(s2))
+    b = sorted(s2.difference(s1))
+    print(' '.join(a))
+    print(' '.join(b))
+    f1.close()
+    f2.close()
