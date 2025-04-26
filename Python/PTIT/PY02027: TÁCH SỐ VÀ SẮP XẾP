@@ -1,0 +1,18 @@
+import math
+
+if __name__ == '__main__':
+    n = int(input())
+    a = []
+    for i in range(n):
+        s = input()
+        s += '@'  #Để thoả mãn trường hợp kí tự cuối là chữ số
+        num = 0
+        for i in range(len(s)):
+            if s[i].isdigit():
+                num = num * 10 + int(s[i])
+            elif i != 0 and s[i-1].isdigit():  #Nếu kí tự trước đó là chữ số và i != 0 thì thêm số vừa tạo vào list
+                a.append(num)
+                num = 0  
+    a.sort()
+    for x in a:
+        print(x)
