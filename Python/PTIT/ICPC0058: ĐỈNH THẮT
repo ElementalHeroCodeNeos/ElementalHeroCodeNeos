@@ -1,0 +1,41 @@
+import math
+
+res = 0
+path = []
+def Try(u):
+    global res
+    for v in ke[u]:
+        if not visited[v]:
+            path.append(v)
+            visited[v] = True
+            if v == t:
+                res += 1
+                for x in path:
+                    if x not in d: d[x] = 1
+                    else: d[x] += 1
+            Try(v)
+            visited[v] = False
+            path.pop()
+
+if __name__ == '__main__':  
+    tc =int(input())
+    for case in range(tc):
+        n, m, s, t = map(int, input().split())
+        ke = []
+        visited = [False] * (n + 1)
+        d = dict()
+        for i in range(n + 1):
+            ke.append([])
+        for i in range(m):
+            x, y = map(int, input().split())
+            ke[x].append(y)
+        visited[s] = True
+        path.append(s)
+        res = 0
+        Try(s)
+        path.pop()
+        cnt = 0
+        for x, y in d.items():
+            if y == res:
+                cnt += 1
+        print(cnt - 2)
