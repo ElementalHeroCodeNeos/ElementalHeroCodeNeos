@@ -1,0 +1,20 @@
+import math
+
+if __name__ == '__main__':  
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        st = []
+        d = dict()
+        cnt = 1
+        for i in range(len(s)):
+            if s[i] == '(':
+                st.append(i)
+                print(cnt, end = ' ')
+                d[i] = cnt 
+                cnt += 1
+            elif s[i] == ')':
+                top = st[-1]
+                print(d[top], end = ' ')
+                st.pop()
+        print()
