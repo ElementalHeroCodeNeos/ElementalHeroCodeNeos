@@ -1,0 +1,24 @@
+import math
+
+if __name__ == '__main__':  
+    n = int(input())
+    d = dict()  #Đếm tần suất các đỉnh trong tất cả các cạnh
+    for i in range(n - 1):
+        a, b = map(int, input().split())
+        if a not in d: d[a] = 1
+        else: d[a] += 1
+        if b not in d: d[b] = 1
+        else: d[b] += 1 
+    res, ok = 0, True  #res lưu đỉnh sao (đỉnh có cạnh nối tới tất các đỉnh còn lại, nên d[sao] = n - 1). Còn ok kiểm tra đồ thị hình sao
+    for x, y in d.items():
+        if y == n - 1: 
+            res = x  #Cập nhật x là đỉnh sao
+            break
+    if res != 0:  #Nếu tồn tại đỉnh sao
+        for x, y in d.items():
+            if x != res and y != 1:  #Xét các đỉnh khác, nếu tần suất 1 đỉnh nào đó mà khác 1 
+                ok = False
+                break
+    else: ok = False  #Ngược lại, không tồn tại đỉnh sao
+    if ok: print('Yes')
+    else: print('No')
