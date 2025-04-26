@@ -1,0 +1,41 @@
+import math
+#QUA BÀI NÀY, MÌNH HỌC ĐƯỢC CÁCH DÙNG QUAY LUI ĐỂ DUYỆT TẤT CẢ ĐƯỜNG ĐI TỪ S->T 
+res = 0  #Số đường đi từ s đến t
+path = []  #Lưu từng đường đi từ s đến t
+def Try(u):
+    global res  #Khai báo res là biến toàn cục
+    for v in ke[u]:
+        if not visited[v]:
+            path.append(v)
+            visited[v] = True
+            if v == t:  #Nếu đi đến đỉnh t
+                res += 1  #Cập nhập thêm 1 đường đi s->t
+                for x in path:  #Đếm tần suất của mỗi đỉnh i trong tất cả đường đi từ s->t. Nếu d[i] == res thì đỉnh đó là đỉnh thắt
+                    if x not in d: d[x] = 1
+                    else: d[x] += 1
+            Try(v)
+            visited[v] = False  #BackTrack
+            path.pop()
+
+if __name__ == '__main__':  
+    tc =int(input())
+    for case in range(tc):
+        n, m, s, t = map(int, input().split())
+        ke = []
+        visited = [False] * (n + 1)
+        d = dict()
+        for i in range(n + 1):
+            ke.append([])
+        for i in range(m):
+            x, y = map(int, input().split())
+            ke[x].append(y)
+        visited[s] = True  #Chú ý: Trước khi Try(), nhớ đánh dấu đã thăm đỉnh 1 vì trong hàm Try(), ta chỉ cho visited[v] = True khi v xuất phát từ 1 đỉnh u nào đó. Còn đỉnh đầu thì không có parent
+        path.append(s)  #Và nhớ lưu đỉnh s vào đường đi, lí do tương tự
+        res = 0  # Chú ý: Khởi tạo lại res = 0
+        Try(s)
+        path.pop()  #À còn nhớ pop đỉnh s nữa, lí do tương tự
+        cnt = 0  #Số đỉnh thắt
+        for x, y in d.items():
+            if y == res:  #Điều kiện vừa nói ở trên hàm Try()
+                cnt += 1
+        print(cnt - 2)  #Trừ đi đỉnh đầu và cuối
