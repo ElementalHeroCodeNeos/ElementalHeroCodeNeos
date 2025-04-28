@@ -1,0 +1,26 @@
+import math
+from collections import deq
+
+def check(s):
+    if s[-1] == '2': return False
+    cnt1, cnt2, cnt3, cnt4 = 0, 0, 0, 0
+    for x in s:
+        if x == '2': cnt1 += 1
+        elif x == '3': cnt2 += 1
+        elif x == '5': cnt3 += 1
+        else: cnt4 += 1
+    return cnt1 > 0 and cnt2 > 0 and cnt3 > 0 and cnt4 > 0
+
+def BFS(n):
+    q = deque(['2', '3', '5', '7'])  #Cấu trúc dữ liệu queue trong Python
+    while len(q) > 0:
+        top = q.popleft()  #Lấy phần tử ở đầu queue
+        if len(top) > n: break  
+        if check(top): print(top)
+        for x in '2357':
+            tmp = top + x
+            q.append(tmp)
+
+if __name__ == '__main__':      
+    n = int(input())
+    BFS(n)
