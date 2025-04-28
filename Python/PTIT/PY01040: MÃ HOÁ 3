@@ -1,0 +1,36 @@
+import math
+
+def Rotate(s): 
+    res = ''  #Lưu xâu sau khi xoay    
+    d = 0  #Số bước xoay
+    for x in s:
+        d += ord(x) - ord('A')
+    d %= 26  #Vì xoay 26 bước ta về lại kí tự ban đầu
+    for x in s:  #Duyệt và xoay từng kí tự trong xâu
+        pos = ord(x) - ord('A')  #Giá trị của kí tự x (ví dụ x = 'A', 'B' thì pos = 0, 1,...)
+        if pos + d <= 25:  #Nếu sau khi xoay nốt d bước còn lại, ta ở vị trí <= 'Z' (tức là không sang lượt mới, không bắt đầu lại từ 'A')
+            pos = pos + d
+        else:  #Ngược lại, ta làm 2 thao tác: đi đến 'A' mất (26 - pos) bước; và từ vị trí 'A' đi tiếp d - (26 - pos) bước còn lại để đến vị trí cần tìm
+            pos = d - (26 - pos)
+        res += chr(pos + ord('A'))  #Cập nhật vào kết quả
+    return res
+
+if __name__ == '__main__':   
+    tc = int(input())
+    for case in range(tc):
+        s = input()
+        n = len(s) // 2  
+        s1, s2 = s[:n], s[n:]
+        s1 = Rotate(s1)
+        s2 = Rotate(s2)
+        res = ''
+        for i in range(len(s1)):
+            pos = ord(s1[i]) - ord('A')  #Làm tương tự như hàm Rotate, chỉ khác ở số bước xoay d là lúc này đc tính riêng cho mỗi kí tự của s1
+            d = ord(s2[i]) - ord('A')
+            d %= 26
+            if pos + d <= 25:
+                pos = pos + d
+            else: 
+                pos = d - (26 - pos)
+            res += chr(pos + ord('A'))
+        print(res)
