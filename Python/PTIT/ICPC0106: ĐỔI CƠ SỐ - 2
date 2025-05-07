@@ -1,0 +1,28 @@
+import math
+
+def convert_dec(s):  #Hàm chuyển số nhị phân độ dài b sang kí tự ở hệ cơ số b
+    res, lt = 0, 1
+    for x in s[::-1]:
+        res += int(x) * lt
+        lt *= 2
+    if res < 10: return str(res)  
+    return chr(res + ord('A') - 10)  #Chú ý (hệ cơ số 16 trở lên): viết như này để không bị WA
+
+def convert(s, b):  #Hàm chuyển số nhị phân sang số ở hệ cơ số b
+    b = int(math.log(b, 2)) 
+    r = len(s) % b
+    if r == 0: ex = 0  #ex là số chữ số 0 cần thêm vào đầu xâu s để độ dài xâu chia hết cho b
+    else: 
+        ex = b - r
+    s = ex * '0' + s
+    res = ''
+    for i in range(0, len(s) - b + 1, b):  #Duyệt từng bộ b bit, chuyển sang kí tự ở hệ b rồi cộng vào sau xâu kết quả res
+        res += convert_dec(s[i:i+b])
+    return res
+
+if __name__ == '__main__':
+    tc = int(input())
+    for case in range(tc):
+        b = int(input())
+        s = input()
+        print(convert(s, b))
