@@ -1,17 +1,17 @@
 import math
 
 class PhanSo:
-    def __init__(self, tu, mau):
+    def __init__(self, tu, mau):    #Phương thức khởi tạo 1 đối tượng phân số, gồm 2 thuộc tính là tử số và mẫu số
         self.tu = tu
         self.mau = mau
-    def __add__(self, other):
-        mau = self.mau * other.mau
-        tu = self.tu * other.mau + other.tu * self.mau
-        uc = math.gcd(tu, mau)
+    def __add__(self, other):    #Phương thức dùng để nạp chồng (định nghĩa) toán tử + cho 2 đối tượng của 1 class
+        mau = self.mau * other.mau    #Mẫu số của phân số tổng
+        tu = self.tu * other.mau + other.tu * self.mau    #Tử số của phân số tổng
+        uc = math.gcd(tu, mau)    #Rút gọn phân số tổng
         tu //= uc
         mau //= uc
-        return PhanSo(tu, mau)
-    def __str__(self):
+        return PhanSo(tu, mau)    #Trả về phân số tổng
+    def __str__(self):    #Phương thức trả về 1 chuỗi để mô tả đối tượng
         return f'{self.tu}/{self.mau}'
 
 if __name__ == '__main__':
