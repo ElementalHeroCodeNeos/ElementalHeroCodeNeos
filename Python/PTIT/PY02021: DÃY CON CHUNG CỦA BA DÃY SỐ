@@ -3,23 +3,23 @@ import math
 if __name__ == '__main__': 
     tc = int(input())
     for case in range(tc):
-        n, m, p = map(int, input().split())
-        a = list(map(int, input().split()))
+        n, m, p = map(int, input().split())    #Số lượng phần tử của 3 dãy số a, b, c
+        a = list(map(int, input().split()))    
         b = list(map(int, input().split()))
         c = list(map(int, input().split()))
-        ok = False
-        i, j, k = 0, 0, 0
-        while i < n and j < m and k < p:
+        ok = False    #Biến ok dùng để kiểm tra xem 3 dãy số có phần tử chung không? 
+        i, j, k = 0, 0, 0    #Kỹ thuật 3 con trỏ dùng để duyệt qua nhiều mảng
+        while i < n and j < m and k < p:    #Lặp chừng nào 3 con trỏ còn nằm trong phạm vi hợp lệ của 3 mảng
             if a[i] == b[j] and b[j] == c[k]:
                 print(a[i], end = ' ')
                 i += 1
                 j += 1
-                k += 1
-                ok = True
+                k += 1    #Tìm phần tử chung tiếp theo
+                ok = True    #3 dãy số đã cho có phần tử chung
             elif a[i] < b[j]:
                 i += 1
             elif b[j] < c[k]:
                 j += 1
             else: k += 1
         print()
-        if not ok: print('NO')
+        if not ok: print('NO')    #3 dãy số đã cho không có phần tử chung
