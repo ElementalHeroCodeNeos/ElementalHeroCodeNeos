@@ -1,18 +1,18 @@
 import math
 
-def convert(n, b):
-    if n == 0:
-        return
-    convert(n // b, b)
-    r = n % b
-    if r < 10:
-        print(r, end = '')
-    else:
-        print(chr(r + 55), end = '')
+def convert(n, b):    #Hàm chuyển đổi số n từ hệ thập phân sang hệ cơ số b
+    res = ''    #Xâu kết quả
+    while n != 0:    #Ý tưởng: Lặp lại việc chia n cho b, ghi lại phần dư cho đến khi n = 0 thì dừng lại. Các số dư ghi theo thứ tự ngược là số biểu diễn của n trong hệ cơ số b
+        r =  n % b    #Phần dư của n khi chia cho b
+        if r < 10:    
+            res += str(r)    #Cộng chữ số r ở dạng str
+        else:
+            res += str(chr(r + 55))    #Cộng với dạng kí tự unicode của phần dư r
+        n //= b
+    return res[::-1]    #Xâu đảo ngược của res
 
 if __name__ == '__main__':   
     tc = int(input())
     for case in range(tc):
         n, b = map(int, input().split())
-        convert(n, b)
-        print()
+        print(convert(n, b))
