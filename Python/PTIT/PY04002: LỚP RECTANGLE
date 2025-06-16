@@ -2,21 +2,16 @@ import math
 
 class Rectangle:
     def __init__(self, dai, rong, mau):
-        self.dai = dai 
-        self.rong = rong 
-        self.mau = mau.capitalize()
-    def perimeter(self):
-        return (self.dai + self.rong) * 2
-    def area(self):
-        return self.dai * self.rong
-    def color(self):
-        return self.mau
-    def solve(self):
-        if self.dai <= 0 or self.rong <= 0:
-            print('INVALID')
-        else:
-            print(f'{self.perimeter()} {self.area()} {self.color()}')
-
+        self.dai = dai
+        self.rong = rong
+        self.mau = mau[0].upper() + mau[1:].lower()
+    def __str__(self):
+        cvi = (self.dai + self.rong) * 2
+        dtich = self.dai * self.rong
+        if self.dai > 0 and self.rong > 0:
+            return f'{cvi} {dtich} {self.mau}'
+        return 'INVALID'     
+    
 a = input().split()
 r = Rectangle(int(a[0]), int(a[1]), a[2])
-r.solve()
+print(r)
