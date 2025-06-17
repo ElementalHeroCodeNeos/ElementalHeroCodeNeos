@@ -10,7 +10,7 @@ if __name__ == '__main__':
     tc = int(input())
     for case in range(tc):
         s = input()
-        if nto(int(s[:3])) and nto(int(s[len(s) - 3 : len(s)])):
+        if nto(int(s[:3])) and nto(int(s[-3:])):
             print('YES')
         else:
             print('NO')
