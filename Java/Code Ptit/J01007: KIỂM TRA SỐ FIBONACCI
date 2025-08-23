@@ -1,0 +1,27 @@
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class test { 
+    public static HashSet<Long> set = new HashSet<>();
+    public static void Fibonacci(){
+        long[] f = new long[93];
+        f[0] = 0;
+        f[1] = 1;
+        set.add(f[0]);
+        set.add(f[1]);
+        for(int i=2; i<=92; i++){
+            f[i] = f[i - 1] + f[i - 2];
+            set.add(f[i]);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Fibonacci();
+        int tc = sc.nextInt();
+        for(int t=1; t<=tc; t++){
+            long n = sc.nextLong();
+            if(set.contains(n)) System.out.println("YES");
+            else System.out.println("NO");
+        }
+    }
+}
