@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class test { 
+    public static long Tonggiaithua(int n){
+        long f = 1, sum = 0;
+        for(int i=1; i<=n; i++){
+            f *= i;
+            sum += f;
+        }
+        return sum;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        System.out.println(Tonggiaithua(n));
+    }
+}
