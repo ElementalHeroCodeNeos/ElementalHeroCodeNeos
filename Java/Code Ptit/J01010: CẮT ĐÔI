@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Test { 
+    public static void solve(String s){
+        String res = "";
+        for(char x : s.toCharArray()){
+            if(x == '0' || x == '8' || x == '9') res += '0';
+            else if(x == '1') res += '1';
+            else{   // x là chữ số không thể cắt đôi
+                System.out.println("INVALID");
+                return;
+            }
+        }
+        long ans = Long.parseLong(res); // Chuyển xâu sang kiểu long
+        if(ans == 0) System.out.println("INVALID");
+        else System.out.println(ans);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        sc.nextLine();
+        for(int t=0; t<tc; t++){
+            String s = sc.next();
+            solve(s);
+        }
+    }
+}
