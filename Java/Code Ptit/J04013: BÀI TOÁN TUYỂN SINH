@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+class ThiSinh {
+    private String ma, ten;
+    private double toan, ly, hoa;
+    public ThiSinh(String ma, String ten, double toan, double ly, double hoa){
+        this.ma = ma;
+        this.ten = ten;
+        this.toan = toan;
+        this.ly = ly;
+        this.hoa = hoa;
+    }
+    public double getUuTien(){
+        char khuVuc = this.ma.charAt(2);
+        if(khuVuc == '1') return 0.5;
+        if(khuVuc == '2') return 1;
+        return 2;
+    }
+    public double getTongDiem(){
+        return this.toan * 2 + this.ly + this.hoa;
+    }   
+    public void display(){
+        double diemXetTuyen = this.getTongDiem() + this.getUuTien();
+        String trangThai;
+        if(diemXetTuyen >= 24) trangThai = "TRUNG TUYEN";
+        else trangThai = "TRUOT";
+        System.out.print(this.ma + " " + this.ten + " ");
+        if(this.getUuTien() == (int)this.getUuTien()){  // Nếu phần thập phân = 0 thì ko in 
+            System.out.print((int)this.getUuTien() + " ");
+        }
+        else System.out.printf("%.1f ", this.getUuTien());  // Ngc lại in phần thập phân
+        if(this.getTongDiem() == (int)this.getTongDiem()){
+            System.out.print((int)this.getTongDiem() + " ");
+        }   
+        else System.out.printf("%.1f ", this.getTongDiem());
+        System.out.println(trangThai + " ");
+    }
+}
+
+public class ptit {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ThiSinh x = new ThiSinh(sc.nextLine(), sc.nextLine(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
+        x.display();
+    }
+}
