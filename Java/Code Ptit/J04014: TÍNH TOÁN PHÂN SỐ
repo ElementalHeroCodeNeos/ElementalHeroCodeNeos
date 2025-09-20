@@ -1,5 +1,3 @@
-package PTIT;
-
 import java.util.Scanner;
 
 class PhanSo {
