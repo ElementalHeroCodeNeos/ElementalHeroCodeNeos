@@ -1,0 +1,58 @@
+package PTIT;
+
+import java.util.Scanner;
+
+class PhanSo {
+    private long tu, mau;
+    public PhanSo(){
+
+    }
+    public PhanSo(long tu, long mau){
+        this.tu = tu;
+        this.mau = mau;
+    }
+    public static long gcd(long a, long b){
+        if(b == 0) return a;
+        return gcd(b, a % b);
+    }
+    public static long lcm(long a, long b){
+        return a * b / gcd(a, b);
+    }
+    public void rutGon(){
+        long uc = gcd(this.tu, this.mau);
+        this.tu /= uc;
+        this.mau /= uc;
+    }
+    public PhanSo add(PhanSo p){
+        PhanSo tong = new PhanSo();
+        long mc = lcm(this.mau, p.mau);
+        tong.tu = this.tu * mc / this.mau + p.tu * mc / p.mau;
+        tong.mau = mc;
+        tong.rutGon();
+        return tong;
+    }
+    public PhanSo mul(PhanSo p){
+        PhanSo tich = new PhanSo();
+        tich.tu = this.tu * p.tu;
+        tich.mau = this.mau * p.mau;
+        tich.rutGon();
+        return tich;
+    }
+    public String toString(){
+        return this.tu + "/" + this.mau;
+    }
+}
+
+public class ptit {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            PhanSo A = new PhanSo(sc.nextInt(), sc.nextInt());
+            PhanSo B = new PhanSo(sc.nextInt(), sc.nextInt());
+            PhanSo C = A.add(B).mul(A.add(B));
+            PhanSo D = A.mul(B).mul(C);
+            System.out.println(C + " " + D);
+        }
+    }
+}
