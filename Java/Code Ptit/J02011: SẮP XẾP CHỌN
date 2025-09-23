@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+// Ý tưởng: Duyệt mảng, ở mỗi bước chọn phần tử nhỏ nhất trong phần còn lại và đưa nó về vị trí đúng từ trái sang phải, làm lần lượt cho đến khi mảng được sắp xếp.
 public class Neos { 
     public static void selectionSort(int[] a, int n){
         for(int i=0; i<n-1; i++){
