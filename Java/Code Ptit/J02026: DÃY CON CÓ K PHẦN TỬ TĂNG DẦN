@@ -1,0 +1,33 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Neos { 
+    public static int n, k;
+    public static int[] a = new int[16];
+    public static int[] x = new int[16];
+    public static void Try(int i, int idx){
+        for(int j=idx; j<=n; j++){
+            x[i] = a[j];
+            if(i == k){
+                for(int l=1; l<=k; l++){
+                    System.out.print(x[l] + " ");
+                }
+                System.out.println();
+            }
+            else Try(i + 1, j + 1);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            n = sc.nextInt();
+            k = sc.nextInt();
+            for(int i=1; i<=n; i++){
+                a[i] = sc.nextInt();
+            }
+            Arrays.sort(a, 1, n + 1);
+            Try(1, 1);
+        }
+    }
+}
