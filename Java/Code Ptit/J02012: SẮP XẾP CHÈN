@@ -1,0 +1,38 @@
+import java.util.Scanner;
+/* Ý tưởng: Tạo 1 mảng b lưu phần tử mảng a đã được sắp xếp. Duyệt mảng a, ở mỗi bước, chèn phần tử a[i] vào mảng b ở vị trí thích hợp 
+sao cho mảng b luôn đc sắp xếp */
+public class Neos { 
+    public static void insertionSort(int[] a, int n){
+        int[] b = new int[n];   
+        b[0] = a[0];    // Ban đầu mảng b chỉ có 1 phần tử 
+        System.out.println("Buoc 0: " + b[0]);
+        for(int i=1; i<n; i++){ // Mỗi bước cần chèn phần tử a[i] vào mảng b
+            int pos = 0;    // Vị trí cần chèn
+            for(int j=0; j<i; j++){ // Mảng b hiện tại chỉ có i phần tử
+                if(a[i] < b[j]){
+                    pos = j;
+                    break;
+                }
+                else pos = j + 1;
+            }
+            for(int j=i; j>=pos+1; j--){    // Dịch các phần tử bên phải vị trí pos của mảng b
+                b[j] = b[j - 1];
+            }
+            b[pos] = a[i];  // Chèn vào vị trí pos
+            System.out.print("Buoc " + i + ": ");
+            for(int j=0; j<=i; j++){
+                System.out.print(b[j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for(int i=0; i<n; i++){
+            a[i] = sc.nextInt();
+        }
+        insertionSort(a, n);
+    }
+}
