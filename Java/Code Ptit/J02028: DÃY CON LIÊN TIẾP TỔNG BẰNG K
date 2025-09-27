@@ -1,0 +1,41 @@
+import java.util.Scanner;
+/*  Ý tưởng: Dùng mảng cộng dồn F[]. Trong đó F[i] là tổng phần tử tính từ đầu mảng đến vị trí i
+Để kiểm tra tồn tại dãy con liên tiếp có tổng bằng k, ta chỉ cần tìm vị trí j < i sao cho F[i] - F[j] = k
+Khi đó, dãy con liên tiếp thoả mãn sẽ nằm từ chỉ số j+1 đến i*/
+public class Neos { 
+    public static boolean findPos(long[] a, int n, int l, int r, long val){ // Thuật toán nhị phân tìm trong mảng, phần tử có giá trị bằng val
+        while(l <= r){
+            int m = (l + r) / 2;
+            if(a[m] == val) return true;
+            else if(a[m] < val) l = m + 1;
+            else r = m - 1;
+        }
+        return false;
+    }
+    public static boolean check(int[] a, int n, long k){
+        long[] F = new long[n+1];   // Mảng cộng dồn
+        for(int i=1; i<=n; i++){
+            F[i] = F[i - 1] + a[i];
+        }
+        for(int i=1; i<=n; i++){
+            if(findPos(F, n, 0, i-1, F[i] - k)){    
+               return true;
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            int n = sc.nextInt();
+            long k = sc.nextLong();
+            int[] a = new int[n+1];
+            for(int i=1; i<=n; i++){
+                a[i] =  sc.nextInt();
+            }
+            if(check(a, n, k)) System.out.println("YES");
+            else System.out.println("NO");          
+        }
+    }
+}
