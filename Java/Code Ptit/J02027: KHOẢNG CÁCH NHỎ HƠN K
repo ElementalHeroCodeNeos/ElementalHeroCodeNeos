@@ -1,0 +1,37 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Neos { 
+    public static int findPos(int[] a, int n, int l, int r, int val){   // Tìm vị trí của phần tử cuối cùng mà giá trị nhỏ hơn val
+        int pos = -1;
+        while(l <= r){
+            int m = (l + r) / 2;
+            if(a[m] < val){
+                pos = m;
+                l = m + 1;
+            }
+            else r = m - 1;
+        }        
+        return pos;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            int n = sc.nextInt(), k = sc.nextInt();
+            int[] a = new int[n];
+            for(int i=0; i<n; i++){
+                a[i] =  sc.nextInt();
+            }
+            Arrays.sort(a); // Sắp xếp mảng để chỉ phải xét a[j] - a[i] < k (do a[j] > a[i])
+            long cnt = 0;   // Chú ý khai báo long
+            for(int i=0; i<n-1; i++){
+                int pos = findPos(a, n, i+1, n-1, a[i] + k);
+                if(pos != -1){
+                    cnt += pos - i; // Các phần tử thoả mãn nằm từ vị trí i+1 đến pos
+                }
+            }
+            System.out.println(cnt);
+        }
+    }
+}
