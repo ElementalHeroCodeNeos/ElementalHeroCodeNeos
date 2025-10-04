@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Neos {
+    public static int check(String s){
+        if(s.charAt(0) == '0') return -1;
+        int c = 0, n = s.length();  // c là số chữ số chẵn
+        for(char x : s.toCharArray()){
+            if(!Character.isDigit(x)) return -1;
+            if((x - '0') % 2 == 0) c++;
+        }
+        int l = n - c;  // số chữ số lẻ
+        if((n%2 == 0 && c > l) || (n%2 == 1 && l > c)){  
+            return 1;
+        }
+        return 0;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            String s = sc.next();
+            if(check(s) == -1) System.out.println("INVALID");
+            else if(check(s) == 1) System.out.println("YES");
+            else System.out.println("NO");
+        }
+    }
+}
