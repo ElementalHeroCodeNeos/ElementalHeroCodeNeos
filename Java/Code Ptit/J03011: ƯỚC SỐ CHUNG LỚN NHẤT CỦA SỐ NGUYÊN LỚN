@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Neos {
+    public static long mod(String s, long m){  // Trả về (s % m)
+        long sum = 0;
+        for(char x : s.toCharArray()){
+            sum = ((sum * 10) % m + (x - '0')) % m;
+        }
+        return sum;
+    }
+    public static long gcd(long a, long b){  // ƯCLN của 2 số long
+        if(b == 0) return a;
+        return gcd(b, a % b);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            long a = sc.nextLong();
+            String b = sc.next();
+            System.out.println(gcd(a, mod(b, a)));  // Đưa gcd(a, b) = gcd(a, b % a)
+        }
+    }
+}
