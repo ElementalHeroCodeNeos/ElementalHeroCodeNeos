@@ -1,0 +1,20 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Neos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            String x = sc.next(), y = sc.next();
+            BigInteger a = new BigInteger(x);  // Chuyển về kiểu BigInteger
+            BigInteger b = new BigInteger(y);
+            String res = a.subtract(b).abs().toString();  // Dùng hàm của BigInteger để tính |a - b| 
+            int len = Math.max(x.length(), y.length());
+            while(res.length() != len){  // Để ý rằng kết quả trong testcase có số 0 ở đầu
+                res = "0" + res;
+            }
+            System.out.println(res);
+        }
+    }
+}
