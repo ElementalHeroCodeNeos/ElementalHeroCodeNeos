@@ -1,0 +1,33 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Neos {
+    public static String getAccount(String s){  
+        String[] a = s.trim().toLowerCase().split("\\s+");
+        String res = a[a.length - 1];
+        for(int i=0; i<a.length-1; i++){
+            res += a[i].charAt(0);
+        }
+        return res;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        HashMap<String, Integer> map = new HashMap<>();
+        for(int i=0; i<n; i++){
+            String s = sc.nextLine();
+            String userName = getAccount(s);
+            String email = userName;
+            if(!map.containsKey(userName)){  // Chưa tồn tại userName này trong cơ sở dữ liệu
+                email += "@ptit.edu.vn";
+                map.put(userName, 1);  // Số lượng tk có userName này mới là 1
+            }
+            else{
+                email += (map.get(userName) + 1) + "@ptit.edu.vn";  
+                map.put(userName, map.get(userName) + 1);  // Số lượng tk có cùng userName này tăng thêm 1
+            }
+            System.out.println(email);
+        }
+    }
+}
