@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Neos {
+    public static boolean check(String s){
+        int l = 0, r = s.length() - 1, cnt = 0;  // cnt là số cặp không đối xứng trong xâu s
+        while(l <= r){
+            if(s.charAt(l) != s.charAt(r)){
+                cnt++;
+            }
+            l++; r--;
+        }
+        return (s.length() % 2 == 1 && cnt == 0) || (cnt == 1);  // Yêu cầu đề thoả mãn khi chỉ có 1 cặp không đối xứng hoặc xâu đã là đối xứng và có độ dài lẻ
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            String s = sc.next();
+            if(check(s)) System.out.println("YES");
+            else System.out.println("NO");
+        }
+    }
+}
