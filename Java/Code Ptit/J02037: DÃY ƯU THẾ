@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class J02037 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        sc.nextLine();
+        for(int t=0; t<tc; t++){
+            String s = sc.nextLine();
+            String[] a = s.split("\\s+");
+            int len = a.length, c = 0;
+            for(String x : a){
+                int num = Integer.parseInt(x);
+                if(num % 2 == 0) c++;
+            }
+            int l = len - c;
+            if((len % 2 == 0 && c > l) || (len % 2 == 1 && l > c)){
+                System.out.println("YES");
+            }
+            else System.out.println("NO");
+        }
+    }
+}
