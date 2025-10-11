@@ -1,0 +1,19 @@
+import java.util.Scanner;
+/* Ý tưởng: Từ trái sang phải, ta sẽ chọn những ký tự mà bên phải của nó không có ký tự nào lớn hơn nó
+Thay vì duyệt từ trái sang phải mất 2 vòng for để tìm ký tự max bên phải của từng ký tự, ta sẽ duyệt ngược 
+và cập nhật maxChar liên tục*/
+public class Neos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        String res = "";
+        char maxChar = 0;
+        for(int i=s.length()-1; i>=0; i--){
+            if(s.charAt(i) >= maxChar){
+                res = s.charAt(i) + res;
+                maxChar = s.charAt(i);
+            }
+        }
+        System.out.println(res);
+    }
+}
