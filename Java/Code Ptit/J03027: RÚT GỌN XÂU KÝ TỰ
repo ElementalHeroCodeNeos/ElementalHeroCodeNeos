@@ -1,0 +1,27 @@
+import java.util.Scanner;
+import java.util.Stack;
+// Ý tưởng: Dùng Stack giống bài xử lý dấu ngoặc
+public class Neos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        Stack<Character> st = new Stack<>();
+        for(char x : s.toCharArray()){
+            if(!st.empty()){
+                char top = st.pop();
+                if(x != top){
+                    st.add(top);
+                    st.add(x);
+                }
+            }
+            else st.add(x);
+        }
+        String res = "";
+        while(!st.empty()){
+            char top = st.pop();
+            res = top + res;
+        }
+        if(res.equals("")) System.out.println("Empty String");
+        else System.out.println(res);
+    }
+}
