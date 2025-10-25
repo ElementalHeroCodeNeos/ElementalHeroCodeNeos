@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+class Matrix{
+    private int row, col;
+    private int[][] f;
+    public Matrix(int row, int col){
+        this.row = row;
+        this.col = col;
+        f = new int[row][col];
+    }
+    public void nextMatrix(Scanner sc){
+        for(int i=0; i<row; i++){
+            for(int j=0; j<col; j++){
+                f[i][j] = sc.nextInt();
+            }
+        }
+    }
+    public Matrix mul(Matrix b){
+        Matrix ans = new Matrix(this.row, b.col);
+        for(int i=0; i<this.row; i++){
+            for(int j=0; j<b.col; j++){
+                int tmp = 0;
+                for(int k=0; k<this.col; k++){
+                    tmp += this.f[i][k] * b.f[k][j];
+                }
+                ans.f[i][j] = tmp;
+            }
+        }
+        return ans;
+    }
+    public String toString(){
+        String ans = "";
+        for(int i=0; i<this.row; i++){
+            for(int j=0; j<this.col; j++){
+                ans += this.f[i][j] + " ";
+            }
+            ans += "\n";
+        }
+        return ans;
+    }
+}
+
+public class Neos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt(), p = sc.nextInt();
+        Matrix a = new Matrix(n,m);
+        a.nextMatrix(sc);
+        Matrix b = new Matrix(m,p);
+        b.nextMatrix(sc);
+        System.out.println(a.mul(b));
+    }
+}
