@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+class Point{   
+    private double x, y;
+    public Point(double x, double y){
+        this.x = x;
+        this.y = y;
+    }
+    public static Point nextPoint(Scanner sc){
+        return new Point(sc.nextDouble(), sc.nextDouble());
+    }
+    public static double distance(Point A, Point B){
+        return Math.sqrt(Math.pow(A.x - B.x, 2) + Math.pow(A.y - B.y, 2));
+    }
+}
+
+class Triangle{
+    private Point A, B, C;
+    public Triangle(Point A, Point B, Point C){
+        this.A = A;
+        this.B = B;
+        this.C = C;
+    }
+    public boolean valid(){
+        double c = Point.distance(A, B);
+        double b = Point.distance(A, C);
+        double a = Point.distance(B, C);
+        return a + b > c && b + c > a && c + a > b;
+    }
+    public String getPerimeter(){
+        if(this.valid()){
+            return String.format("%.3f", Point.distance(A, B) + Point.distance(A, C) + Point.distance(B, C));
+        }
+        return "-1";
+    }
+}
+
+public class Neos2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- >0){
+            Triangle a = new Triangle(Point.nextPoint(sc), Point.nextPoint(sc), Point.nextPoint(sc));
+            if(!a.valid()){
+                System.out.println("INVALID");
+            } else{
+                System.out.println(a.getPerimeter());
+            }
+        }
+    }
+    public static void main9471186(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- >0){
+            Triangle a = new Triangle(Point.nextPoint(sc), Point.nextPoint(sc), Point.nextPoint(sc));
+            if(!a.valid()){
+                System.out.println("INVALID");
+            } else{
+                System.out.println(a.getPerimeter());
+            }
+        }
+    }
+}
