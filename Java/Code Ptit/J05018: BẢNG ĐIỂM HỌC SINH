@@ -1,0 +1,69 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Comparator;
+
+class HocSinh{
+    private int ma;
+    private String ten;
+    private double[] diem;
+    public HocSinh(int ma, String ten, double[] diem){
+        this.ma = ma;
+        this.ten = ten;
+        this.diem = diem;
+    }
+    public int getMa(){
+        return this.ma;
+    }
+    public double getDiemTB(){
+        double res = 2 * (diem[0] + diem[1]);
+        for(int i=2; i<10; i++){
+            res += diem[i];
+        }
+        res /= 12; // Cách làm tròn điểm trung bình theo yêu cầu đề bài
+        res *= 100;
+        res = Math.ceil(res);
+        return res / 100;
+    }
+    public String toString(){
+        double diemTB = this.getDiemTB();
+        String hocLuc;
+        if(diemTB < 5) hocLuc = "YEU";
+        else if(diemTB <= 6.9) hocLuc = "TB";
+        else if(diemTB <= 7.9) hocLuc = "KHA";
+        else if(diemTB <= 8.9) hocLuc = "GIOI";
+        else hocLuc = "XUAT SAC"; 
+        return "HS" + String.format("%02d", this.ma) + " " + this.ten + " " + String.format("%.1f", diemTB) + " " + hocLuc;
+    }
+}
+
+public class Neos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        HocSinh[] a = new HocSinh[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            String ten = sc.nextLine();
+            double[] diem = new double[10];
+            for(int j=0; j<10; j++){
+                diem[j] = sc.nextDouble();
+            }
+            a[i] = new HocSinh(i + 1, ten, diem);
+        }
+        Arrays.sort(a, new Comparator<HocSinh>(){
+            @Override
+            public int compare(HocSinh o1, HocSinh o2) {
+                if(o1.getDiemTB() > o2.getDiemTB()){
+                    return -1;
+                }
+                if(o1.getDiemTB() < o2.getDiemTB()){
+                    return 1;
+                }
+                return o1.getMa() - o2.getMa();
+            } 
+        });
+        for(HocSinh x : a){
+            System.out.println(x);
+        }
+    }  
+}
