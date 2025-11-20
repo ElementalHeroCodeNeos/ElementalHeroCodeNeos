@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+// Chú ý: Bài này đề lỏ, bảo dựa vào ký tự thứ 2 và 3 trong MSV nhưng phải dùng mã lớp mới đúng!
 class SinhVien {
     private String msv, ten, lop, email;
 
