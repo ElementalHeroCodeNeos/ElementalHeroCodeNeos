@@ -1,0 +1,46 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class SinhVien{
+    private String ma, ten, lop;
+    private double d1, d2, d3;
+
+    public SinhVien(String ma, String ten, String lop, double d1, double d2, double d3) {
+        this.ma = ma;
+        this.ten = ten;
+        this.lop = lop;
+        this.d1 = d1;
+        this.d2 = d2;
+        this.d3 = d3;
+    }
+
+    public String getMa() {
+        return ma;
+    }
+    
+    public String toString(){
+        return ma + " " + ten + " " + lop + " " + String.format("%.1f %.1f %.1f", d1, d2, d3);
+    }
+}
+
+public class J05030 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        SinhVien[] a = new SinhVien[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            a[i] = new SinhVien(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
+        }
+        Arrays.sort(a, new Comparator<SinhVien>(){
+            @Override
+            public int compare(SinhVien o1, SinhVien o2) {
+                return o1.getMa().compareTo(o2.getMa());
+            }
+        });
+        for(int i=0; i<n; i++){
+            System.out.println((i + 1) + " " + a[i]);
+        }
+    }
+}
