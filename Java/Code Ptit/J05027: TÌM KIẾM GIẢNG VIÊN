@@ -27,7 +27,7 @@ class GiangVien{
     }
 }
 
-public class J05025 {
+public class main {
     public static String chuanHoa(String s){
         String[] a = s.toUpperCase().split("\\s+");
         String tmp = "";
