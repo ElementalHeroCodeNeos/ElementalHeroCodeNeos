@@ -1,0 +1,61 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class ThiSinh {
+    private int ma;
+    private String ten, ns;
+    private double d1, d2, d3;
+
+    public ThiSinh(int ma, String ten, String ns, double d1, double d2, double d3) {
+        this.ma = ma;
+        this.ten = ten;
+        this.ns = ns;
+        this.d1 = d1;
+        this.d2 = d2;
+        this.d3 = d3;
+    }
+
+    public int getMa() {
+        return ma;
+    }
+    
+    public double getTongDiem(){
+        return d1 + d2 + d3;
+    }
+    
+    public String toString(){
+        return ma + " " + ten + " " + ns + " " + this.getTongDiem();
+    }
+}
+
+public class main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ThiSinh[] a = new ThiSinh[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            a[i] = new ThiSinh(i + 1, sc.nextLine(), sc.nextLine(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
+        }
+        Arrays.sort(a, new Comparator<ThiSinh>(){
+            @Override
+            public int compare(ThiSinh o1, ThiSinh o2) {
+                if(o1.getTongDiem() > o2.getTongDiem()){
+                    return -1;
+                }
+                if(o1.getTongDiem() < o2.getTongDiem()){
+                    return 1;
+                }
+                return o1.getMa() - o2.getMa();
+            }
+        });
+        double max_val = a[0].getTongDiem();
+        for(ThiSinh x : a){
+            if(x.getTongDiem() == max_val){
+                System.out.println(x);
+            }
+            else break;
+        }
+    }
+}
