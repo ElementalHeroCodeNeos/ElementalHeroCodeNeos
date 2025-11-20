@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+class GiangVien{
+    private String ma, ten, mon;
+
+    public GiangVien(int ma, String ten, String mon) {
+        this.ma = "GV" + String.format("%02d", ma);
+        this.ten = ten;
+        this.mon = mon;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public String getMaMon() {
+        String[] a = mon.toUpperCase().split("\\s+");
+        String tmp = "";
+        for(String x : a){
+            tmp += x.charAt(0);
+        }
+        return tmp;
+    }
+
+    public String toString() {
+        return ma + " " + ten + " " + this.getMaMon();
+    }
+}
+
+public class J05025 {
+    public static String chuanHoa(String s){
+        String[] a = s.toUpperCase().split("\\s+");
+        String tmp = "";
+        for(String x : a){
+            tmp += x.charAt(0);
+        }
+        return tmp;         
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        GiangVien[] a = new GiangVien[n];
+        sc.nextLine();
+        for(int i=0; i<n; i++){
+            a[i] = new GiangVien(i + 1, sc.nextLine(), sc.nextLine());
+        }
+        int Q = sc.nextInt();
+        sc.nextLine();
+        for(int t=0; t<Q; t++){
+            String keyWord = sc.nextLine();
+            System.out.println("DANH SACH GIANG VIEN THEO TU KHOA " + keyWord + ":");
+            for(GiangVien x : a){
+                if(x.getTen().toLowerCase().contains(keyWord.toLowerCase())){
+                    System.out.println(x);
+                }
+            }
+        }
+    }
+}
