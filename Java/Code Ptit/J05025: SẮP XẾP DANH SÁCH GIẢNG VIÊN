@@ -1,0 +1,53 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class GiangVien{
+    private String ma, ten, mon;
+
+    public GiangVien(int ma, String ten, String mon) {
+        this.ma = "GV" + String.format("%02d", ma);
+        this.ten = ten;
+        this.mon = mon;
+    }
+
+    public String getMon() {
+        return mon;
+    }
+
+    public String toString() {
+        return ma + " " + ten + " ";
+    }
+}
+
+public class main {
+    public static String chuanHoa(String s){
+        String[] a = s.toUpperCase().split("\\s+");
+        String tmp = "";
+        for(String x : a){
+            tmp += x.charAt(0);
+        }
+        return tmp;         
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        GiangVien[] a = new GiangVien[n];
+        sc.nextLine();
+        for(int i=0; i<n; i++){
+            a[i] = new GiangVien(i + 1, sc.nextLine(), sc.nextLine());
+        }
+        int Q = sc.nextInt();
+        sc.nextLine();
+        for(int t=0; t<Q; t++){
+            String mon = sc.nextLine();
+            System.out.println("DANH SACH GIANG VIEN BO MON " + chuanHoa(mon) + ":");
+            for(GiangVien x : a){
+                if(x.getMon().equals(mon)){
+                    System.out.print(x + chuanHoa(mon));
+                    System.out.println("");
+                }
+            }
+        }
+    }
+}
