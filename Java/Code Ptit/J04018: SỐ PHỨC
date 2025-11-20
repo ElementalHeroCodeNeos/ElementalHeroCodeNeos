@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+class SoPhuc {
+    private int thuc, ao;
+
+    public SoPhuc(int thuc, int ao) {
+        this.thuc = thuc;
+        this.ao = ao;
+    }
+    
+    public SoPhuc add(SoPhuc b){
+        return new SoPhuc(this.thuc + b.thuc, this.ao + b.ao);
+    }
+    
+    public SoPhuc mul(SoPhuc b){
+        return new SoPhuc(this.thuc*b.thuc - this.ao*b.ao, this.thuc*b.ao + this.ao*b.thuc); 
+    }
+
+    public String toString(){
+        if(ao < 0) return thuc + " - " + Math.abs(ao) + "i";
+        return thuc + " + " + ao + "i";
+    }
+}
+
+public class main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        for(int t=0; t<tc; t++){
+            SoPhuc a = new SoPhuc(sc.nextInt(), sc.nextInt());
+            SoPhuc b = new SoPhuc(sc.nextInt(), sc.nextInt());
+            SoPhuc c = a.add(b).mul(a);
+            SoPhuc d = a.add(b).mul(a.add(b));
+            System.out.println(c + ", " + d);
+        }
+    }
+}
