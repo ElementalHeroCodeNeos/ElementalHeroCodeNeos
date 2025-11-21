@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+class MatHang {
+    private String ma, ten, donVi;
+    private double nhap;
+    private int num;
+
+    public MatHang(int ma, String ten, String donVi, double nhap, int num) {
+        this.ma = "MH" + String.format("%02d", ma);
+        this.ten = ten;
+        this.donVi = donVi;
+        this.nhap = nhap;
+        this.num = num;
+    }
+    
+    public double getFee(){
+        return nhap * num * 5 / 100;
+    }
+    
+    public double getTt(){
+        return nhap * num + this.getFee();
+    }
+    
+    public double getBan(){
+        return this.getTt() * 102 / 100;
+    }
+    
+    public String toString(){
+        return ma + " " + ten + " " + donVi + " " + Math.round(this.getFee()) + " "
+        + Math.round(this.getTt()) + " " + Math.round(this.getBan());
+    }
+}
+
+public class J05036 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        MatHang[] a = new MatHang[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            a[i] = new MatHang(i + 1, sc.nextLine(), sc.nextLine(), sc.nextDouble(), sc.nextInt());
+        }
+        for(MatHang x : a){
+            System.out.println(x);
+        }
+    }
+}
