@@ -1,0 +1,57 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class SinhVien {
+    private String ten;
+    private int dung, sub;
+
+    public SinhVien(String ten, int dung, int sub) {
+        this.ten = ten;
+        this.dung = dung;
+        this.sub = sub;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public int getDung() {
+        return dung;
+    }
+
+    public int getSub() {
+        return sub;
+    }
+    
+    public String toString(){
+        return ten + " " + dung + " " + sub;
+    }
+}
+
+public class J05042 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        SinhVien[] a = new SinhVien[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            a[i] = new SinhVien(sc.nextLine(), sc.nextInt(), sc.nextInt());
+        }
+        Arrays.sort(a, new Comparator<SinhVien>(){
+            @Override
+            public int compare(SinhVien o1, SinhVien o2) {
+                if(o1.getDung() != o2.getDung()){
+                    return o2.getDung() - o1.getDung();
+                }
+                if(o1.getSub() != o2.getSub()){
+                    return o1.getSub() - o2.getSub();
+                }
+                return o1.getTen().compareTo(o2.getTen());
+            }
+        });
+        for(SinhVien x : a){
+            System.out.println(x);
+        }
+    }
+}
