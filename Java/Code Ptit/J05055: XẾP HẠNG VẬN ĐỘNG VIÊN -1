@@ -6,11 +6,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/* Chú ý:
+1/ Năm hiện tại trong bài là năm 2021.
+2/ Hàm nào liên quan đến hàm parse() là phải xử lý Throws ParseException.
+3/ Chỉ có thể nhập dữ liệu String bằng Scanner -> Sau đó, chuyển String -> Date bằng hàm parse() của lớp SimpleDateFormat.
+*/
+
 class ThiSinh {
     private String ma, ten;
     private Date ns, start, end;
     private int xepHang;
-    private SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy"); // là lớp dùng để format dữ liệu thời gian (Date). Ở đây, sdf1 format dữ liệu ngày còn sdf2 format dữ liệu giờ
     private SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
 
     public ThiSinh(int ma, String ten, String ns, String start, String end)throws ParseException {
