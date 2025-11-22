@@ -1,0 +1,56 @@
+package J05048;
+
+import java.util.Scanner;
+/* Chú ý: 
+1/ Hàm Math.round() trả về kiểu long.
+2/ Phải ép kiểu giá trị trong hàm round() sang double để làm tròn chính xác.
+*/
+class MatHang {
+    private String ma;
+    private int nhap;
+
+    public MatHang(String ma, int nhap) {
+        this.ma = ma;
+        this.nhap = nhap;
+    }
+    
+    public int getXuat(){
+        if(ma.charAt(0) == 'A') return (int)Math.round(nhap * 60.0 / 100);
+        return (int)Math.round(nhap * 70.0 / 100);
+    }
+    
+    public int getDonGia(){
+        if(ma.charAt(ma.length() - 1) == 'Y') return 110000;
+        return 135000;
+    }
+    
+    public long getTien(){
+        return (long)getXuat() * getDonGia();
+    }
+    
+    public long getThue(){
+        if(ma.charAt(0) == 'A' && ma.charAt(ma.length() - 1) == 'Y') return Math.round(getTien() * 8.0 / 100);
+        if(ma.charAt(0) == 'A' && ma.charAt(ma.length() - 1) == 'N') return Math.round(getTien() * 11.0 / 100);
+        if(ma.charAt(0) == 'B' && ma.charAt(ma.length() - 1) == 'Y') return Math.round(getTien() * 17.0 / 100);
+        return Math.round(getTien() * 22.0 / 100);
+    }
+    
+    public String toString(){
+        return ma + " " + nhap + " " + getXuat() + " " + getDonGia() + " " + getTien() + " " + getThue();
+    }
+}
+
+public class J05048 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        MatHang[] a = new MatHang[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            a[i] = new MatHang(sc.nextLine(), sc.nextInt());
+        }
+        for(MatHang x : a){
+            System.out.println(x);
+        }
+    }
+}
