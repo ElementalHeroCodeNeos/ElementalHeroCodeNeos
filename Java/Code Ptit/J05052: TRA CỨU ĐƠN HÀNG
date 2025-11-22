@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+class Hang {
+    private String ten, ma;
+    private int gia, num;
+
+    public Hang(String ten, String ma, int gia, int num) {
+        this.ten = ten;
+        this.ma = ma;
+        this.gia = gia;
+        this.num = num;
+    }
+    
+    public String getStt(){
+        return ma.substring(1, 4);
+    }
+    
+    public int getGiamGia(){ 
+        char loai = ma.charAt(ma.length() - 1);
+        if(loai == '1') return (int)Math.round(gia * num * 50.0 / 100);
+        return (int)Math.round(gia * num * 30.0 / 100);
+    }
+    
+    public int getThanhTien(){
+        return gia * num - getGiamGia();
+    }
+    
+    public String toString(){
+        return ten + " " + ma + " " + getStt() + " " + getGiamGia() + " " + getThanhTien();
+    }
+}
+public class J05052 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Hang[] a = new Hang[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            a[i] = new Hang(sc.nextLine(), sc.nextLine(), sc.nextInt(), sc.nextInt());
+        }
+        for(Hang x : a){
+            System.out.println(x);
+        }
+    }
+}
