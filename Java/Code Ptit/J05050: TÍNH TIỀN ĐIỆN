@@ -1,0 +1,54 @@
+package J05050;
+
+import java.util.Scanner;
+
+class KhachHang {
+    private String ma, loai;
+    private int cu, moi;
+
+    public KhachHang(int ma, String loai, int cu, int moi) {
+        this.ma = "KH" + String.format("%02d", ma);
+        this.loai = loai;
+        this.cu = cu;
+        this.moi = moi;
+    }
+    
+    public int getHeSo(){
+        if(loai.equals("KD")) return 3;
+        if(loai.equals("NN")) return 5;
+        if(loai.equals("TT")) return 4;
+        return 2;
+    }
+    
+    public int getThanhTien(){
+        return (moi - cu) * getHeSo() * 550;
+    }
+    
+    public int getPhuTroi(){
+        int dif = moi - cu;
+        if(dif < 50) return 0;
+        if(dif <= 100) return (int)Math.round(getThanhTien() * 35.0 / 100);
+        return getThanhTien();
+    }
+    
+    public int getTong(){
+        return getThanhTien() + getPhuTroi();
+    }
+    
+    public String toString(){
+        return ma + " " + getHeSo() + " " + getThanhTien() + " " + getPhuTroi() + " " + getTong();
+    }
+}
+public class J05050 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        KhachHang[] a = new KhachHang[n];
+        for(int i=0; i<n; i++){
+            a[i] = new KhachHang(i + 1, sc.next(), sc.nextInt(), sc.nextInt());
+        }
+        for(KhachHang x : a){
+            System.out.println(x);
+        }
+    }
+}
