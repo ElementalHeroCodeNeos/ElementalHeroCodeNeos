@@ -1,0 +1,78 @@
+package J05054;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Scanner;
+
+class HocSinh {
+    private String ma, ten;
+    private double dtb;
+    private int stt;
+
+    public HocSinh(int ma, String ten, double dtb) {
+        this.ma = "HS" + String.format("%02d", ma);
+        this.ten = ten;
+        this.dtb = dtb;
+    }
+
+    public double getDtb() {
+        return dtb;
+    }
+    
+    public String getXepLoai(){
+        if(dtb >= 9) return "Gioi";
+        if(dtb >= 7) return "Kha";
+        if(dtb >= 5) return "Trung Binh";
+        return "Yeu";
+    }
+    
+    public int getStt(){
+        return stt;
+    }
+    
+    public void setStt(int stt){
+        this.stt = stt;
+    }
+    public String toString(){
+        return ma + " " + ten + " " + String.format("%.1f", dtb) + " " + getXepLoai() + " " + stt;
+    }
+}
+
+public class J05054 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        HocSinh[] a = new HocSinh[n];
+        HocSinh[] b = new HocSinh[n];
+        HashMap<Double, Integer> map = new HashMap<>();
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            a[i] = new HocSinh(i + 1, sc.nextLine(), sc.nextDouble());
+            b[i] = a[i];
+            if(!map.containsKey(a[i].getDtb())){
+                map.put(a[i].getDtb(), 1);
+            }
+            else map.put(a[i].getDtb(), map.get(a[i].getDtb()) + 1);
+        }  
+        Arrays.sort(a, new Comparator<HocSinh>(){
+            @Override
+            public int compare(HocSinh o1, HocSinh o2) {
+                if(o1.getDtb() > o2.getDtb()) return -1;
+                return 1;
+            }
+        });
+        a[0].setStt(1);
+        for(int i=1; i<n; i++){
+            if(a[i].getDtb() == a[i - 1].getDtb()){
+                a[i].setStt(a[i - 1].getStt());
+            }
+            else{
+                a[i].setStt(a[i - 1].getStt() + map.get(a[i - 1].getDtb()));
+            }
+        }
+        for(HocSinh x : b){
+            System.out.println(x);
+        }
+    }
+}
