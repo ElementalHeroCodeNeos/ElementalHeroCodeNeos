@@ -1,0 +1,96 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Scanner;
+
+class ThiSinh {
+    private String ma, ten;
+    private Date ns, start, end;
+    private int xepHang;
+    private SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
+
+    public ThiSinh(int ma, String ten, String ns, String start, String end)throws ParseException {
+        this.ma = "VDV" + String.format("%02d", ma);
+        this.ten = ten;
+        this.ns = sdf1.parse(ns);
+        this.start = sdf2.parse(start);
+        this.end = sdf2.parse(end);
+    }
+    
+    public int getXepHang(){
+        return this.xepHang;
+    }
+    
+    public void setXepHang(int xepHang){
+        this.xepHang = xepHang;
+    }
+    
+    public int getUuTien(){
+        int tuoi = 2021 - (ns.getYear() + 1900);
+        if(tuoi < 18) return 0;
+        if(tuoi < 25) return 1;
+        if(tuoi <= 32) return 2;
+        return 3;
+    }
+    
+    public long getThanhTichThucTe(){
+        return (end.getTime() - start.getTime()) / 1000;
+    }
+    
+    public long getThanhTichXepHang(){
+        return getThanhTichThucTe() - getUuTien();
+    }
+    
+    public String chuanHoa(long time){
+        long hour = time / 3600;
+        time %= 3600;
+        long minute = time / 60;
+        time %= 60;
+        long second = time;
+        return String.format("%02d:%02d:%02d", hour, minute, second);
+    }
+    
+    public String toString(){
+        return ma + " " + ten + " " + chuanHoa(getThanhTichThucTe()) + " " + chuanHoa(getUuTien())
+        + " " + chuanHoa(getThanhTichXepHang()) + " " + xepHang;      
+    } 
+}
+public class main {
+    public static void main(String[] args) throws ParseException{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ThiSinh[] a = new ThiSinh[n];
+        ThiSinh[] b = new ThiSinh[n];
+        HashMap<Long, Integer> map = new HashMap<>();
+        sc.nextLine();
+        for(int i=0; i<n; i++){
+            a[i] = new ThiSinh(i + 1, sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine());
+            b[i] = a[i];
+            if(!map.containsKey(a[i].getThanhTichXepHang())){
+                map.put(a[i].getThanhTichXepHang(), 1);
+            }
+            else map.put(a[i].getThanhTichXepHang(), map.get(a[i].getThanhTichXepHang()) + 1);
+        }
+        Arrays.sort(a, new Comparator<ThiSinh>(){
+            @Override
+            public int compare(ThiSinh o1, ThiSinh o2) {
+                if(o1.getThanhTichXepHang() < o2.getThanhTichXepHang()) return -1;
+                return 1;
+            }
+        });
+        a[0].setXepHang(1);
+        for(int i=1; i<n; i++){
+            if(a[i].getThanhTichXepHang() == a[i - 1].getThanhTichXepHang()){
+                a[i].setXepHang(a[i - 1].getXepHang());
+            }
+            else a[i].setXepHang(a[i - 1].getXepHang() + map.get(a[i - 1].getThanhTichXepHang()));
+        }
+        for(ThiSinh x : b){
+            System.out.println(x);
+        }
+    }
+}
