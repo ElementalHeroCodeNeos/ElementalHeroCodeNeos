@@ -1,0 +1,50 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+class MatHang {
+    private String ma, ten;
+    private int num, gia;
+
+    public MatHang(String ma, String ten, int num, int gia) {
+        this.ma = ma;
+        this.ten = ten;
+        this.num = num;
+        this.gia = gia;
+    }
+    
+    public int getCk(){
+        if(num > 10) return gia * num * 5 / 100;
+        if(num >= 8) return gia * num * 2 / 100;
+        if(num >= 5) return gia * num * 1 / 100;
+        return 0;
+    }
+    
+    public int getTt(){
+        return gia * num - this.getCk();
+    }
+    
+    public String toString(){
+        return ma + " " + ten + " " + this.getCk() + " " + this.getTt();
+    }
+}
+public class J05046 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        HashMap<String, Integer> map = new HashMap<>();
+        int n = sc.nextInt();
+        MatHang[] a = new MatHang[n];
+        for(int i=0; i<n; i++){
+            sc.nextLine();
+            String ten = sc.nextLine();
+            String[] s = ten.split("\\s+");
+            String type = Character.toUpperCase(s[0].charAt(0)) + "" + Character.toUpperCase(s[1].charAt(0));
+            if(map.containsKey(type)) map.put(type, map.get(type) + 1);
+            else map.put(type, 1);
+            String ma = type + String.format("%02d", map.get(type));
+            a[i] = new MatHang(ma, ten, sc.nextInt(), sc.nextInt());
+        }
+        for(MatHang x : a){
+            System.out.println(x);
+        }
+    }
+}
